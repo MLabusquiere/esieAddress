@@ -3,7 +3,7 @@
 /* App Module */
 
 var servicesModule = angular.module('services', ['ngResource']);
-var filtersModule = angular.module('filters', []);
+var filtersModule = angular.module('filters', [])
 
 var esieAddressApp = angular.module('esieAddress', ['filters', 'services']);
 
@@ -12,10 +12,11 @@ var path = "http://"+url+"/rest";
 
 esieAddressApp.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.
+		when('/', {redirectTo: '/contacts'}).
 
 		/* Related Contacts Pages */
 		when('/contacts', {templateUrl: 'partials/contact-list.html', controller: ContactListCtrl}).
 
-		otherwise({redirectTo: '/contacts'});
+		otherwise({redirectTo: '/error/404'});
 }]);
 
