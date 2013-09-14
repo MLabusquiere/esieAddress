@@ -1,0 +1,27 @@
+<div class="container">
+	<section>
+		<div class="page-header">
+			<h1>Contact List</h1>
+		</div>
+		
+		<!--Body content-->
+		<table class="table table-striped" ng-init="predicate = 'firstName'; reverse=false;">
+			<thead>
+				<tr>
+					<th class="col-md-4 text-center"><a href="" ng-click="predicate = 'firstName'; reverse=!reverse">Firstname</a></th>
+					<th class="col-md-5 text-center"><a href="" ng-click="predicate = 'lastName'; reverse=!reverse">Lastname</a></th>
+					<th class="col-md-2 text-center"><a href="" ng-click="predicate = 'dateOfBirth'; reverse=!reverse">Birthdate</a></th>
+					<th class="col-md-1 text-center"><a href="" ng-click="predicate = 'actif'; reverse=!reverse">Active</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="contact in contacts | orderBy:predicate:reverse">
+					<td>{{contact.firstName}}</td>
+					<td>{{contact.lastName | uppercase}}</td>
+					<td class="text-center">{{contact.dateOfBirth | date}}</td>
+					<td class="text-center"><span class="glyphicon glyphicon-{{contact.actif | checkmark}}"></span></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</div>
