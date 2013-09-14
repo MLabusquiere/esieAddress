@@ -12,11 +12,9 @@ var path = "http://"+url+"/rest";
 
 esieAddressApp.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.
-		when('/', {redirectTo: '/contacts'}).
-
 		/* Related Contacts Pages */
 		when('/contacts', {templateUrl: 'partials/contact-list.html', controller: ContactListCtrl}).
 
-		otherwise({redirectTo: '/error/404'});
+		otherwise({redirectTo: '/contacts'});
 }]);
 
