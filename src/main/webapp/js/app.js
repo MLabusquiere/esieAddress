@@ -7,8 +7,10 @@ var filtersModule = angular.module('filters', [])
 
 var esieAddressApp = angular.module('esieAddress', ['filters', 'services']);
 
-var url = "localhost\\:8080/esieAddress"
-var path = "http://"+url+"/rest";
+console.log(document.URL);
+
+var url = "http://esieaddress.labusquiere.eu.cloudbees.net/"
+var path = url+"/rest";
 
 esieAddressApp.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.
