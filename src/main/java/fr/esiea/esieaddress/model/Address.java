@@ -24,7 +24,7 @@ import java.util.Date;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class Address {
+public class Address implements IModel {
 
     private String numero;
     private String street;
