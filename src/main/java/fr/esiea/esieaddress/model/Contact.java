@@ -1,6 +1,8 @@
 package fr.esiea.esieaddress.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -26,10 +28,13 @@ import java.util.Date;
  */
 public class Contact implements IModel {
 
+    private String id;
     private String lastName;
     private String firstName;
     private String email;
     private Date dateOfBirth;
+    //May a map to specify an type of an address
+    private Set<Address> addresses = new HashSet<Address>();
     private boolean actif;
 
     public Contact() {}
@@ -72,5 +77,14 @@ public class Contact implements IModel {
 
     public void setActif(boolean actif) {
         this.actif = actif;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

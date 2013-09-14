@@ -1,6 +1,13 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.service.crud.implementation;
 
-import java.util.Date;
+import fr.esiea.esieaddress.dao.Dao;
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.service.crud.ICrudService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -24,50 +31,36 @@ import java.util.Date;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class Address implements IModel {
 
-    private String numero;
-    private String street;
-    private String postalCode;
-    private String city;
-    private String id;
+@Service
+public class ContactCrudService implements ICrudService<Contact> {
 
-    public Address() {}
+    @Autowired
+    private Dao<Contact> dao;
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    @Override
+    public Collection<Contact> getAll() throws DaoException {
+        return dao.getAll();
     }
 
     @Override
-    public String getId() {
-        return id;
+    public void remove(String idContact) throws DaoException  {
+        dao.remove(idContact);
     }
+
+    @Override
+    public void save(Contact contact) throws DaoException  {
+        dao.save(contact);
+    }
+
+    @Override
+    public void insert(Contact contact) throws DaoException {
+        dao.insert(contact);
+    }
+
+    @Override
+    public Contact getOne(String contactId) throws DaoException  {
+        return dao.getOne(contactId);
+    }
+
 }

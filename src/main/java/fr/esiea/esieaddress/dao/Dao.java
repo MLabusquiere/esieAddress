@@ -1,6 +1,10 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.dao;
 
-import java.util.Date;
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.IModel;
+
+import java.util.Collection;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -24,50 +28,14 @@ import java.util.Date;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class Address implements IModel {
+public interface Dao<T extends IModel> {
+    Collection<Contact> getAll() throws DaoException;
 
-    private String numero;
-    private String street;
-    private String postalCode;
-    private String city;
-    private String id;
+    void remove(String idContact) throws DaoException;
 
-    public Address() {}
+    void save(T contact) throws DaoException;
 
-    public String getNumero() {
-        return numero;
-    }
+    void insert(T contact) throws DaoException;
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
+    T getOne(String contactId) throws DaoException;
 }

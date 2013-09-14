@@ -23,4 +23,6 @@ package fr.esiea.esieaddress.model;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface IModel {
+
+    String getId();
 }
