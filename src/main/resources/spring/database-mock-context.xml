@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
-  ~
-  ~ Permission is hereby granted, free of charge, to any person obtaining
-  ~ a copy of this software and associated documentation files (the
-  ~ "Software"), to deal in the Software without restriction, including
-  ~ without limitation the rights to use, copy, modify, merge, publish,
-  ~ distribute, sublicense, and/or sell copies of the Software, and to
-  ~ permit persons to whom the Software is furnished to do so, subject to
-  ~ the following conditions:
-  ~
-  ~ The above copyright notice and this permission notice shall be
-  ~ included in all copies or substantial portions of the Software.
-  ~
-  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-  ~ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-  ~ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-  ~ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-  ~ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-  ~ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  -->
+<!-- ~ Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs ~ ~ Permission is 
+	hereby granted, free of charge, to any person obtaining ~ a copy of this 
+	software and associated documentation files (the ~ "Software"), to deal in 
+	the Software without restriction, including ~ without limitation the rights 
+	to use, copy, modify, merge, publish, ~ distribute, sublicense, and/or sell 
+	copies of the Software, and to ~ permit persons to whom the Software is furnished 
+	to do so, subject to ~ the following conditions: ~ ~ The above copyright 
+	notice and this permission notice shall be ~ included in all copies or substantial 
+	portions of the Software. ~ ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY 
+	OF ANY KIND, ~ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+	OF ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND ~ NONINFRINGEMENT. 
+	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE ~ LIABLE FOR ANY CLAIM, 
+	DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION ~ OF CONTRACT, TORT OR OTHERWISE, 
+	ARISING FROM, OUT OF OR IN CONNECTION ~ WITH THE SOFTWARE OR THE USE OR OTHER 
+	DEALINGS IN THE SOFTWARE. -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
+<<<<<<< HEAD
     <bean name="contact1" class="fr.esiea.esieaddress.model.Contact">
         <property name="email" value="test@gmail.com"/>
         <property name="dateOfBirth" value="2010-01-31"/>
@@ -41,4 +35,56 @@
             </map>
         </property>
     </bean>
+=======
+
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd" />
+	</bean>
+
+	<bean name="contact1" class="fr.esiea.esieaddress.model.Contact">
+		<property name="email" value="labusquiere@gmail.com" />
+		<property name="firstName" value="Maxence" />
+		<property name="lastName" value="Labusquière" />
+		<property name="actif" value="true" />
+		<property name="dateOfBirth">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1990-12-12" />
+			</bean>
+		</property>
+		<property name="id" value="id1" />
+	</bean>
+	<bean name="contact2" class="fr.esiea.esieaddress.model.Contact">
+		<property name="email" value="deis@gmail.com" />
+		<property name="firstName" value="Damien" />
+		<property name="lastName" value="Deis" />
+		<property name="actif" value="false" />
+		<property name="dateOfBirth">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1991-11-17" />
+			</bean>
+		</property>
+		<property name="id" value="id2" />
+	</bean>
+	<bean name="contact3" class="fr.esiea.esieaddress.model.Contact">
+		<property name="email" value="girard@gmail.com" />
+		<property name="firstName" value="Rémi" />
+		<property name="lastName" value="Girard" />
+		<property name="actif" value="true" />
+		<property name="dateOfBirth">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1991-06-12" />
+			</bean>
+		</property>
+		<property name="id" value="id3" />
+	</bean>
+	<bean name="database" class="fr.esiea.esieaddress.dao.implementation.DaoContact">
+		<property name="database">
+			<map>
+				<entry key="id1" value-ref="contact1" />
+				<entry key="id2" value-ref="contact2" />
+				<entry key="id3" value-ref="contact3" />
+			</map>
+		</property>
+	</bean>
+>>>>>>> 0fec0919c6a949ab88629cd57f2ca2e361fc75b2
 </beans>
