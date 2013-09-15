@@ -19,23 +19,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
-<<<<<<< HEAD
-    <bean name="contact1" class="fr.esiea.esieaddress.model.Contact">
-        <property name="email" value="test@gmail.com"/>
-        <property name="dateOfBirth" value="2010-01-31"/>
-        <property name="firstName" value="test"/>
-        <property name="lastName" value="testLastName"/>
-        <property name="actif" value="true"/>
-        <property name="id" value="id"/>
-    </bean>
-    <bean name="database" class="fr.esiea.esieaddress.dao.implementation.DaoContact">
-        <property name="database">
-            <map>
-                <entry key="id" value-ref="contact1" />
-            </map>
-        </property>
-    </bean>
-=======
+
 
 	<bean id="dateFormat" class="java.text.SimpleDateFormat">
 		<constructor-arg value="yyyy-MM-dd" />
@@ -86,5 +70,4 @@
 			</map>
 		</property>
 	</bean>
->>>>>>> 0fec0919c6a949ab88629cd57f2ca2e361fc75b2
 </beans>
