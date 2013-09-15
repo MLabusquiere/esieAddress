@@ -3,11 +3,10 @@
 /* App Module */
 
 var servicesModule = angular.module('services', ['ngResource']);
-var filtersModule = angular.module('filters', [])
+var filtersModule = angular.module('filters', []);
+var directivesModule = angular.module('directives', []);
 
 var esieAddressApp = angular.module('esieAddress', ['filters', 'services']);
-
-console.log(document.URL);
 
 var path = "rest";
 

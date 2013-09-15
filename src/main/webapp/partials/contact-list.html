@@ -3,9 +3,25 @@
 		<div class="page-header">
 			<h1>Contact List</h1>
 		</div>
+
+		<div class="pull-left">
+			<a class="btn btn-primary" data-toggle="modal" href="#newContact">
+				<span class="glyphicon glyphicon-pencil"></span><br/>New
+			</a>
+		</div>
+
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-primary" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'">
+				<span class="glyphicon glyphicon-th-list"></span>
+			</button>
+			<button type="button" class="btn btn-primary" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'">
+				<span class="glyphicon glyphicon-th"></span>
+			</button>
+		</div>
+		<div class="clearfix"></div>
 		
 		<!--Body content-->
-		<table class="table table-striped" ng-init="predicate = 'firstName'; reverse=false;">
+		<table ng-show="layout == 'table'" class="table table-striped" ng-init="predicate = 'firstName'; reverse=false;">
 			<thead>
 				<tr>
 					<th class="col-md-4 text-center"><a href="" ng-click="predicate = 'firstName'; reverse=!reverse">Firstname</a></th>
@@ -23,5 +39,79 @@
 				</tr>
 			</tbody>
 		</table>
+
+		<div ng-show="layout == 'list'" >
+			<form>
+			<ul class="list">
+				<li ng-repeat="contact in contacts | orderBy:predicate:reverse" ng-click="click()">
+					{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong>
+					<a class="pull-right" ng-click="edit()"><span class="glyphicon glyphicon-edit"></span></a>
+				</li>
+			</ul>
+			</form>
+		</div>
+
+		<div ng-show="layout == 'grid'" >
+			<p>Not implemented</p>
+		</div>
 	</section>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="newContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">New Contact</h4>
+			</div>
+			<form class="form-horizontal" role="form">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="inputFirstname1" class="col-lg-2 control-label">Firstname</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="inputFirstname1" placeholder="Firstname">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputLastname1" class="col-lg-2 control-label">Lastname</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="inputLastname1" placeholder="Lastname">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+						<div class="col-lg-10">
+							<input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputbirthdate" class="col-lg-2 control-label">Birthdate</label>
+						<div class="col-lg-10 row">
+							<div class="col-lg-3">
+								<select class="form-control">
+									<option ng-repeat="day in days">{{day}}</option>
+								</select>
+							</div>
+							<div class="col-lg-3">
+								<select class="form-control">
+									<option ng-repeat="month in months">{{month}}</option>
+								</select>
+							</div>
+							<div class="col-lg-4">
+								<select class="form-control">
+									<option ng-repeat="year in years">{{year}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary">Save</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
