@@ -4,6 +4,7 @@ import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,7 @@ import java.util.logging.Logger;
 public class CrudContactCtrl {
 
     @Autowired
+    @Qualifier("serviceValidationDecorator")
     ICrudService<Contact> crudService;
 
     private final static Logger LOGGER = Logger.getLogger("CrudContact");
