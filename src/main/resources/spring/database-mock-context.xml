@@ -28,6 +28,7 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean name="contact1" class="fr.esiea.esieaddress.model.Contact">
         <property name="email" value="test@gmail.com"/>
+        <property name="dateOfBirth" value="2010-01-31"/>
         <property name="firstName" value="test"/>
         <property name="lastName" value="testLastName"/>
         <property name="actif" value="true"/>
