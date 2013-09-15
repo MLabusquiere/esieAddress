@@ -1,13 +1,11 @@
 package fr.esiea.esieaddress.dao.implementation;
 
-import fr.esiea.esieaddress.dao.Dao;
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,7 +30,7 @@ import java.util.Map;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class DaoContact implements Dao<Contact> {
+public class DaoContact implements ICrudDao<Contact> {
 
     @Autowired
     private Map<String,Contact> database;

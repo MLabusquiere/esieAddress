@@ -9,8 +9,7 @@ var esieAddressApp = angular.module('esieAddress', ['filters', 'services']);
 
 console.log(document.URL);
 
-var url = "http://esieaddress.labusquiere.eu.cloudbees.net/"
-var path = url+"/rest";
+var path = "rest";
 
 esieAddressApp.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.

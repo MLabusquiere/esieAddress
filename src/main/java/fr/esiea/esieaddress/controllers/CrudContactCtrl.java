@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/contacts")
-public class CrudContact {
+public class CrudContactCtrl {
 
     @Autowired
     ICrudService<Contact> crudService;

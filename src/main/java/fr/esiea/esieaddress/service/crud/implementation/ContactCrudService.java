@@ -1,6 +1,6 @@
 package fr.esiea.esieaddress.service.crud.implementation;
 
-import fr.esiea.esieaddress.dao.Dao;
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
@@ -36,7 +36,7 @@ import java.util.Collection;
 public class ContactCrudService implements ICrudService<Contact> {
 
     @Autowired
-    private Dao<Contact> dao;
+    private ICrudDao<Contact> dao;
 
     @Override
     public Collection<Contact> getAll() throws DaoException {

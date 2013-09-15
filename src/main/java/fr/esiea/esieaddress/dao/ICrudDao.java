@@ -28,7 +28,7 @@ import java.util.Collection;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public interface Dao<T extends IModel> {
+public interface ICrudDao<T extends IModel> {
     Collection<Contact> getAll() throws DaoException;
 
     void remove(String idContact) throws DaoException;
