@@ -3,6 +3,7 @@ package fr.esiea.esieaddress.service.validation;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -48,30 +49,30 @@ public class ServiceValidationDecorator implements ICrudService<Contact> {
     private IValidationService validationService;
 
     @Override
-    public Collection<Contact   > getAll() throws DaoException {
+    public Collection<Contact> getAll() throws ServiceException, DaoException {
         return crudService.getAll();
     }
 
     @Override
-    public void remove(String idContact) throws DaoException {
+    public void remove(String idContact) throws ServiceException, DaoException {
         crudService.remove(idContact);
     }
 
     @Override
-    public void save(Contact contact) throws DaoException {
+    public void save(Contact contact) throws ServiceException, DaoException {
         validationService.validate(contact);
         crudService.save(contact);
     }
 
-
     @Override
-    public void insert(Contact contact) throws DaoException {
+    public void insert(Contact contact) throws ServiceException, DaoException {
         validationService.validate(contact);
         crudService.insert(contact);
     }
 
     @Override
-    public Contact getOne(String contactId) throws DaoException {
+    public Contact getOne(String contactId) throws ServiceException, DaoException {
         return crudService.getOne(contactId);
     }
+
 }

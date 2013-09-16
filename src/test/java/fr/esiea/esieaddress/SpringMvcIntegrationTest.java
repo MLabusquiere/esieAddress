@@ -1,11 +1,26 @@
 package fr.esiea.esieaddress;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
+import java.nio.charset.Charset;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -37,9 +52,53 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class SpringMvcIntegrationTest {
 
-    @Test
-    public void ContactInsertion() throws Exception {
+    @Autowired
+    private WebApplicationContext wac;
 
+    private MockMvc mockMvc;
+    public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+    private String jsonContact = "{\"id\":\"id10\",\"lastName\":\"Labusquiere\",\"firstName\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"true\"}\n";
+    private String jsonContactUpdate = "{\"id\":\"id10\",\"lastName\":\"Labusquiere\",\"firstName\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"false\"}\n" +
+            "\"";
+
+    @Before
+    public void setUp() throws Exception {
+
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 
     }
+
+    @Test
+    public void ContactInsertUpdateGetDelete() throws Exception {
+        this.mockMvc.perform(post("/contacts").accept(APPLICATION_JSON)
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(jsonContact))
+                //.andDo(print())
+                .andExpect(status().isCreated());
+
+        this.mockMvc.perform(put("/contacts").accept(APPLICATION_JSON)
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(jsonContactUpdate))
+                //.andDo(print())
+                .andExpect(status().isNoContent());
+
+        this.mockMvc.perform(get("/contacts/id10").accept(APPLICATION_JSON))
+                //.andDo(print())
+                //Assert Content
+                .andExpect(status().isOk());
+
+        this.mockMvc.perform(delete("/contacts/id10").accept(APPLICATION_JSON))
+                //.andDo(print())
+                .andExpect(status().isNoContent());
+
+    }
+
+    @Test
+    public void ContactGetAll() throws Exception {
+        this.mockMvc.perform(get("/contacts").accept(APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+
 }

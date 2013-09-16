@@ -3,6 +3,7 @@ package fr.esiea.esieaddress.controllers;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -43,11 +44,11 @@ public class CrudContactCtrl {
     @Qualifier("serviceValidationDecorator")
     ICrudService<Contact> crudService;
 
-    private final static Logger LOGGER = Logger.getLogger("CrudContactCtrl.class)");
+    private final static Logger LOGGER = Logger.getLogger("CrudContactCtrl");
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Collection<Contact> getAll() throws DaoException {
+    public Collection<Contact> getAll() throws ServiceException, DaoException {
 
         LOGGER.info("[Controller] Querying Contact list");
         return crudService.getAll();
@@ -56,7 +57,7 @@ public class CrudContactCtrl {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Contact getById(@PathVariable("id") String contactId) throws DaoException {
+    public Contact getById(@PathVariable("id") String contactId) throws ServiceException, DaoException {
 
         LOGGER.info("[Controller] Querying Contact with id : \"" + contactId + "\"");
         return crudService.getOne(contactId);
@@ -65,7 +66,7 @@ public class CrudContactCtrl {
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Contact contact) throws DaoException {
+    public void create(@RequestBody Contact contact) throws ServiceException, DaoException {
        
         LOGGER.info("[Controller] Querying to create new contact : "+ contact.toString());
         crudService.insert(contact);
@@ -74,7 +75,7 @@ public class CrudContactCtrl {
 
     @RequestMapping(value = "", method = RequestMethod.PUT, consumes = "application/json")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void edit(@RequestBody Contact contact) throws DaoException {
+    public void edit(@RequestBody Contact contact) throws ServiceException, DaoException {
 
         LOGGER.info("[Controller] Querying to edit Contact : \"" + contact.toString());
         crudService.save(contact);
@@ -84,7 +85,7 @@ public class CrudContactCtrl {
 
     @RequestMapping(value = "/{idContact}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String idContact) throws DaoException {
+    public void delete(@PathVariable String idContact) throws ServiceException, DaoException {
 
         LOGGER.info("[Controller] Querying to delete Contact with id : \"" + idContact);
         crudService.remove(idContact);

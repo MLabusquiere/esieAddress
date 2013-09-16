@@ -1,4 +1,15 @@
-package fr.esiea.esieaddress.model.exception;
+package fr.esiea.esieaddress.service.validation.implementation;
+
+import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.service.validation.IValidationService;
+import fr.esiea.esieaddress.service.validation.exception.ValidationException;
+import org.springframework.stereotype.Service;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -22,24 +33,20 @@ package fr.esiea.esieaddress.model.exception;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class RestException extends Exception {
+@Service
+public class ValidationService implements IValidationService {
 
-    private int status = 500;
-    private Object model;
+    private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-    public int getStatus() {
-        return status;
-    }
-
-    public Object getModel() {
-        return model;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public void setModel(Object model) {
-        this.model = model;
+    @Override
+    public void validate(Contact contact) throws ValidationException {
+        Set<ConstraintViolation<Contact>> violations = validator.validate(contact);
+        if( ! violations.isEmpty()) {
+            HashMap<Object, String> errorMap = new HashMap<Object, String>();
+            for(ConstraintViolation<Contact> violation:violations)   {
+                errorMap.put(violation.getInvalidValue(),violation.getMessage());
+            }
+            throw new ValidationException(errorMap);
+        }
     }
 }

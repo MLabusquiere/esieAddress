@@ -35,14 +35,14 @@ public class Contact implements IModel {
 
     private String id;
 
-    @NotNull(message="{fr.esiea.esieaddress.model.lastName.notNull}")
-    @Pattern(regexp="\\d\\d\\d[A-F]", message="{fr.esiea.esieaddress.model.lastName}")
-    @Size(min = 2, max = 20, message="{fr.esiea.esieaddress.model.contact.lastName.size}")
+    @NotNull(message="{fr.esiea.esieaddress.model.contact.lastName.notNull}")
+    //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u", message="{fr.esiea.esieaddress.model.contact.lastName}")
+    @Size(max = 20, message="{fr.esiea.esieaddress.model.contact.lastName.size}")
     private String lastName;
 
-    @NotNull(message="{fr.esiea.esieaddress.model.firstName.notNull}")
-    @Pattern(regexp="\\d\\d\\d[A-F]",message="{fr.esiea.esieaddress.model.contact.firstName}")
-    @Size(min = 11, max = 20,message="{fr.esiea.esieaddress.model.contact.firstName.size}")
+    @NotNull(message="{fr.esiea.esieaddress.model.contact.firstName.notNull}")
+    //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u",message="{fr.esiea.esieaddress.model.contact.firstName}")
+    @Size(max = 20,message="{fr.esiea.esieaddress.model.contact.firstName.size}")
     private String firstName;
 
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
