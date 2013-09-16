@@ -27,9 +27,9 @@
 	<title>esieAddress</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link href="css/style.css" rel="stylesheet" media="screen">
 	<!-- Bootstrap -->
 	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="css/style.css" rel="stylesheet" media="screen">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -38,24 +38,67 @@
 	<![endif]-->
 </head>
 <body>
-	<div ng-view></div>
 
-	
-	<!-- Angular -->
-	<script src="libs/angular.js"></script>
-	<script src="libs/angular-resource.js"></script>
+<div class="container">
+	<div class="row">
+		<div id="sidebar-left" class="col-lg-2 col-sm-1">
+			<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
 
-	<script src="js/app.js"></script>
-	<script src="js/filters.js"></script>
-	<!-- Controllers -->
-	<script src="js/controllers/contactListController.js"></script>
-	<!-- Services -->
-	<script src="js/services/contactServices.js"></script>
+			<div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse" ng-controller="ContactListCtrl">
+				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable">
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+				</ul>
+			</div>
+		</div>
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="libs/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="libs/bootstrap.js"></script>
+		<div id="content" class="col-lg-10 col-sm-11" ng-view><h2>Content</h2></div>
+
+	</div>
+</div>
+
+<!-- Libs -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="libs/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="libs/bootstrap.js"></script>
+<!-- Angular -->
+<script src="libs/angular.js"></script>
+<script src="libs/angular-resource.js"></script>
+
+<!-- Files -->
+<!-- Angular -->
+<script src="js/app.js"></script>
+<script src="js/filters.js"></script>
+<!-- Controllers -->
+<script src="js/controllers/contactListController.js"></script>
+<!-- Services -->
+<script src="js/services/contactServices.js"></script>
+
+<!-- Others -->
+<script src="js/functions.js"></script>
+
 </body>
 </html>
 
