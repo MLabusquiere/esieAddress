@@ -1,5 +1,10 @@
 package fr.esiea.esieaddress.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,12 +34,29 @@ import java.util.Set;
 public class Contact implements IModel {
 
     private String id;
+
+    @NotNull(message="{fr.esiea.esieaddress.model.lastName.notNull}")
+    @Pattern(regexp="\\d\\d\\d[A-F]", message="{fr.esiea.esieaddress.model.lastName}")
+    @Size(min = 2, max = 20, message="{fr.esiea.esieaddress.model.contact.lastName.size}")
     private String lastName;
+
+    @NotNull(message="{fr.esiea.esieaddress.model.firstName.notNull}")
+    @Pattern(regexp="\\d\\d\\d[A-F]",message="{fr.esiea.esieaddress.model.contact.firstName}")
+    @Size(min = 11, max = 20,message="{fr.esiea.esieaddress.model.contact.firstName.size}")
     private String firstName;
+
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+            ,message="{fr.esiea.esieaddress.model.contact.email}")
+    //Norme RFC2822 - http://www.regular-expressions.info/email.html
     private String email;
+
+    @Past(message="{fr.esiea.esieaddress.model.contact.dateOfBirth.path}")
     private Date dateOfBirth;
     //May a map to specify an type of an address
+
+    @Valid
     private Set<Address> addresses = new HashSet<Address>();
+
     private boolean actif;
 
     public Contact() {}

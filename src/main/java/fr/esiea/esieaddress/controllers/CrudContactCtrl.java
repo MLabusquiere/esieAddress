@@ -43,9 +43,9 @@ public class CrudContactCtrl {
     @Qualifier("serviceValidationDecorator")
     ICrudService<Contact> crudService;
 
-    private final static Logger LOGGER = Logger.getLogger("CrudContact");
+    private final static Logger LOGGER = Logger.getLogger("CrudContactCtrl.class)");
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public Collection<Contact> getAll() throws DaoException {
 
@@ -63,11 +63,11 @@ public class CrudContactCtrl {
 
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Contact contact) throws DaoException {
        
-        LOGGER.info("[Controller] Querying to create new contact : \"" + contact.toString() + "\"");
+        LOGGER.info("[Controller] Querying to create new contact : "+ contact.toString());
         crudService.insert(contact);
 
     }
