@@ -1,4 +1,8 @@
-package fr.esiea.esieaddress.model.exception;
+package fr.esiea.esieaddress.service.validation.exception;
+
+import fr.esiea.esieaddress.service.exception.ServiceException;
+
+import java.util.Map;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -22,24 +26,17 @@ package fr.esiea.esieaddress.model.exception;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class RestException extends Exception {
 
-    private int status = 500;
-    private Object model;
+public class ValidationException extends ServiceException {
 
-    public int getStatus() {
-        return status;
+    Map<Object, String> errorMap;
+
+    public ValidationException(Map<Object, String> errorMap) {
+        this.errorMap = errorMap;
     }
 
+    @Override
     public Object getModel() {
-        return model;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public void setModel(Object model) {
-        this.model = model;
+        return errorMap;
     }
 }

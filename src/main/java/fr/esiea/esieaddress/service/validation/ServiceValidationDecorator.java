@@ -3,11 +3,18 @@ package fr.esiea.esieaddress.service.validation;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
+import fr.esiea.esieaddress.service.exception.ServiceException;
+import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -36,32 +43,36 @@ public class ServiceValidationDecorator implements ICrudService<Contact> {
 
     @Autowired
     @Qualifier("contactCrudService")
-    ICrudService<Contact> service;
+    private ICrudService<Contact> crudService;
+
+    @Autowired
+    private IValidationService validationService;
 
     @Override
-    public Collection<Contact> getAll() throws DaoException {
-        return service.getAll();
+    public Collection<Contact> getAll() throws ServiceException, DaoException {
+        return crudService.getAll();
     }
 
     @Override
-    public void remove(String idContact) throws DaoException {
-        service.remove(idContact);
+    public void remove(String idContact) throws ServiceException, DaoException {
+        crudService.remove(idContact);
     }
 
     @Override
-    public void save(Contact contact) throws DaoException {
-        //TODO Validation
-        service.save(contact);
+    public void save(Contact contact) throws ServiceException, DaoException {
+        validationService.validate(contact);
+        crudService.save(contact);
     }
 
     @Override
-    public void insert(Contact contact) throws DaoException {
-       //TODO Validation
-       service.insert(contact);
+    public void insert(Contact contact) throws ServiceException, DaoException {
+        validationService.validate(contact);
+        crudService.insert(contact);
     }
 
     @Override
-    public Contact getOne(String contactId) throws DaoException {
-        return service.getOne(contactId);
+    public Contact getOne(String contactId) throws ServiceException, DaoException {
+        return crudService.getOne(contactId);
     }
+
 }

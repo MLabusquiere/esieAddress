@@ -1,4 +1,14 @@
-package fr.esiea.esieaddress.model.exception;
+package fr.esiea.esieaddress.controllers;
+
+import fr.esiea.esieaddress.model.exception.RestException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.util.logging.Logger;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -22,24 +32,16 @@ package fr.esiea.esieaddress.model.exception;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class RestException extends Exception {
+@ControllerAdvice
+public class ExceptionHandlerCtrl extends ResponseEntityExceptionHandler {
 
-    private int status = 500;
-    private Object model;
+    private final static Logger LOGGER = Logger.getLogger("ExceptionHandlerCtrl");
 
-    public int getStatus() {
-        return status;
+    @ExceptionHandler(value = {RestException.class})
+    protected ResponseEntity<Object> handleException(RestException ex, WebRequest request) {
+        LOGGER.info("An exception was catch by spring mvc :" + ex.getClass() + " : " + ex.getMessage());
+        Object model = ex.getModel();
+        return new ResponseEntity<Object>(model, HttpStatus.valueOf(ex.getStatus()));
     }
 
-    public Object getModel() {
-        return model;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public void setModel(Object model) {
-        this.model = model;
-    }
 }

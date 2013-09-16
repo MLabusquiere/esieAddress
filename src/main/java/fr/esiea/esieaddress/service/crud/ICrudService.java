@@ -3,6 +3,7 @@ package fr.esiea.esieaddress.service.crud;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.model.IModel;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 
 import java.util.Collection;
 
@@ -30,14 +31,14 @@ import java.util.Collection;
  */
 public interface ICrudService<T extends IModel> {
 
-    Collection<Contact> getAll() throws DaoException;
+    Collection<Contact> getAll() throws ServiceException, DaoException;
 
-    void remove(String idContact) throws DaoException;
+    void remove(String idContact) throws ServiceException, DaoException;
 
-    void save(T contact) throws DaoException;
+    void save(T contact) throws ServiceException, DaoException;
 
-    void insert(T contact) throws DaoException;
+    void insert(T contact) throws ServiceException, DaoException;
 
-    Contact getOne(String contactId) throws DaoException;
+    Contact getOne(String contactId) throws ServiceException, DaoException;
 
 }
