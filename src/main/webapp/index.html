@@ -46,29 +46,9 @@
 
 			<div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse" ng-controller="ContactListCtrl">
 				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable">
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
-					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search"><a href="">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a></li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -93,6 +73,9 @@
 <script src="js/filters.js"></script>
 <!-- Controllers -->
 <script src="js/controllers/contactListController.js"></script>
+<script src="js/controllers/contactDetailController.js"></script>
+<script src="js/controllers/contactFormController.js"></script>
+<script src="js/controllers/errorController.js"></script>
 <!-- Services -->
 <script src="js/services/contactServices.js"></script>
 

@@ -13,7 +13,10 @@ var path = "rest";
 esieAddressApp.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.
 		/* Related Contacts Pages */
-		when('/contacts', {templateUrl: 'partials/contact-list.html', controller: ContactListCtrl}).
+		when('/contacts', {templateUrl: 'partials/home.html', controller: ContactListCtrl}).
+		when('/contacts/:id', {templateUrl: 'partials/contact-detail.html', controller: ContactDetailCtrl}).
+
+		when('/error/:id', {templateUrl: 'partials/error.html', controller: ErrorCtrl}).
 
 		otherwise({redirectTo: '/contacts'});
 }]);
