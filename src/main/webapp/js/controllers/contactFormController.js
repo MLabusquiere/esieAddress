@@ -4,6 +4,9 @@
 
 function ContactFormCtrl($scope, $location, Contact) {
 
+	$scope.addressNumber = 0;
+	$scope.addresses = new Array();
+
 	$scope.days = new Array();
 	$scope.months = new Array();
 	$scope.years = new Array();
@@ -20,4 +23,22 @@ function ContactFormCtrl($scope, $location, Contact) {
 		var date = new Date().getFullYear();
 		$scope.years[i] = (date-i);
 	}
+
+	$scope.newAddress = function () {
+		var address = {};
+		address.text = "";
+		address.id = $scope.addresses.length;
+		console.log("Adding address ");
+		$scope.addresses[$scope.addresses.length] = address;
+	};
+
+	$scope.deleteLastAddress = function () {
+		console.log("Deleting last address");
+		$scope.addresses.splice($scope.addresses.length-1, 1);
+	};
+
+	$scope.deleteAddress = function (index) {
+		console.log("Deleting address # "+index);
+		$scope.addresses.splice(index, 1);
+	};
 }

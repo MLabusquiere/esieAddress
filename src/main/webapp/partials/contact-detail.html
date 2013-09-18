@@ -1,10 +1,14 @@
 <div class="container">
-	<h1>{{contact.firstName}} {{contact.lastName | uppercase}}</h1>
+	<div class="page-header">
+		<h1>{{contact.firstName}} {{contact.lastName | uppercase}} <small>Nickname</small></h1>
+	</div>
 
-	{{contact.dateOfBirth | date:'dd/MM/yyyy'}}<br/>
+	<div class="content">
+		{{contact.dateOfBirth | date:'dd/MM/yyyy'}}<br/>
 
-	{{contact.email}}<br/>
+		{{contact.email}}<br/>
 
-	{{contact.actif}}
+		{{contact.actif}}
+	</div>
 
 </div>

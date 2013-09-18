@@ -16,6 +16,8 @@ esieAddressApp.config(['$routeProvider', function ($routeProvider) {
 		when('/contacts', {templateUrl: 'partials/home.html', controller: ContactListCtrl}).
 		when('/contacts/:id', {templateUrl: 'partials/contact-detail.html', controller: ContactDetailCtrl}).
 
+		when('/new', {templateUrl: 'partials/contact-form.html', controller: ContactFormCtrl}).
+
 		when('/error/:id', {templateUrl: 'partials/error.html', controller: ErrorCtrl}).
 
 		otherwise({redirectTo: '/contacts'});

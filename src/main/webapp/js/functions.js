@@ -8,8 +8,8 @@ $(function(){
 
 
 $(function(){
-	$('#contacts').css({'height':($(document).height()/100*92)+'px'});
+	$('#contacts').css({'height':($(document).height()/100*88)+'px'});
 	$(window).resize(function(){
-		$('#contacts').css({'height':($(document).height()/100*92)+'px'});
+		$('#contacts').css({'height':($(document).height()/100*88)+'px'});
 	});
 });

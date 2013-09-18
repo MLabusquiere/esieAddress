@@ -15,4 +15,7 @@ function ContactListCtrl($scope, $location, Contact) {
 		$location.path('/error/'+error.status);
 	});
 
+	$scope.test = function () {
+		console.log("switch");
+	};
 }

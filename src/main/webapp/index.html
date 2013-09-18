@@ -29,7 +29,11 @@
 
 	<!-- Bootstrap -->
 	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="css/bootstrap-switch.css" rel="stylesheet" media="screen">
 	<link href="css/style.css" rel="stylesheet" media="screen">
+
+	<!-- Angular -->
+	<script src="libs/angular.js"></script>
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -41,31 +45,93 @@
 
 <div class="container">
 	<div class="row">
-		<div id="sidebar-left" class="col-lg-2 col-sm-1">
+		<div id="sidebar-left" class="col-lg-2 col-sm-2" ng-controller="ContactListCtrl">
+
+			<div id="controls">
+				<div class="pull-left">
+					<a class="btn btn-primary" href="#/new"><span class="glyphicon glyphicon-pencil"></span></a>
+				</div>
+
+				<div class="btn-group pull-right">
+					<a class="btn btn-primary" data-toggle="collapse" data-parent="#controls" href="#config"><span class="glyphicon glyphicon-cog"></span></a>
+				</div>
+				<div class="clearfix"></div>
+
+				<div id="config" class="panel-collapse collapse">
+					<div class="btn-group">
+						<button type="button" class="btn btn-primary" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'">
+							<span class="glyphicon glyphicon-list"></span>
+						</button>
+						<button type="button" class="btn btn-primary" ng-class="{active: layout == 'th-list'}" ng-click="layout = 'th-list'">
+							<span class="glyphicon glyphicon-th-list"></span>
+						</button>
+						<button type="button" class="btn btn-primary" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'">
+							<span class="glyphicon glyphicon-th"></span>
+						</button>
+					</div>
+					<div class="make-switch">
+						<input type="checkbox" checked">
+					</div>
+
+				</div>
+			</div>
+
 			<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
 
-			<div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse" ng-controller="ContactListCtrl">
-				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable">
+			<div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable" ng-show="layout == 'list'">
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
+					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
+						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+					</li>
 					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
 						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
 					</li>
 				</ul>
+				<div ng-show="layout == 'th-list'">
+					<span class="label">Thumbail list not implemented</span>
+				</div>
+				<div ng-show="layout == 'grid'">
+					<span class="label">Grid not implemented</span>
+				</div>
 			</div>
 		</div>
 
-		<div id="content" class="col-lg-10 col-sm-11" ng-view><h2>Content</h2></div>
+		<div id="content" class="col-lg-10 col-sm-10" ng-view><h2>Content</h2></div>
 
 	</div>
 </div>
 
 <!-- Libs -->
+<script src="libs/angular-resource.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="libs/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Bootstrap -->
 <script src="libs/bootstrap.js"></script>
-<!-- Angular -->
-<script src="libs/angular.js"></script>
-<script src="libs/angular-resource.js"></script>
+<script src="libs/bootstrap-switch.js"></script>
 
 <!-- Files -->
 <!-- Angular -->
