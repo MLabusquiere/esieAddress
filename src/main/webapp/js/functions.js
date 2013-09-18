@@ -13,3 +13,10 @@ $(function(){
 		$('#contacts').css({'height':($(document).height()/100*88)+'px'});
 	});
 });
+
+$(function(){
+	$('#pageContent').css({'height':($(document).height()/100*80)+'px'});
+	$(window).resize(function(){
+		$('#pageContent').css({'height':($(document).height()/100*80)+'px'});
+	});
+});

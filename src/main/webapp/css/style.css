@@ -30,7 +30,6 @@ a#main-menu-toggle{color:white;position:absolute;z-index:1000;top:0;left:5px;pad
 .nav-tabs.nav-stacked>li:last-child>a{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
 
 .container{max-width:100%!important}
-.content{overflow: scroll}
 
 #controls{margin-bottom: 20px}
 
