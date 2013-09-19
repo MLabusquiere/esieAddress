@@ -14,9 +14,9 @@
 .has-switch {
   display: inline-block;
   cursor: pointer;
-  -webkit-border-radius: 5px;
+  /*-webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 5px;*/
   border: 1px solid;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   position: relative;
@@ -33,6 +33,9 @@
 }
 .has-switch.switch-mini {
   min-width: 72px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
 }
 .has-switch.switch-mini i.switch-mini-icons {
   height: 1.20em;
@@ -42,6 +45,9 @@
   transform: scale(0.6);
   margin-top: -1px;
   margin-bottom: -1px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
 }
 .has-switch.switch-small {
   min-width: 80px;
@@ -166,17 +172,17 @@
   width: 33%;
 }
 .has-switch span.switch-left {
-  -webkit-border-top-left-radius: 4px;
+  /*-webkit-border-top-left-radius: 4px;
   -moz-border-radius-topleft: 4px;
   border-top-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
   -moz-border-radius-bottomleft: 4px;
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;*/
 }
 .has-switch span.switch-right {
   color: #333333;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  background-color: #f0f0f0;
+  /*background-color: #f0f0f0;
   background-image: -moz-linear-gradient(top, #e6e6e6, #ffffff);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e6e6e6), to(#ffffff));
   background-image: -webkit-linear-gradient(top, #e6e6e6, #ffffff);
@@ -186,10 +192,12 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe6e6e6', endColorstr='#ffffffff', GradientType=0);
   border-color: #ffffff #ffffff #d9d9d9;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #ffffff;
+  *background-color: #ffffff;*/
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+/*
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);*/
+    background-color: #ebebeb;
+    border-color: #cccccc;
 }
 .has-switch span.switch-right:hover,
 .has-switch span.switch-right:focus,
@@ -197,9 +205,12 @@
 .has-switch span.switch-right.active,
 .has-switch span.switch-right.disabled,
 .has-switch span.switch-right[disabled] {
-  color: #333333;
-  background-color: #ffffff;
-  *background-color: #f2f2f2;
+  /*color: #333333;
+  background-color: #eeeeee;
+  *background-color: #f2f2f2;*/
+    color: #333333;
+    background-color: #dddddd;
+    border-color: #adadad;
 }
 .has-switch span.switch-right:active,
 .has-switch span.switch-right.active {
@@ -209,7 +220,9 @@
 .has-switch span.switch-left {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #005fcc;
+  background-color: #428bca;
+  border-color: #357ebd;
+ /* background-color: #005fcc;
   background-image: -moz-linear-gradient(top, #0044cc, #0088cc);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0044cc), to(#0088cc));
   background-image: -webkit-linear-gradient(top, #0044cc, #0088cc);
@@ -220,9 +233,9 @@
   border-color: #0088cc #0088cc #005580;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #0088cc;
-  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+  *//* Darken IE7 buttons by default so they stand out more given they won't have borders *//*
 
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);*/
 }
 .has-switch span.switch-primary:hover,
 .has-switch span.switch-left:hover,
@@ -237,8 +250,10 @@
 .has-switch span.switch-primary[disabled],
 .has-switch span.switch-left[disabled] {
   color: #ffffff;
-  background-color: #0088cc;
-  *background-color: #0077b3;
+    background-color: #3276b1;
+    border-color: #285e8e;
+  /*background-color: #0088cc;
+  *background-color: #0077b3;*/
 }
 .has-switch span.switch-primary:active,
 .has-switch span.switch-left:active,

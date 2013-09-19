@@ -3,23 +3,23 @@
 		<h1>New Contact <small>Create a new contact</small></h1>
 	</div>
 	<div id="pageContent" class="scrollable">
-		<form class="form-horizontal col-lg-10" role="form">
+		<form class="form-horizontal col-lg-10" role="form" ng-submit="addQuestion()">
 			<div class="form-group">
 				<label for="inputFirstname" class="col-lg-2 control-label">Firstname</label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="inputFirstname" placeholder="Firstname">
+					<input type="text" ng-model="newContact.firstname" class="form-control" id="inputFirstname" placeholder="Firstname">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputLastname" class="col-lg-2 control-label">Lastname</label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="inputLastname" placeholder="Lastname">
+					<input type="text" ng-model="newContact.lastname" class="form-control" id="inputLastname" placeholder="Lastname">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail" class="col-lg-2 control-label">Email</label>
 				<div class="col-lg-10">
-					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+					<input type="email" ng-model="newContact.email" class="form-control" id="inputEmail" placeholder="Email">
 				</div>
 			</div>
 
@@ -27,13 +27,13 @@
 				<label class="col-lg-2 control-label">Birthdate</label>
 				<div class="col-lg-10 row">
 					<div class="col-lg-3">
-						<input type="text" class="form-control" id="birthyear" placeholder="Year">
+						<input type="text" ng-model="newContact.birthdate.year" class="form-control" id="birthyear" placeholder="Year">
 					</div>
 					<div class="col-lg-2">
-						<input type="text" class="form-control" id="birthmonth" placeholder="Month">
+						<input type="text" ng-model="newContact.birthdate.month" class="form-control" id="birthmonth" placeholder="Month">
 					</div>
 					<div class="col-lg-2">
-						<input type="text" class="form-control" id="birthday" placeholder="Day">
+						<input type="text" ng-model="newContact.birthdate.day" class="form-control" id="birthday" placeholder="Day">
 					</div>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 				<div class="col-lg-offset-2 col-lg-10">
 					<div class="checkbox">
 						<label>
-							<input type="checkbox"> Actif
+							<input type="checkbox" ng-model="newContact.active"> Actif
 						</label>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 				<div class="form-group" ng-repeat="address in addresses">
 					<label for="inputAddress{{$index}}" class="col-lg-2 control-label">Address #{{$index+1}}</label>
 					<div class="col-lg-9">
-						<input type="text" class="form-control" id="inputAddress{{$index}}" placeholder="Address">
+						<input type="text" class="form-control" ng-model="newContact.addresses[$index]" id="inputAddress{{$index}}" placeholder="Address">
 					</div>
 					<div class="col-lg-1">
 						<button type="button" class="btn btn-default" ng-click="deleteAddress($index)"><span class="glyphicon glyphicon-minus"></span></button>

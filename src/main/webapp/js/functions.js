@@ -6,6 +6,12 @@ $(function(){
 	});
 });
 
+$(function(){
+	$('#sidebar-left').css({'height':($(document).height())+'px'});
+	$(window).resize(function(){
+		$('#sidebar-left').css({'height':($(document).height())+'px'});
+	});
+});
 
 $(function(){
 	$('#contacts').css({'height':($(document).height()/100*88)+'px'});

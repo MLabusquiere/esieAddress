@@ -4,6 +4,9 @@
 
 function ContactFormCtrl($scope, $location, Contact) {
 
+	$scope.newContact = {};
+	$scope.newContact.addresses = new Array();
+
 	$scope.addressNumber = 0;
 	$scope.addresses = new Array();
 
@@ -40,5 +43,9 @@ function ContactFormCtrl($scope, $location, Contact) {
 	$scope.deleteAddress = function (index) {
 		console.log("Deleting address # "+index);
 		$scope.addresses.splice(index, 1);
+	};
+
+	$scope.addQuestion = function() {
+		console.log($scope.newContact);
 	};
 }

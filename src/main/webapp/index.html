@@ -45,7 +45,7 @@
 
 <div class="container">
 	<div class="row">
-		<div id="sidebar-left" class="col-lg-2 col-sm-2" ng-controller="ContactListCtrl">
+		<div id="sidebar-left" class="col-lg-2 col-sm-2 collapse in" ng-controller="ContactListCtrl">
 
 			<div id="controls">
 				<div class="pull-left">
@@ -53,32 +53,31 @@
 				</div>
 
 				<div class="btn-group pull-right">
-					<a class="btn btn-primary" data-toggle="collapse" data-parent="#controls" href="#config"><span class="glyphicon glyphicon-cog"></span></a>
+					<a class="btn btn-primary" data-toggle="collapse" data-target="#config"><span class="glyphicon glyphicon-cog"></span></a>
 				</div>
 				<div class="clearfix"></div>
+			</div>
 
-				<div id="config" class="panel-collapse collapse">
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'">
-							<span class="glyphicon glyphicon-list"></span>
-						</button>
-						<button type="button" class="btn btn-primary" ng-class="{active: layout == 'th-list'}" ng-click="layout = 'th-list'">
-							<span class="glyphicon glyphicon-th-list"></span>
-						</button>
-						<button type="button" class="btn btn-primary" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'">
-							<span class="glyphicon glyphicon-th"></span>
-						</button>
-					</div>
-					<div class="make-switch">
-						<input type="checkbox" checked">
-					</div>
-
+			<div id="config" class="panel-collapse collapse">
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'">
+						<span class="glyphicon glyphicon-list"></span>
+					</button>
+					<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'th-list'}" ng-click="layout = 'th-list'">
+						<span class="glyphicon glyphicon-th-list"></span>
+					</button>
+					<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'">
+						<span class="glyphicon glyphicon-th"></span>
+					</button>
+				</div>
+				<div class="make-switch switch-small">
+					<input type="checkbox" checked>
 				</div>
 			</div>
 
 			<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
 
-			<div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+			<div class="sidebar-nav">
 				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable" ng-show="layout == 'list'">
 					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
 						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
