@@ -61,7 +61,7 @@
 		</property>
 		<property name="id" value="id3" />
 	</bean>
-	<bean name="database" class="fr.esiea.esieaddress.dao.implementation.DaoContact">
+	<bean name="contactDao" class="fr.esiea.esieaddress.dao.implementation.ContactDao">
 		<property name="database">
 			<map>
 				<entry key="id1" value-ref="contact1" />

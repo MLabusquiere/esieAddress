@@ -35,31 +35,31 @@ import java.util.Collection;
 public class ContactCrudService implements ICrudService<Contact> {
 
     @Autowired
-    private ICrudDao<Contact> dao;
+    private ICrudDao<Contact> contactDao;
 
     @Override
     public Collection<Contact> getAll() throws DaoException {
-        return dao.getAll();
+        return contactDao.getAll();
     }
 
     @Override
     public void remove(String idContact) throws DaoException  {
-        dao.remove(idContact);
+        contactDao.remove(idContact);
     }
 
     @Override
     public void save(Contact contact) throws DaoException  {
-        dao.save(contact);
+        contactDao.save(contact);
     }
 
     @Override
     public void insert(Contact contact) throws DaoException {
-        dao.insert(contact);
+        contactDao.insert(contact);
     }
 
     @Override
     public Contact getOne(String contactId) throws DaoException  {
-        return dao.getOne(contactId);
+        return contactDao.getOne(contactId);
     }
 
 }

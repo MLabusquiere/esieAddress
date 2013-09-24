@@ -29,7 +29,7 @@ import java.util.Collection;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface ICrudDao<T extends IModel> {
-    Collection<Contact> getAll() throws DaoException;
+    Collection<T> getAll() throws DaoException;
 
     void remove(String idContact) throws DaoException;
 

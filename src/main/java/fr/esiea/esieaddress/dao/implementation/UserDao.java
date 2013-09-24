@@ -2,10 +2,11 @@ package fr.esiea.esieaddress.dao.implementation;
 
 import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.Contact;
-import org.springframework.beans.factory.annotation.Autowired;
+import fr.esiea.esieaddress.model.user.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,38 +31,38 @@ import java.util.Map;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class DaoContact implements ICrudDao<Contact> {
+@Repository
+public class UserDao implements ICrudDao<User> {
 
-    @Autowired
-    private Map<String,Contact> database;
+    private Map<String,User> database = new HashMap<String,User>();
 
     @Override
-    public Collection<Contact> getAll() throws DaoException {
+    public Collection<User> getAll() throws DaoException {
         return database.values();  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void remove(String idContact) throws DaoException {
-       database.remove(idContact);
+    public void remove(String idUser) throws DaoException {
+       database.remove(idUser);
     }
 
     @Override
-    public void save(Contact contact) throws DaoException {
-        database.remove(contact.getId());
-        insert(contact);
+    public void save(User user) throws DaoException {
+        database.remove(user.getId());
+        insert(user);
     }
 
     @Override
-    public void insert(Contact contact) throws DaoException {
-        database.put(contact.getId(),contact);
+    public void insert(User user) throws DaoException {
+        database.put(user.getId(),user);
     }
 
     @Override
-    public Contact getOne(String contactId) throws DaoException {
-        return database.get(contactId);
+    public User getOne(String userId) throws DaoException {
+        return database.get(userId);
     }
 
-    public void setDatabase(Map<String, Contact> database) {
+    public void setDatabase(Map<String, User> database) {
         this.database = database;
     }
 }

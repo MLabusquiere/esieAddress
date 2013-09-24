@@ -1,10 +1,12 @@
-package fr.esiea.esieaddress.service.crud;
+package fr.esiea.esieaddress.service;
 
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.Contact;
-import fr.esiea.esieaddress.model.IModel;
 import fr.esiea.esieaddress.model.user.User;
+import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
@@ -30,16 +32,38 @@ import java.util.Collection;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public interface ICrudService<T extends IModel> {
+@Service
+public class UserService implements ICrudService<User>{
 
-    Collection<T> getAll() throws ServiceException, DaoException;
+    @Autowired
+    ICrudDao<User> userDao;
 
-    void remove(String idContact) throws ServiceException, DaoException;
+    public User findByEmail(String email) throws ServiceException, DaoException {
+        return getOne(email);
+    }
 
-    void save(T contact) throws ServiceException, DaoException;
+    @Override
+    public Collection<User> getAll() throws ServiceException, DaoException {
+        return userDao.getAll();  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-    void insert(T contact) throws ServiceException, DaoException;
+    @Override
+    public void remove(String idUser) throws ServiceException, DaoException {
+        remove(idUser);
+    }
 
-    T getOne(String contactId) throws ServiceException, DaoException;
+    @Override
+    public void save(User user) throws ServiceException, DaoException {
+        save(user);
+    }
 
+    @Override
+    public void insert(User user) throws ServiceException, DaoException {
+        insert(user);
+    }
+
+    @Override
+    public User getOne(String userId) throws ServiceException, DaoException {
+        return getOne(userId);  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

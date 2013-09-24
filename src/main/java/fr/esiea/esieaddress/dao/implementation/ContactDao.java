@@ -1,12 +1,12 @@
-package fr.esiea.esieaddress.service.crud;
+package fr.esiea.esieaddress.dao.implementation;
 
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
-import fr.esiea.esieaddress.model.IModel;
-import fr.esiea.esieaddress.model.user.User;
-import fr.esiea.esieaddress.service.exception.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -30,16 +30,38 @@ import java.util.Collection;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public interface ICrudService<T extends IModel> {
+public class ContactDao implements ICrudDao<Contact> {
 
-    Collection<T> getAll() throws ServiceException, DaoException;
+    @Autowired
+    private Map<String,Contact> database;
 
-    void remove(String idContact) throws ServiceException, DaoException;
+    @Override
+    public Collection<Contact> getAll() throws DaoException {
+        return database.values();  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-    void save(T contact) throws ServiceException, DaoException;
+    @Override
+    public void remove(String idContact) throws DaoException {
+       database.remove(idContact);
+    }
 
-    void insert(T contact) throws ServiceException, DaoException;
+    @Override
+    public void save(Contact contact) throws DaoException {
+        database.remove(contact.getId());
+        insert(contact);
+    }
 
-    T getOne(String contactId) throws ServiceException, DaoException;
+    @Override
+    public void insert(Contact contact) throws DaoException {
+        database.put(contact.getId(),contact);
+    }
 
+    @Override
+    public Contact getOne(String contactId) throws DaoException {
+        return database.get(contactId);
+    }
+
+    public void setDatabase(Map<String, Contact> database) {
+        this.database = database;
+    }
 }
