@@ -1,7 +1,12 @@
 package fr.esiea.esieaddress.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.view.ContactView;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -48,10 +55,14 @@ public class CrudContactCtrl {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Collection<Contact> getAll() throws ServiceException, DaoException {
+    public void getAll(HttpServletResponse servletResponse) throws ServiceException, DaoException, IOException {
 
         LOGGER.info("[Controller] Querying Contact list");
-        return crudService.getAll();
+        /*
+         * Make the list with only id, firstname, lastname, actif
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writerWithView(ContactView.LightView.class).writeValue(servletResponse.getOutputStream(),crudService.getAll());
 
     }
 
@@ -67,7 +78,7 @@ public class CrudContactCtrl {
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Contact contact) throws ServiceException, DaoException {
-       
+
         LOGGER.info("[Controller] Querying to create new contact : "+ contact.toString());
         crudService.insert(contact);
 

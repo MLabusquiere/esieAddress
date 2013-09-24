@@ -1,5 +1,9 @@
 package fr.esiea.esieaddress.model;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
+import fr.esiea.esieaddress.model.view.ContactView;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -31,30 +35,38 @@ import java.util.*;
  */
 public class Contact implements IModel {
 
+    @JsonView(ContactView.LightView.class)
     private String id;
 
     @NotNull(message="{fr.esiea.esieaddress.model.contact.lastName.notNull}")
     //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u", message="{fr.esiea.esieaddress.model.contact.lastName}")
+
+    @JsonView(ContactView.LightView.class)
     @Size(max = 20, message="{fr.esiea.esieaddress.model.contact.lastName.size}")
     private String lastName;
 
     @NotNull(message="{fr.esiea.esieaddress.model.contact.firstName.notNull}")
     //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u",message="{fr.esiea.esieaddress.model.contact.firstName}")
+    @JsonView(ContactView.LightView.class)
     @Size(max = 20,message="{fr.esiea.esieaddress.model.contact.firstName.size}")
     private String firstName;
 
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
             ,message="{fr.esiea.esieaddress.model.contact.email}")
     //Norme RFC2822 - http://www.regular-expressions.info/email.html
+    @JsonView(ContactView.FullView.class)
     private String email;
 
     @Past(message="{fr.esiea.esieaddress.model.contact.dateOfBirth.path}")
+    @JsonView(ContactView.FullView.class)
     private Date dateOfBirth;
     //May a map to specify an type of an address
 
     @Valid
+    @JsonView(ContactView.FullView.class)
     private Map<String,Address> addresses = new HashMap<String,Address>();
 
+    @JsonView(ContactView.LightView.class)
     private boolean actif;
 
     public Contact() {}
@@ -115,4 +127,6 @@ public class Contact implements IModel {
     public void setId(String id) {
         this.id = id;
     }
+
 }
+
