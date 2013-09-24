@@ -1,8 +1,4 @@
-package fr.esiea.esieaddress.service.validation.exception;
-
-import fr.esiea.esieaddress.service.exception.ServiceException;
-
-import java.util.Map;
+package fr.esiea.esieaddress.dao.exception;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -26,11 +22,9 @@ import java.util.Map;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+public class UpdateException extends DaoException {
 
-public class ValidationException extends ServiceException {
-
-    public ValidationException(Map<Object, String> model) {
-        super(400,model);
+    public UpdateException() {
+        super(404,"You can't update this ressource");
     }
-
 }

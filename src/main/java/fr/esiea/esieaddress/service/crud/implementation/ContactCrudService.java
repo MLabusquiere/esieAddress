@@ -4,6 +4,8 @@ import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
+import fr.esiea.esieaddress.service.exception.InvalidIdException;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,8 +60,11 @@ public class ContactCrudService implements ICrudService<Contact> {
     }
 
     @Override
-    public Contact getOne(String contactId) throws DaoException  {
-        return dao.getOne(contactId);
+    public Contact getOne(String contactId) throws ServiceException, DaoException  {
+        Contact contact = dao.getOne(contactId);
+        if( null==contact )
+            throw new InvalidIdException();
+        return contact;
     }
 
 }

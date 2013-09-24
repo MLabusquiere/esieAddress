@@ -2,6 +2,7 @@ package fr.esiea.esieaddress.dao.implementation;
 
 import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.dao.exception.UpdateException;
 import fr.esiea.esieaddress.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,7 +48,8 @@ public class DaoContact implements ICrudDao<Contact> {
 
     @Override
     public void save(Contact contact) throws DaoException {
-        database.remove(contact.getId());
+        if(null == database.remove(contact.getId()))
+            throw new UpdateException();
         insert(contact);
     }
 

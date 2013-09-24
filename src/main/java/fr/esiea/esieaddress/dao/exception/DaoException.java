@@ -25,4 +25,7 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class DaoException extends RestException {
+    public DaoException(int status,Object model) {
+        super(status, model);
+    }
 }
