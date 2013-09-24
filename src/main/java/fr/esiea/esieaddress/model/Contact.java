@@ -5,9 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -55,11 +53,19 @@ public class Contact implements IModel {
     //May a map to specify an type of an address
 
     @Valid
-    private Set<Address> addresses = new HashSet<Address>();
+    private Map<String,Address> addresses = new HashMap<String,Address>();
 
     private boolean actif;
 
     public Contact() {}
+
+    public boolean addAddress(String label,Address address) {
+        if(true == addresses.containsValue(label))
+            return false;
+        addresses.put(label, address);
+        return true;
+
+    }
 
     public String getLastName() {
         return lastName;
