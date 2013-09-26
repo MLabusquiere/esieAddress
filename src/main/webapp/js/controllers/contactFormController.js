@@ -4,7 +4,9 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('ContactFormCtrl',function($scope, $location, Contact) {
+module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Contact) {
+
+	$scope.edit = false;
 
 	$scope.newContact = {};
 	$scope.newContact.addresses = new Array();
@@ -12,7 +14,19 @@ module.controller('ContactFormCtrl',function($scope, $location, Contact) {
 	$scope.addressNumber = 0;
 	$scope.addresses = new Array();
 
-	$scope.days = new Array();
+	if($routeParams.id != undefined){
+		console.log("Edit contact "+$routeParams.id)
+		$scope.edit = true;
+		Contact.get({
+			id: $routeParams.id
+		}, function(data) {
+			$scope.newContact = data;
+		}, function(error) {
+			$location.path('/error/'+error.status);
+		});
+	}
+
+/*	$scope.days = new Array();
 	$scope.months = new Array();
 	$scope.years = new Array();
 
@@ -27,7 +41,14 @@ module.controller('ContactFormCtrl',function($scope, $location, Contact) {
 	for(i = 0; i<120; i++){
 		var date = new Date().getFullYear();
 		$scope.years[i] = (date-i);
-	}
+	}*/
+
+	$scope.saveContact = function () {
+		if($scope.edit = true){
+
+		}
+		Contact.save($scope.newContact);
+	};
 
 	$scope.newAddress = function () {
 		var address = {};

@@ -17,6 +17,7 @@ esieAddressApp.config(['$routeProvider', function ($routeProvider) {
 		/* Related Contacts Pages */
 		when('/contacts', {templateUrl: 'partials/home.html', controller: 'ContactListCtrl'}).
 		when('/contacts/:id', {templateUrl: 'partials/contact-detail.html', controller: 'ContactDetailCtrl'}).
+		when('/contacts/:id/edit', {templateUrl: 'partials/contact-form.html', controller: 'ContactFormCtrl'}).
 
 		when('/new', {templateUrl: 'partials/contact-form.html', controller: 'ContactFormCtrl'}).
 

@@ -32,7 +32,7 @@ a#main-menu-toggle{color:white;position:absolute;z-index:1000;top:0;left:5px;pad
 .container{max-width:100%!important}
 
 #controls{margin-bottom: 10px}
-#config{margin:0 -10px;padding:10px;background-color: #2D323D}
+#config{color:white;margin:0 -10px;padding:10px;background-color: #2D323D}
 
 
 .blue{color:#36a9e1}

@@ -1,6 +1,7 @@
 <div class="container">
-	<div class="page-header">
-		<h1>New Contact <small>Create a new contact</small></h1>
+	<div class="page-header" ng-switch on="edit">
+		<h1 ng-switch-when="true">Edit Contact <small>Edit contact</small></h1>
+		<h1 ng-switch-default>New Contact <small>Congrats you've got a new friend !</small></h1>
 	</div>
 	<div id="pageContent" class="scrollable">
 		<form class="form-horizontal col-lg-10" role="form" ng-submit="addQuestion()">
