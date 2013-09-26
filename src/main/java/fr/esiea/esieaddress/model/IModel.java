@@ -1,5 +1,8 @@
 package fr.esiea.esieaddress.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import fr.esiea.esieaddress.model.view.ContactView;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -24,5 +27,8 @@ package fr.esiea.esieaddress.model;
  */
 public interface IModel {
 
+    @JsonView(ContactView.LightView.class)
     String getId();
+    void setId(String id);
+    void generateId();
 }

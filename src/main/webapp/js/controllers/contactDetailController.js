@@ -1,8 +1,8 @@
 'use strict';
 
 /* User Detail Controller */
-
-function ContactDetailCtrl($scope, $location, $routeParams, Contact) {
+var module = angular.module('esieAddress.controllers');
+module.controller('ContactDetailCtrl', function($scope, $location, $routeParams, Contact) {
 
 	$scope.contact = {};
 
@@ -14,4 +14,4 @@ function ContactDetailCtrl($scope, $location, $routeParams, Contact) {
 		$location.path('/error/'+error.status);
 	});
 
-}
+});

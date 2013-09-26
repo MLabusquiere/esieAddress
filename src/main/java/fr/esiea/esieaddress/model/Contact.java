@@ -32,10 +32,7 @@ import java.util.*;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class Contact implements IModel {
-
-    @JsonView(ContactView.LightView.class)
-    private String id;
+public class Contact extends Model {
 
     @NotNull(message="{fr.esiea.esieaddress.model.contact.lastname.notNull}")
     //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u", message="{fr.esiea.esieaddress.model.contact.lastname}")
@@ -118,19 +115,11 @@ public class Contact implements IModel {
         this.actif = actif;
     }
 
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
         return "Contact{" +
-                "id='" + id + '\'' +
+                "id='" + getId() + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", email='" + email + '\'' +

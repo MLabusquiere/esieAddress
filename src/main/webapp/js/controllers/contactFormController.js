@@ -2,7 +2,9 @@
 
 /* User Controllers */
 
-function ContactFormCtrl($scope, $location, Contact) {
+var module = angular.module('esieAddress.controllers');
+
+module.controller('ContactFormCtrl',function($scope, $location, Contact) {
 
 	$scope.newContact = {};
 	$scope.newContact.addresses = new Array();
@@ -48,4 +50,4 @@ function ContactFormCtrl($scope, $location, Contact) {
 	$scope.addQuestion = function() {
 		console.log($scope.newContact);
 	};
-}
+});

@@ -2,6 +2,8 @@
 
 /* User Controllers */
 
-function ErrorCtrl($scope, $routeParams, $location) {
+var module = angular.module('esieAddress.controllers');
 
-}
+module.controller('ErrorCtrl',function ($scope, $routeParams, $location) {
+
+});

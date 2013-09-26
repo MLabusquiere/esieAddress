@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.util.Collections;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -39,14 +41,19 @@ public class ValidationService implements IValidationService {
     private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     @Override
-    public void validate(Contact contact) throws ValidationException {
+    public Map<Object, String> validate(Contact contact) {
+
         Set<ConstraintViolation<Contact>> violations = validator.validate(contact);
-        if( ! violations.isEmpty()) {
-            HashMap<Object, String> errorMap = new HashMap<Object, String>();
-            for(ConstraintViolation<Contact> violation:violations)   {
-                errorMap.put(violation.getInvalidValue(),violation.getMessage());
-            }
-            throw new ValidationException(errorMap);
+
+        if( violations.isEmpty())
+            return Collections.EMPTY_MAP;
+
+        HashMap<Object, String> errorMap = new HashMap<Object, String>();
+        for(ConstraintViolation<Contact> violation:violations)   {
+            errorMap.put(violation.getInvalidValue(),violation.getMessage());
         }
+
+        return errorMap;
+
     }
 }

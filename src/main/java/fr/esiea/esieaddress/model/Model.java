@@ -1,6 +1,6 @@
 package fr.esiea.esieaddress.model;
 
-import java.util.Date;
+import java.util.UUID;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -24,45 +24,26 @@ import java.util.Date;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class Address extends Model {
+public abstract class Model implements IModel{
 
-    private String numero;
-    private String street;
-    private String postalCode;
-    private String city;
+    private String id;
 
-    public Address() {}
-
-    public String getNumero() {
-        return numero;
+    @Override
+    public String getId() {
+        return id;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getStreet() {
-        return street;
+    @Override
+    public void generateId() {
+        /*
+         * helper for the database to generate Id
+         */
+        if(id == null)
+            id = UUID.randomUUID().toString();
     }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
 }

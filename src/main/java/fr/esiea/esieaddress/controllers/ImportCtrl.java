@@ -1,8 +1,15 @@
 package fr.esiea.esieaddress.controllers;
 
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.service.crud.ICrudService;
+import fr.esiea.esieaddress.service.crud.implementation.ContactCrudService;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.validation.csv.CsvService;
+import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,8 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.nio.file.Files;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -37,27 +43,23 @@ import java.util.Set;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class CsvUploadCtrl {
+@Controller
+@RequestMapping("/import")
+public class ImportCtrl {
 
-    private static final Logger LOGGER = Logger.getLogger(CsvUploadCtrl.class);
+    private static final Logger LOGGER = Logger.getLogger(ImportCtrl.class);
     private static final double FILE_SIZE_MAX = 30000;
-    private static String URI;
 
+    @Autowired
+    private ICrudService<Contact> contactCrudService;
     @Autowired
     private CsvService csvService;
 
-    static {
-        try {
-        URI = Files.createTempDirectory("csvImport").toString();
-        }catch (Exception e)    {
-            URI = null;
-            LOGGER.error("Can't innitialise the directory to import file");
-        }
-    }
-
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public void upload(MultipartHttpServletRequest files, final HttpServletRequest request) throws IOException {
+    public void upload(MultipartHttpServletRequest files, final HttpServletRequest request) throws DaoException, ServiceException, FileNotFoundException {
+        LOGGER.info("[IMPORT] Start to import contact");
+
         //TODO Make it less verbose and may use a buffer to make it safer
         Map<String, MultipartFile> multipartFileMap = files.getMultiFileMap().toSingleValueMap();
         Set<String> fileNames = multipartFileMap.keySet();
@@ -69,13 +71,42 @@ public class CsvUploadCtrl {
 
             if (checkFileName(originalFilename) && multipartFile.getSize() < FILE_SIZE_MAX) {
 
-                LOGGER.info("[CONTROLLER] A file is created at " + URI);
 
-                try(Reader contactsFile = new InputStreamReader(multipartFile.getInputStream()))    {
+                InputStream inputStream = null;
 
-                   csvService.ReadContactCSV(contactsFile);
+                try {
+                    inputStream = multipartFile.getInputStream();
+                } catch (IOException e) {
+                    throw new FileNotFoundException(e.toString());
+                }
 
-                }finally { }
+                try(Reader contactsFile = new InputStreamReader(inputStream))    {
+                    List<Object> modelErrors = new ArrayList<>();
+                    LOGGER.debug("[IMPORT] File is reading");
+                    Collection<Contact> contacts = csvService.ReadContactCSV(contactsFile);
+                    for(Contact contact:contacts)   {
+                        try {
+                            contactCrudService.insert(contact);
+                        } catch (ValidationException e) {
+                            Object modelError = e.getModel();
+                            LOGGER.warn("found an error in contact " + modelError);
+                            modelErrors.add(modelError);
+                        }
+                    }
+
+                    if( !modelErrors.isEmpty() )
+                        throw new ValidationException(modelErrors);
+
+                } catch (IOException e) {
+                    throw new FileNotFoundException(e.toString());
+                }finally {
+                    if(inputStream != null)
+                        try {
+                            inputStream.close();
+                        } catch (IOException e) {
+                            LOGGER.error("[IMPORT] Impossible to close the file " + inputStream.toString());
+                        }
+                }
             }
         }
     }

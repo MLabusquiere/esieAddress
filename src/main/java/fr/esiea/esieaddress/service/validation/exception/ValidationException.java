@@ -2,6 +2,7 @@ package fr.esiea.esieaddress.service.validation.exception;
 
 import fr.esiea.esieaddress.service.exception.ServiceException;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,4 +34,10 @@ public class ValidationException extends ServiceException {
         super(400,model);
     }
 
+    /*
+     * It's using by importCtrl (send back a list of map error (1 map by wrong) contact
+     */
+    public ValidationException(List<Object> model) {
+        super(400,model);
+    }
 }

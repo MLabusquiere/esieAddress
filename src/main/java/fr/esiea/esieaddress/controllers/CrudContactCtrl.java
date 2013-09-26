@@ -90,7 +90,7 @@ public class CrudContactCtrl {
 
         LOGGER.info("[Controller] Querying to edit Contact : \"" + contact.toString());
         crudService.save(contact);
-        //TODO may else we should send an error
+
     }
 
 

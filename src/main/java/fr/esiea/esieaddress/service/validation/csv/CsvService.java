@@ -53,7 +53,7 @@ public class CsvService {
 
     private String[] actualTemplate = pickOutlookTemplate();
 
-    public Collection<?> ReadContactCSV(Reader input)    {
+    public Collection<Contact> ReadContactCSV(Reader input)    {
         ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
 
         strat.setType(CsvContact.class);

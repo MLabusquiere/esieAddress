@@ -5,6 +5,7 @@ import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -40,7 +42,7 @@ import java.util.Set;
  */
 @Service
 public class ServiceValidationDecorator implements ICrudService<Contact> {
-
+    private static final Logger LOGGER = Logger.getLogger(ServiceValidationDecorator.class);
     @Autowired
     @Qualifier("contactCrudService")
     private ICrudService<Contact> crudService;
@@ -60,14 +62,27 @@ public class ServiceValidationDecorator implements ICrudService<Contact> {
 
     @Override
     public void save(Contact contact) throws ServiceException, DaoException {
-        validationService.validate(contact);
-        crudService.save(contact);
+        LOGGER.info("[VALIDATION] Do the validation on updatedContact contact " + contact.getId());
+
+        final Map<Object, String> errorMap = validationService.validate(contact);
+
+        if(errorMap.isEmpty())
+            crudService.save(contact);
+
+        throw new ValidationException(errorMap);
+
     }
 
     @Override
     public void insert(Contact contact) throws ServiceException, DaoException {
-        validationService.validate(contact);
-        crudService.insert(contact);
+        LOGGER.info("[VALIDATION] Do the validation on a new contact");
+
+        final Map<Object,String> errorMaps = validationService.validate(contact);
+
+        if(errorMaps.isEmpty())
+            crudService.insert(contact);
+
+        throw new ValidationException(errorMaps);
     }
 
     @Override

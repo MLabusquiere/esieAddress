@@ -3,6 +3,8 @@ package fr.esiea.esieaddress.service.validation;
 import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 
+import java.util.Map;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -26,5 +28,5 @@ import fr.esiea.esieaddress.service.validation.exception.ValidationException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface IValidationService {
-    void validate(Contact contact) throws ValidationException;
+    Map<Object, String> validate(Contact contact) throws ValidationException;
 }

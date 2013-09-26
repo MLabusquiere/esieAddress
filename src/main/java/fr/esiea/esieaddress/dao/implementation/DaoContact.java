@@ -55,6 +55,7 @@ public class DaoContact implements ICrudDao<Contact> {
 
     @Override
     public void insert(Contact contact) throws DaoException {
+        contact.generateId();
         database.put(contact.getId(),contact);
     }
 

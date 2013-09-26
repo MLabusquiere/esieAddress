@@ -2,7 +2,9 @@
 
 /* User Controllers */
 
-function ContactListCtrl($scope, $location, Contact) {
+var module = angular.module('esieAddress.controllers');
+
+module.controller('ContactListCtrl',function($scope, $location, Contact) {
 
 	$scope.layout = 'list';
 	$scope.showAll = true;
@@ -18,4 +20,4 @@ function ContactListCtrl($scope, $location, Contact) {
 	$scope.test = function () {
 		console.log("switch");
 	};
-}
+});
