@@ -1,4 +1,4 @@
-package fr.esiea.esieaddress.controllers;
+package fr.esiea.esieaddress.controllers.exception;
 
 import fr.esiea.esieaddress.model.exception.RestException;
 import org.springframework.http.HttpStatus;

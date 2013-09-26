@@ -80,7 +80,7 @@
 			<div class="sidebar-nav">
 				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable" ng-show="layout == 'list'">
 					<li ng-repeat="contact in contacts | orderBy:predicate:reverse | filter:search" ng-show="contact.actif == true || showAll == true">
-						<a href="#/contacts/{{contact.id}}">{{contact.firstName}} <strong>{{contact.lastName | uppercase}}</strong></a>
+						<a href="#/contacts/{{contact.id}}">{{contact.firstname}} <strong>{{contact.lastname | uppercase}}</strong></a>
 					</li>
 				</ul>
 				<div ng-show="layout == 'th-list'">

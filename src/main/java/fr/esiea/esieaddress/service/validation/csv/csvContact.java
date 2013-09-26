@@ -1,14 +1,6 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.service.validation.csv;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import fr.esiea.esieaddress.model.view.ContactView;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -32,50 +24,27 @@ import java.util.*;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class Contact implements IModel {
+public class CsvContact {
 
-    @JsonView(ContactView.LightView.class)
     private String id;
-
-    @NotNull(message="{fr.esiea.esieaddress.model.contact.lastname.notNull}")
-    //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u", message="{fr.esiea.esieaddress.model.contact.lastname}")
-
-    @JsonView(ContactView.LightView.class)
-    @Size(max = 20, message="{fr.esiea.esieaddress.model.contact.lastname.size}")
     private String lastname;
-
-    @NotNull(message="{fr.esiea.esieaddress.model.contact.firstname.notNull}")
-    //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u",message="{fr.esiea.esieaddress.model.contact.firstname}")
-    @JsonView(ContactView.LightView.class)
-    @Size(max = 20,message="{fr.esiea.esieaddress.model.contact.firstname.size}")
     private String firstname;
-
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-            ,message="{fr.esiea.esieaddress.model.contact.email}")
-    //Norme RFC2822 - http://www.regular-expressions.info/email.html
-    @JsonView(ContactView.FullView.class)
     private String email;
-
-    @Past(message="{fr.esiea.esieaddress.model.contact.dateOfBirth.path}")
-    @JsonView(ContactView.FullView.class)
     private Date dateOfBirth;
-    //May a map to specify an type of an address
-
-    @Valid
-    @JsonView(ContactView.FullView.class)
-    private Map<String,Address> addresses = new HashMap<String,Address>();
-
-    @JsonView(ContactView.LightView.class)
     private boolean actif;
+    private String numero;
+    private String street;
+    private String postalCode;
+    private String city;
 
-    public Contact() {}
+    public CsvContact() {}
 
-    public boolean addAddress(String label,Address address) {
-        if(true == addresses.containsValue(label))
-            return false;
-        addresses.put(label, address);
-        return true;
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getLastname() {
@@ -118,26 +87,51 @@ public class Contact implements IModel {
         this.actif = actif;
     }
 
-    @Override
-    public String getId() {
-        return id;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
     public String toString() {
-        return "Contact{" +
+        return "CsvContact{" +
                 "id='" + id + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", email='" + email + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", addresses=" + addresses +
                 ", actif=" + actif +
-                "\n";
+                ", numero='" + numero + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                "}\n";
     }
 }
-
