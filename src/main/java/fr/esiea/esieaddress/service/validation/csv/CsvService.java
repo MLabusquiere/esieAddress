@@ -56,7 +56,7 @@ public class CsvService {
     public Collection<Contact> ReadContactCSV(Reader input)    {
         ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
 
-        strat.setType(csvContact.class);
+        strat.setType(CsvContact.class);
         strat.setColumnMapping(actualTemplate);
 
         CsvToBean csv = new CsvToBean();
@@ -68,7 +68,7 @@ public class CsvService {
             e.printStackTrace();
             //TODO
         }
-        List<csvContact> csvContacts= csv.parse(strat, reader);
+        List<CsvContact> csvContacts= csv.parse(strat, reader);
        
        
         List<Contact> contacts = contactCsvToContact(csvContacts);
@@ -79,11 +79,11 @@ public class CsvService {
 
     }
 
-    private List<Contact> contactCsvToContact(List<csvContact> csvContacts) {
+    private List<Contact> contactCsvToContact(List<CsvContact> csvContacts) {
 
         List<Contact> contacts = new ArrayList<>();
 
-        for(fr.esiea.esieaddress.service.validation.csv.csvContact csvContact:csvContacts)  {
+        for(CsvContact csvContact:csvContacts)  {
            Address address = new Address();
            Contact contact = new Contact();
 
