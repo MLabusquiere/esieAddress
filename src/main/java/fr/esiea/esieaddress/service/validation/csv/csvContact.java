@@ -24,7 +24,7 @@ import java.util.Date;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class CsvContact {
+public class csvContact {
 
     private String id;
     private String lastname;
@@ -37,7 +37,7 @@ public class CsvContact {
     private String postalCode;
     private String city;
 
-    public CsvContact() {}
+    public csvContact() {}
 
     public String getId() {
         return id;
@@ -121,7 +121,7 @@ public class CsvContact {
 
     @Override
     public String toString() {
-        return "CsvContact{" +
+        return "csvContact{" +
                 "id='" + id + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
