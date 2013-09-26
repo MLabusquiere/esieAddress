@@ -57,8 +57,8 @@ public class SpringMvcIntegrationTest {
 
     private MockMvc mockMvc;
     public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
-    private String jsonContact = "{\"id\":\"id10\",\"lastName\":\"Labusquiere\",\"firstName\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"true\"}\n";
-    private String jsonContactUpdate = "{\"id\":\"id10\",\"lastName\":\"Labusquiere\",\"firstName\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"false\"}\n" +
+    private String jsonContact = "{\"id\":\"id10\",\"lastname\":\"Labusquiere\",\"firstname\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"true\"}\n";
+    private String jsonContactUpdate = "{\"id\":\"id10\",\"lastname\":\"Labusquiere\",\"firstname\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"false\"}\n" +
             "\"";
 
     @Before
@@ -73,7 +73,7 @@ public class SpringMvcIntegrationTest {
         this.mockMvc.perform(post("/contacts").accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(jsonContact))
-                //.andDo(print())
+                .andDo(print())
                 .andExpect(status().isCreated());
 
         this.mockMvc.perform(put("/contacts").accept(APPLICATION_JSON)

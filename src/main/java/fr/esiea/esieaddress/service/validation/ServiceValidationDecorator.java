@@ -68,8 +68,8 @@ public class ServiceValidationDecorator implements ICrudService<Contact> {
 
         if(errorMap.isEmpty())
             crudService.save(contact);
-
-        throw new ValidationException(errorMap);
+        else
+            throw new ValidationException(errorMap);
 
     }
 
@@ -81,8 +81,8 @@ public class ServiceValidationDecorator implements ICrudService<Contact> {
 
         if(errorMaps.isEmpty())
             crudService.insert(contact);
-
-        throw new ValidationException(errorMaps);
+        else
+            throw new ValidationException(errorMaps);
     }
 
     @Override
