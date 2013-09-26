@@ -31,6 +31,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <import resource="classpath:spring/database-mock-context.xml"/>
+    <import resource="classpath:spring/validation-context.xml"/>
     <context:annotation-config/>
     <context:component-scan base-package="fr.esiea.esieaddress.dao"/>
     <context:component-scan base-package="fr.esiea.esieaddress.model"/>
