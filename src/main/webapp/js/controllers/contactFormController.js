@@ -9,7 +9,6 @@ module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Co
 	$scope.edit = false;
 
 	$scope.newContact = {};
-	$scope.newContact.addresses = new Array();
 
 	$scope.addressNumber = 0;
 	$scope.addresses = new Array();
@@ -47,7 +46,15 @@ module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Co
 		if($scope.edit = true){
 
 		}
-		Contact.save($scope.newContact);
+		console.log($scope.newContact);
+		Contact.save($scope.newContact,
+			function(data) {
+				console.log("OK");
+			},
+			function(error) {
+				console.log("Error "+error.status);
+			}
+		);
 	};
 
 	$scope.newAddress = function () {
@@ -68,7 +75,4 @@ module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Co
 		$scope.addresses.splice(index, 1);
 	};
 
-	$scope.addQuestion = function() {
-		console.log($scope.newContact);
-	};
 });
