@@ -29,8 +29,9 @@ public class CsvContact {
 	private String id;
 	private String lastname;
 	private String firstname;
-	private String email;
 	private Date dateOfBirth;
+	private String email;
+	private String phone;
 	private boolean actif;
 	private String numero;
 	private String street;
@@ -38,6 +39,14 @@ public class CsvContact {
 	private String city;
 
 	public CsvContact() {
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getId() {
@@ -62,6 +71,14 @@ public class CsvContact {
 
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getEmail() {
@@ -112,20 +129,13 @@ public class CsvContact {
 		this.postalCode = postalCode;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	@Override
 	public String toString() {
 		return "CsvContact{" +
 				"id='" + id + '\'' +
 				", lastname='" + lastname + '\'' +
 				", firstname='" + firstname + '\'' +
+				", phone='" + phone + '\'' +
 				", email='" + email + '\'' +
 				", dateOfBirth=" + dateOfBirth +
 				", actif=" + actif +
@@ -133,6 +143,6 @@ public class CsvContact {
 				", street='" + street + '\'' +
 				", postalCode='" + postalCode + '\'' +
 				", city='" + city + '\'' +
-				"}\n";
+				'}';
 	}
 }

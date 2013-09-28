@@ -35,79 +35,72 @@ import java.util.*;
  */
 @Service
 public class CsvService {
-    private final static String[] outlookTemplate;
+	private final static String[] outlookTemplate;
 
-    static  {
-        outlookTemplate = new String[88];
-        outlookTemplate[0] = "firstname";
-        outlookTemplate[2] = "lastname";
+	static {
+		outlookTemplate = new String[88];
+		outlookTemplate[0] = "firstname";
+		outlookTemplate[2] = "lastname";
 //      outlookTemplate[8] = "dateOfBirth";
-        outlookTemplate[14] = "email";
-        //outlookTemplate[0] = "numero";
-        outlookTemplate[24] = "street";
-        outlookTemplate[30] = "postalCode";
-        outlookTemplate[28] = "city";
+		outlookTemplate[14] = "email";
+		outlookTemplate[20] = "phone";
+		outlookTemplate[24] = "street";
+		outlookTemplate[30] = "postalCode";
+		outlookTemplate[28] = "city";
+	}
 
-    }
+	private String[] actualTemplate = pickOutlookTemplate();
 
+	public Collection<Contact> ReadContactCSV(Reader input) {
+		ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
 
-    private String[] actualTemplate = pickOutlookTemplate();
+		strat.setType(CsvContact.class);
+		strat.setColumnMapping(actualTemplate);
 
-    public Collection<Contact> ReadContactCSV(Reader input)    {
-        ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
+		CsvToBean csv = new CsvToBean();
+		CSVReader reader = new CSVReader(input, ',');
+		//need to pass the header
+		try {
+			reader.readNext();
+		} catch (IOException e) {
+			e.printStackTrace();
+			//TODO
+		}
+		List<CsvContact> csvContacts = csv.parse(strat, reader);
 
-        strat.setType(CsvContact.class);
-        strat.setColumnMapping(actualTemplate);
+		List<Contact> contacts = contactCsvToContact(csvContacts);
 
-        CsvToBean csv = new CsvToBean();
-        CSVReader reader = new CSVReader(input, ',');
-        //need to pass the header
-        try {
-            reader.readNext();
-        } catch (IOException e) {
-            e.printStackTrace();
-            //TODO
-        }
-        List<CsvContact> csvContacts= csv.parse(strat, reader);
-       
-       
-        List<Contact> contacts = contactCsvToContact(csvContacts);
-        
-       
+		return contacts;
+	}
 
-        return contacts;
+	private List<Contact> contactCsvToContact(List<CsvContact> csvContacts) {
 
-    }
+		List<Contact> contacts = new ArrayList<>();
 
-    private List<Contact> contactCsvToContact(List<CsvContact> csvContacts) {
+		for (CsvContact csvContact : csvContacts) {
+			Address address = new Address();
+			Contact contact = new Contact();
 
-        List<Contact> contacts = new ArrayList<>();
+			address.setCity(csvContact.getCity());
+			address.setNumero(csvContact.getNumero());
+			address.setPostalCode(csvContact.getPostalCode());
+			address.setStreet(csvContact.getStreet());
 
-        for(CsvContact csvContact:csvContacts)  {
-           Address address = new Address();
-           Contact contact = new Contact();
+			contact.setActif(true);
+			contact.setDateOfBirth(csvContact.getDateOfBirth());
+			contact.setEmail(csvContact.getEmail());
+			contact.setFirstname(csvContact.getFirstname());
+			contact.setLastname(csvContact.getLastname());
+			contact.setPhone(csvContact.getPhone());
 
-           address.setCity(csvContact.getCity());
-           address.setNumero(csvContact.getNumero());
-           address.setPostalCode(csvContact.getPostalCode());
-           address.setStreet(csvContact.getStreet());
+			contact.addAddress("personnel", address);
+			contacts.add(contact);
+		}
 
-           contact.setActif(true);
-           contact.setDateOfBirth(csvContact.getDateOfBirth());
-           contact.setEmail(csvContact.getEmail());
-           contact.setFirstname(csvContact.getFirstname());
-           contact.setLastname(csvContact.getLastname());
+		return contacts;
+	}
 
-           contact.addAddress("personnel",address);
-           contacts.add(contact);
-        }
-
-        return contacts;
-    }
-
-    protected String[] pickOutlookTemplate() {
-        return outlookTemplate;
-    }
-
-
+	protected String[] pickOutlookTemplate() {
+		return outlookTemplate;
+	}
 }

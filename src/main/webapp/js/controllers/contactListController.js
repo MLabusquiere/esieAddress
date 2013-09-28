@@ -7,8 +7,8 @@ var module = angular.module('esieAddress.controllers');
 module.controller('ContactListCtrl',function($scope, $location, Contact) {
 
 	$scope.sorts = [
-		{predicate:'lastname', text:'Last name'},
-		{predicate:'firstname', text:'First name'}
+		{predicate:['lastname', 'firstname', 'id'], text:'Last name'},
+		{predicate:['firstname', 'lastname', 'id'], text:'First name'}
 	];
 	$scope.sort = $scope.sorts[0];
 

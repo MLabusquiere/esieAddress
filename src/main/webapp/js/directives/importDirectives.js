@@ -30,14 +30,15 @@ module.directive('ngFileUpload', function () {
 	return {
 		restrict: 'A',
 		link: function (scope, elem, attr, ImportCtrl) {
-			var dragForm = "<form id='file-upload' method='post' action='rest/import' enctype='multipart/form-data'> \
-        <div id='drop'> \
-          Drop Here<br> \
-          <a class='btn btn-primary'>Browse</a> \
-          <input type='file' multiple /> \
-        </div> \
-        <ul></ul> \
-      </form>";
+			var dragForm = "<form id='file-upload' method='post' action='rest/import' enctype='multipart/form-data'>\
+				<div id='drop'>\
+					<h4>Drop Here</h4><br>\
+					<a class='btn btn-primary'>Browse</a>\
+					<input type='file' multiple />\
+				</div>\
+				<ul>\
+				</ul>\
+				</form>";
 
 			elem.html(dragForm);
 
@@ -57,8 +58,17 @@ module.directive('ngFileUpload', function () {
 				// This function is called when a file is added to the queue;
 				// either via the browse button, or via drag/drop:
 				add: function (e, data) {
-					var tpl = $('<li class="working"><input type="text" value="0" data-width="48" data-height="48"' +
-						' data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p><span></span></li>');
+					var tpl = $('' +
+						'<li class="working">' +
+						/*'	<div class="progress">' +
+						'		<div id="loadbar" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">' +
+						'			<span class="sr-only">60% Complete</span>' +
+						'		</div>' +
+						'	</div>' +*/
+						/*'	<input type="text" value="0" data-width="48" data-height="48" data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" />' +*/
+						'	<p></p>' +
+						'	<span></span>' +
+						'</li>');
 
 					// Append the file name and file size
 					tpl.find('p').text(data.files[0].name)
@@ -97,11 +107,12 @@ module.directive('ngFileUpload', function () {
 
 					// Update the hidden input field and trigger a change
 					// so that the jQuery knob plugin knows to update the dial
-					data.context.find('input').val(progress).change();
+					// data.context.find('#loadbar').val(progress).change();
+					/*data.context.find('#loadbar').getAttribute('aria-valuenow').val(progress).change();
 
 					if (progress == 100) {
-						data.context.removeClass('working');
-					}
+						data.context.find('#loadbar').addClass('progress-bar-success');
+					}*/
 				},
 
 				fail: function (e, data) {

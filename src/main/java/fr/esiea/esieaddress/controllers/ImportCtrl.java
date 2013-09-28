@@ -47,72 +47,69 @@ import java.util.*;
 @RequestMapping("/import")
 public class ImportCtrl {
 
-    private static final Logger LOGGER = Logger.getLogger(ImportCtrl.class);
-    private static final double FILE_SIZE_MAX = 30000;
+	private static final Logger LOGGER = Logger.getLogger(ImportCtrl.class);
+	private static final double FILE_SIZE_MAX = 30000;
+	@Autowired
+	private ICrudService<Contact> contactCrudService;
+	@Autowired
+	private CsvService csvService;
 
-    @Autowired
-    private ICrudService<Contact> contactCrudService;
-    @Autowired
-    private CsvService csvService;
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	public void upload(MultipartHttpServletRequest files, final HttpServletRequest request) throws DaoException, ServiceException, FileNotFoundException {
+		LOGGER.info("[IMPORT] Start to import contact");
 
-    @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
-    public void upload(MultipartHttpServletRequest files, final HttpServletRequest request) throws DaoException, ServiceException, FileNotFoundException {
-        LOGGER.info("[IMPORT] Start to import contact");
+		//TODO Make it less verbose and may use a buffer to make it safer
+		Map<String, MultipartFile> multipartFileMap = files.getMultiFileMap().toSingleValueMap();
+		Set<String> fileNames = multipartFileMap.keySet();
 
-        //TODO Make it less verbose and may use a buffer to make it safer
-        Map<String, MultipartFile> multipartFileMap = files.getMultiFileMap().toSingleValueMap();
-        Set<String> fileNames = multipartFileMap.keySet();
+		for (String fileName : fileNames) {
 
-        for (String fileName : fileNames) {
+			MultipartFile multipartFile = multipartFileMap.get(fileName);
+			String originalFilename = multipartFile.getOriginalFilename();
 
-            MultipartFile multipartFile = multipartFileMap.get(fileName);
-            String originalFilename = multipartFile.getOriginalFilename();
+			if (checkFileName(originalFilename) && multipartFile.getSize() < FILE_SIZE_MAX) {
 
-            if (checkFileName(originalFilename) && multipartFile.getSize() < FILE_SIZE_MAX) {
+				InputStream inputStream = null;
 
+				try {
+					inputStream = multipartFile.getInputStream();
+				} catch (IOException e) {
+					throw new FileNotFoundException(e.toString());
+				}
 
-                InputStream inputStream = null;
+				try (Reader contactsFile = new InputStreamReader(inputStream)) {
+					List<Object> modelErrors = new ArrayList<>();
+					LOGGER.debug("[IMPORT] File is reading");
+					Collection<Contact> contacts = csvService.ReadContactCSV(contactsFile);
+					for (Contact contact : contacts) {
+						try {
+							contactCrudService.insert(contact);
+						} catch (ValidationException e) {
+							Object modelError = e.getModel();
+							LOGGER.warn("found an error in contact " + modelError);
+							modelErrors.add(modelError);
+						}
+					}
 
-                try {
-                    inputStream = multipartFile.getInputStream();
-                } catch (IOException e) {
-                    throw new FileNotFoundException(e.toString());
-                }
+					if (!modelErrors.isEmpty())
+						throw new ValidationException(modelErrors);
+				} catch (IOException e) {
+					throw new FileNotFoundException(e.toString());
+				} finally {
+					if (inputStream != null)
+						try {
+							inputStream.close();
+						} catch (IOException e) {
+							LOGGER.error("[IMPORT] Impossible to close the file " + inputStream.toString());
+						}
+				}
+			}
+		}
+	}
 
-                try(Reader contactsFile = new InputStreamReader(inputStream))    {
-                    List<Object> modelErrors = new ArrayList<>();
-                    LOGGER.debug("[IMPORT] File is reading");
-                    Collection<Contact> contacts = csvService.ReadContactCSV(contactsFile);
-                    for(Contact contact:contacts)   {
-                        try {
-                            contactCrudService.insert(contact);
-                        } catch (ValidationException e) {
-                            Object modelError = e.getModel();
-                            LOGGER.warn("found an error in contact " + modelError);
-                            modelErrors.add(modelError);
-                        }
-                    }
-
-                    if( !modelErrors.isEmpty() )
-                        throw new ValidationException(modelErrors);
-
-                } catch (IOException e) {
-                    throw new FileNotFoundException(e.toString());
-                }finally {
-                    if(inputStream != null)
-                        try {
-                            inputStream.close();
-                        } catch (IOException e) {
-                            LOGGER.error("[IMPORT] Impossible to close the file " + inputStream.toString());
-                        }
-                }
-            }
-        }
-    }
-
-    private boolean checkFileName(String fileName) {
-        final int index = fileName.lastIndexOf('.');
-        return index != -1 && fileName.substring(index + 1).toLowerCase().equals("csv");
-    }
+	private boolean checkFileName(String fileName) {
+		final int index = fileName.lastIndexOf('.');
+		return index != -1 && fileName.substring(index + 1).toLowerCase().equals("csv");
+	}
 }
