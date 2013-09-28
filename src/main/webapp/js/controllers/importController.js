@@ -2,11 +2,11 @@ var module = angular.module('esieAddress.controllers');
 
 module.controller('ImportCtrl', function ($rootScope, $scope) {
     $scope.uploadComplete = function () {
-        console.log('Success');
+        console.log('Contacts imported successfully');
 		$rootScope.$broadcast('importSuccess');
     };
 
     $scope.uploadError = function () {
-        alert('Echec');
+        console.log('Contact import error');
     };
 });

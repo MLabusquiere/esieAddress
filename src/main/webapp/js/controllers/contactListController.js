@@ -6,10 +6,15 @@ var module = angular.module('esieAddress.controllers');
 
 module.controller('ContactListCtrl',function($scope, $location, Contact) {
 
-	$scope.predicate = 'lastname';
+	$scope.sorts = [
+		{predicate:'lastname', text:'Last name'},
+		{predicate:'firstname', text:'First name'}
+	];
+	$scope.sort = $scope.sorts[0];
+
 	$scope.reverse = false;
 	$scope.layout = 'list';
-	$scope.showAll = true;
+	$scope.showAll = false;
 
 	$scope.contacts = [];
 
