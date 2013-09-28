@@ -1,20 +1,26 @@
-<!-- Subhead
-================================================== -->
-<header class="jumbotron subhead" id="overview">
-    <div class="container">
-        <h1>This is a demo</h1>
+<div class="container">
+	<div class="page-header">
+		<h1>Import contacts <small>Drag and drop a CSV Contact File</small></h1>
+	</div>
 
-        <p class="lead">Drag and drop a CSV Contact File</p>
-    </div>
-</header>
+	<div
+		ng-file-upload="/import"
+		data-complete='uploadComplete()'
+		data-error="uploadError()">
+	</div>
+
+</div>
 
 <!-- Begin page content -->
+<!--
 <div class="container">
     <div id="push"></div>
     <section class="well">
         <div
                 ng-file-upload="/import"
                 data-complete='uploadComplete()'
-                data-error="uploadError()"></div>
+                data-error="uploadError()">
+
+                </div>
     </section>
-</div>
+</div>-->

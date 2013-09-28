@@ -25,23 +25,6 @@ module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Co
 		});
 	}
 
-/*	$scope.days = new Array();
-	$scope.months = new Array();
-	$scope.years = new Array();
-
-	for(var i = 0; i<31; i++){
-		$scope.days[i] = (i+1);
-	}
-
-	for(i = 0; i<12; i++){
-		$scope.months[i] = (i+1);
-	}
-
-	for(i = 0; i<120; i++){
-		var date = new Date().getFullYear();
-		$scope.years[i] = (date-i);
-	}*/
-
 	$scope.saveContact = function () {
 		if($scope.edit = true){
 
@@ -59,7 +42,7 @@ module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Co
 
 	$scope.newAddress = function () {
 		var address = {};
-		address.text = "";
+		address.street = "";
 		address.id = $scope.addresses.length;
 		console.log("Adding address ");
 		$scope.addresses[$scope.addresses.length] = address;
@@ -74,5 +57,22 @@ module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Co
 		console.log("Deleting address # "+index);
 		$scope.addresses.splice(index, 1);
 	};
+
+/*	$scope.days = new Array();
+	$scope.months = new Array();
+	$scope.years = new Array();
+
+	for(var i = 0; i<31; i++){
+		$scope.days[i] = (i+1);
+	}
+
+	for(i = 0; i<12; i++){
+		$scope.months[i] = (i+1);
+	}
+
+	for(i = 0; i<120; i++){
+		var date = new Date().getFullYear();
+		$scope.years[i] = (date-i);
+	}*/
 
 });

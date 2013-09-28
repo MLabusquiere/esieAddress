@@ -33,7 +33,7 @@ module.directive('ngFileUpload', function () {
 			var dragForm = "<form id='file-upload' method='post' action='rest/import' enctype='multipart/form-data'> \
         <div id='drop'> \
           Drop Here<br> \
-          <a>Browse</a> \
+          <a class='btn btn-primary'>Browse</a> \
           <input type='file' multiple /> \
         </div> \
         <ul></ul> \

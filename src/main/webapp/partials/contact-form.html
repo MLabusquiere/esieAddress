@@ -65,7 +65,7 @@
 				<div class="form-group" ng-repeat="address in addresses">
 					<label for="inputAddress{{$index}}" class="col-lg-2 control-label">Address #{{$index+1}}</label>
 					<div class="col-lg-9">
-						<input type="text" class="form-control" ng-model="addresses[$index]" id="inputAddress{{$index}}" placeholder="Address">
+						<input type="text" class="form-control" ng-model="addresses[$index].street" id="inputAddress{{$index}}" placeholder="Address">
 					</div>
 					<div class="col-lg-1">
 						<button type="button" class="btn btn-default" ng-click="deleteAddress($index)"><span class="glyphicon glyphicon-minus"></span></button>
