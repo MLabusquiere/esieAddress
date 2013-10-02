@@ -21,19 +21,13 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean id="dateFormat" class="java.text.SimpleDateFormat">
-		<constructor-arg value="yyyy-MM-dd" />
-	</bean>
 
 	<bean name="contact1" class="fr.esiea.esieaddress.model.Contact">
 		<property name="email" value="labusquiere@gmail.com" />
 		<property name="firstname" value="Maxence" />
 		<property name="lastname" value="Labusquière" />
 		<property name="actif" value="true" />
-		<property name="dateOfBirth">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="1990-12-12" />
-			</bean>
+		<property name="dateOfBirth" value="12/12/90">
 		</property>
 		<property name="id" value="id1" />
 	</bean>
@@ -42,11 +36,7 @@
 		<property name="firstname" value="Damien" />
 		<property name="lastname" value="Deis" />
 		<property name="actif" value="false" />
-		<property name="dateOfBirth">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="1991-11-17" />
-			</bean>
-		</property>
+		<property name="dateOfBirth" value="17/11/1991"/>
 		<property name="id" value="id2" />
 	</bean>
 	<bean name="contact3" class="fr.esiea.esieaddress.model.Contact">
@@ -54,11 +44,7 @@
 		<property name="firstname" value="Rémi" />
 		<property name="lastname" value="Girard" />
 		<property name="actif" value="true" />
-		<property name="dateOfBirth">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="1991-06-12" />
-			</bean>
-		</property>
+		<property name="dateOfBirth" value="12/06/1991" />
 		<property name="id" value="id3" />
 	</bean>
 	<bean name="database" class="fr.esiea.esieaddress.dao.implementation.DaoContact">

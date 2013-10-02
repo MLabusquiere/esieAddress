@@ -60,7 +60,7 @@ public class Contact extends Model {
     @Facebook("phone")
     private String phone;
 
-    @Past(message = "{fr.esiea.esieaddress.model.contact.dateOfBirth.path}")
+   // Because now it's a string @Past(message = "{fr.esiea.esieaddress.model.contact.dateOfBirth.path}")
     @JsonView(ContactView.FullView.class)
     @Facebook("birthday_date")
     private String dateOfBirth;
