@@ -55,8 +55,8 @@
 			<div id="config" class="panel-collapse collapse">
 				<h4 class="text-center">Settings</h4>
 				<div class="row">
-					<div class="col-lg-4 text-right">Display</div>
-					<div class="btn-group col-lg-8 text-left">
+					<div class="col-lg-3">Display</div>
+					<div class="btn-group col-lg-9">
 						<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'">
 							<span class="glyphicon glyphicon-list"></span>
 						</button>
@@ -67,24 +67,23 @@
 							<span class="glyphicon glyphicon-th"></span>
 						</button>
 					</div>
-					<div class="col-lg-4 text-right">Hide/Show</div>
-					<div class="col-lg-8 text-left" ng-click="showAll = !showAll">
+					<div class="col-lg-3">Hide/Show</div>
+					<div class="col-lg-9" ng-click="showAll = !showAll">
 						<div class="make-switch switch-small">
 							<input ng-model="showAll" type="checkbox">
 						</div>
 					</div>
-					<div class="col-lg-4 text-right">Sort by</div>
-					<div class="col-lg-8 text-left">
+					<div class="col-lg-3">Sort by</div>
+					<div class="col-lg-9">
 						<select class="form-control" ng-model="sort" ng-options="s.text for s in sorts">
 						</select>
-						<a ng-click="reverse=!reverse">Reverse order</a>
 					</div>
-					<div class="col-lg-4 text-right">Import</div>
-					<div class="col-lg-8 text-left">
+					<div class="col-lg-3">Import</div>
+					<div class="col-lg-3">
 						<a class="btn btn-primary btn-sm" href="#/import"><span class="glyphicon glyphicon-import"></span></a>
 					</div>
-					<div class="col-lg-4 text-right">Export</div>
-					<div class="col-lg-8 text-left">
+					<div class="col-lg-3">Export</div>
+					<div class="col-lg-3">
 						<a class="btn btn-primary btn-sm" href="#/export"><span class="glyphicon glyphicon-export"></span></a>
 					</div>
 				</div>
