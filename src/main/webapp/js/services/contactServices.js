@@ -6,26 +6,11 @@
 var module = angular.module('esieAddress.services');
 
 module.factory('Contact', function($resource) {
-	return $resource(path+'/contacts', {}, {
-		query: {method:'GET', isArray:true}
-	});
-});
-
-module.factory('Contact', function($resource) {
-	return $resource(path+'/contacts', {}, {
-		save: {method:'POST'}
-	});
-});
-
-module.factory('Contact', function($resource) {
 	return $resource(path+'/contacts/:id', {}, {
-		get: {method:'GET', isArray:true}
-	});
-});
-
-module.factory('Contact', function($resource) {
-	return $resource(path+'/contacts/:id', {}, {
+		query: {method:'GET', isArray:true},
+		get: {method:'GET'},
+		save: {method:'POST'},
+		update: {method:'PUT'},
 		remove: {method:'DELETE'}
 	});
 });
-

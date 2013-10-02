@@ -4,11 +4,10 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Contact) {
-
-	$scope.edit = false;
+module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $routeParams, Contact) {
 
 	$scope.newContact = {};
+	$scope.newContact.actif = true;
 
 	$scope.addressNumber = 0;
 	$scope.addresses = new Array();
@@ -26,18 +25,31 @@ module.controller('ContactFormCtrl',function($scope, $location, $routeParams, Co
 	}
 
 	$scope.saveContact = function () {
-		if($scope.edit = true){
-
+		if($scope.newContact.id == undefined){
+			console.log("Creating new contact :")
+			console.log($scope.newContact);
+			Contact.save($scope.newContact,
+				function(data) {
+					console.log("New contact created");
+					$rootScope.$broadcast('updateContactList');
+				},
+				function(error) {
+					console.log("Error "+error.status);
+				}
+			);
 		}
-		console.log($scope.newContact);
-		Contact.save($scope.newContact,
-			function(data) {
-				console.log("OK");
-			},
-			function(error) {
-				console.log("Error "+error.status);
-			}
-		);
+		else {
+			console.log("Updating contact "+$scope.newContact.id);
+			Contact.update($scope.newContact,
+				function(data) {
+					console.log("Contact updated");
+					$rootScope.$broadcast('updateContactList');
+				},
+				function(error) {
+					console.log("Error "+error.status);
+				}
+			);
+		}
 	};
 
 	$scope.newAddress = function () {
