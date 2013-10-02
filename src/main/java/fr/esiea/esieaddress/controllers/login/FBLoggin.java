@@ -23,13 +23,12 @@ package fr.esiea.esieaddress.controllers.login;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.http.HttpException;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,10 +43,14 @@ import java.io.IOException;
 public class FBLoggin {
     private static final Logger LOGGER = Logger.getLogger(FBLoggin.class);
 
-    private final String FACEBOOK_APP_ID = "208719949301687";
-    private final String FACEBOOK_REDIRECT_URL = "http://localhost:8080/esieAddress/rest/login/facebookRedirect";
-    private final String FACEBOOK_EXCHANGE_KEY="azertyuiop";
-    private final String FACEBOOK_SECRET_KEY="5a7150fef9431de5a4ab5b6867c0be2b";
+    @Value("controller.facebook.app.id")
+    private String FACEBOOK_APP_ID;
+    @Value("controller.facebook.redirect.url")
+    private String FACEBOOK_REDIRECT_URL;
+    @Value("controller.facebook.exchange.key")
+    private String FACEBOOK_EXCHANGE_KEY;
+    @Value("controller.facebook.secret.key")
+    private String FACEBOOK_SECRET_KEY;
 
     @RequestMapping(value = "/facebookAuthentication", method= RequestMethod.GET)
     public void getFacebookLogin(HttpServletRequest request,HttpServletResponse response) {

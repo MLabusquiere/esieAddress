@@ -30,11 +30,22 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="classpath:spring/database-mock-context.xml"/>
-    <import resource="classpath:spring/validation-context.xml"/>
-    <context:annotation-config/>
-    <context:component-scan base-package="fr.esiea.esieaddress.dao"/>
-    <context:component-scan base-package="fr.esiea.esieaddress.model"/>
-    <context:component-scan base-package="fr.esiea.esieaddress.service"/>
+    <!--web.xml default environment dev-->
+
+    <beans profile="dev">
+        <context:property-placeholder location="classpath:spring/env/dev/*.properties"/>
+    </beans>
+    <beans profile="jenkins">
+        <context:property-placeholder location="classpath:spring/env/cloud/*.properties"/>
+    </beans>
+
+    <beans profile="dev,jenkins">
+        <import resource="classpath:spring/database-mock-context.xml"/>
+        <import resource="classpath:spring/validation-context.xml"/>
+        <context:annotation-config/>
+        <context:component-scan base-package="fr.esiea.esieaddress.dao"/>
+        <context:component-scan base-package="fr.esiea.esieaddress.model"/>
+        <context:component-scan base-package="fr.esiea.esieaddress.service"/>
+    </beans>
 
 </beans>
