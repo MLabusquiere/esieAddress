@@ -1,5 +1,7 @@
 package fr.esiea.esieaddress.model;
 
+import com.restfb.Facebook;
+
 import java.util.UUID;
 
 /**
@@ -25,7 +27,7 @@ import java.util.UUID;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public abstract class Model implements IModel{
-
+    @Facebook("uid")
     private String id;
 
     @Override
@@ -45,5 +47,12 @@ public abstract class Model implements IModel{
          */
         if(id == null)
             id = UUID.randomUUID().toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "id='" + id + '\'' +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
 package fr.esiea.esieaddress.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.restfb.Facebook;
 import fr.esiea.esieaddress.model.view.ContactView;
 
 import javax.validation.Valid;
@@ -8,9 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -36,117 +35,134 @@ import java.util.Map;
  */
 public class Contact extends Model {
 
-	//@NotNull(message = "{fr.esiea.esieaddress.model.contact.lastname.notNull}")
-	//@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u", message="{fr.esiea.esieaddress.model.contact.lastname}")
+    //@NotNull(message = "{fr.esiea.esieaddress.model.contact.lastname.notNull}")
+    //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u", message="{fr.esiea.esieaddress.model.contact.lastname}")
+    @Facebook("last_name")
+    @JsonView(ContactView.LightView.class)
+    @Size(max = 20, message = "{fr.esiea.esieaddress.model.contact.lastname.size}")
+    private String lastname;
 
-	@JsonView(ContactView.LightView.class)
-	@Size(max = 20, message = "{fr.esiea.esieaddress.model.contact.lastname.size}")
-	private String lastname;
+    //@NotNull(message = "{fr.esiea.esieaddress.model.contact.firstname.notNull}")
+    //@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u",message="{fr.esiea.esieaddress.model.contact.firstname}")
+    @Facebook("first_name")
+    @JsonView(ContactView.LightView.class)
+    @Size(max = 20, message = "{fr.esiea.esieaddress.model.contact.firstname.size}")
+    private String firstname;
 
-	//@NotNull(message = "{fr.esiea.esieaddress.model.contact.firstname.notNull}")
-	//@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u",message="{fr.esiea.esieaddress.model.contact.firstname}")
-	@JsonView(ContactView.LightView.class)
-	@Size(max = 20, message = "{fr.esiea.esieaddress.model.contact.firstname.size}")
-	private String firstname;
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+            , message = "{fr.esiea.esieaddress.model.contact.email}")
+    //Norme RFC2822 - http://www.regular-expressions.info/email.html
+    @Facebook("email")
+    @JsonView(ContactView.FullView.class)
+    private String email;
 
-	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-			, message = "{fr.esiea.esieaddress.model.contact.email}")
-	//Norme RFC2822 - http://www.regular-expressions.info/email.html
-	@JsonView(ContactView.FullView.class)
-	private String email;
+    @JsonView(ContactView.FullView.class)
+    @Facebook("phone")
+    private String phone;
 
-	@JsonView(ContactView.FullView.class)
-	private String phone;
+    @Past(message = "{fr.esiea.esieaddress.model.contact.dateOfBirth.path}")
+    @JsonView(ContactView.FullView.class)
+    @Facebook("birthday_date")
+    private String dateOfBirth;
 
-	@Past(message = "{fr.esiea.esieaddress.model.contact.dateOfBirth.path}")
-	@JsonView(ContactView.FullView.class)
-	private Date dateOfBirth;
+    //May a map to specify an type of an address
+    @Valid
+    @JsonView(ContactView.FullView.class)
+    @Facebook("current_address")
+    private List<Address> addresses = new ArrayList<Address>();
 
-	//May a map to specify an type of an address
-	@Valid
-	@JsonView(ContactView.FullView.class)
-	private Map<String, Address> addresses = new HashMap<String, Address>();
 
-	@JsonView(ContactView.LightView.class)
-	private boolean actif;
+    @Facebook("pic_with_logo")
+    private String pictureURL;
 
-	public Contact() {
-	}
+    @JsonView(ContactView.LightView.class)
+    private boolean actif=true;
 
-	public boolean addAddress(String label, Address address) {
-		if (true == addresses.containsValue(label))
-			return false;
-		addresses.put(label, address);
-		return true;
-	}
+    public Contact() {
+    }
 
-	public String getLastname() {
-		return lastname;
-	}
+    public boolean addAddress(Address address) {
+        return addresses.add(address);
+    }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+    public String getLastname() {
+        return lastname;
+    }
 
-	public String getFirstname() {
-		return firstname;
-	}
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+    public String getFirstname() {
+        return firstname;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-	public Map<String, Address> getAddresses() {
-		return addresses;
-	}
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+    public List<Address> getAddresses() {
+        return addresses;
+    }
 
-	public void setAddresses(Map<String, Address> addresses) {
-		this.addresses = addresses;
-	}
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 
-	public boolean isActif() {
-		return actif;
-	}
+    public boolean isActif() {
+        return actif;
+    }
 
-	public void setActif(boolean actif) {
-		this.actif = actif;
-	}
+    public void setActif(boolean actif) {
+        this.actif = actif;
+    }
+    public String getPictureURL() {
+        return pictureURL;
+    }
 
-	@Override
-	public String toString() {
-		return "Contact{" +
-				"lastname='" + lastname + '\'' +
-				", firstname='" + firstname + '\'' +
-				", email='" + email + '\'' +
-				", phone='" + phone + '\'' +
-				", dateOfBirth=" + dateOfBirth +
-				", addresses=" + addresses +
-				", actif=" + actif +
-				'}';
-	}
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id='" +getId() + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", addresses=" + addresses +
+                ", pictureURL='" + pictureURL + '\'' +
+                ", actif=" + actif +
+                '}';
+    }
+
+    public static ContactBuilder getBuilder() {
+        return new ContactBuilder();
+    }
 }
-

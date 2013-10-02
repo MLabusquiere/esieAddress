@@ -29,7 +29,7 @@ public class CsvContact {
 	private String id;
 	private String lastname;
 	private String firstname;
-	private Date dateOfBirth;
+	private String dateOfBirth;
 	private String email;
 	private String phone;
 	private boolean actif;
@@ -89,11 +89,11 @@ public class CsvContact {
 		this.email = email;
 	}
 
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

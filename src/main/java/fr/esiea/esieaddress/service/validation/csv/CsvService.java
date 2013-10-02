@@ -93,7 +93,7 @@ public class CsvService {
 			contact.setLastname(csvContact.getLastname());
 			contact.setPhone(csvContact.getPhone());
 
-			contact.addAddress("personnel", address);
+			contact.addAddress(address);
 			contacts.add(contact);
 		}
 
