@@ -1,16 +1,9 @@
-package fr.esiea.esieaddress.controllers;
+package fr.esiea.esieaddress.facebook;
 
-import fr.esiea.esieaddress.dao.exception.DaoException;
+import com.restfb.types.User;
 import fr.esiea.esieaddress.model.Address;
 import fr.esiea.esieaddress.model.Contact;
-import fr.esiea.esieaddress.service.crud.ICrudService;
-import fr.esiea.esieaddress.service.exception.ServiceException;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -34,22 +27,22 @@ import org.springframework.web.bind.annotation.*;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-@Controller
-@RequestMapping("/addresses")
-public class CrudAddressCtrl {
+@Service
+public class FBService {
 
-    @Autowired
-    @Qualifier("serviceValidationDecorator")
-    ICrudService<Contact> crudService;
+    public Contact FBContactToContact(User fbContact)   {
 
-    private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);
+        Address address = new Address();
+        address.setCity(fbContact.getHometownName());
 
-    @RequestMapping(value="/{id}", method = RequestMethod.PUT, produces = "application/json")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addAddress(@RequestParam String id,@RequestParam String baseLabel,@RequestBody Address address) throws ServiceException, DaoException {
-        Contact contact = crudService.getOne(id);
-        contact.addAddress(address);
+        Contact contact = Contact.getBuilder()
+                .setFirstname(fbContact.getFirstName())
+                .setLastname(fbContact.getLastName())
+                .setEmail(fbContact.getEmail())
+                .setDateOfBirth(fbContact.getBirthday())
+                .addAddresses(address)
+                .build();
+
+        return contact;
     }
-
 }

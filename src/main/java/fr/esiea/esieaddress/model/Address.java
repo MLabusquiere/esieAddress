@@ -1,5 +1,7 @@
 package fr.esiea.esieaddress.model;
 
+import com.restfb.Facebook;
+
 import java.util.Date;
 
 /**
@@ -26,9 +28,13 @@ import java.util.Date;
  */
 public class Address extends Model {
 
+
     private String numero;
+    @Facebook
     private String street;
+    @Facebook("zip")
     private String postalCode;
+    @Facebook
     private String city;
 
     public Address() {}
@@ -65,4 +71,13 @@ public class Address extends Model {
         this.city = city;
     }
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "numero='" + numero + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }
