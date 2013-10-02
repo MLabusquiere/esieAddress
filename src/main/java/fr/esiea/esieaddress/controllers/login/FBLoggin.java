@@ -38,7 +38,7 @@ public class FBLoggin {
     private static final Logger LOGGER = Logger.getLogger(FBLoggin.class);
 
     private final String FACEBOOK_APP_ID = "208719949301687";
-    private final String FACEBOOK_REDIRECT_URL = "http://localhost:8080/esieAddress/rest/login/facebookAuthentication";
+    private final String FACEBOOK_REDIRECT_URL = "http://localhost:8080/esieAddress/rest/login/facebookRedirect";
     private final String FACEBOOK_EXCHANGE_KEY="5a7150fef9431de5a4ab5b6867c0be2b";
 
 
