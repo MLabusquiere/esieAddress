@@ -36,14 +36,14 @@ import java.util.Map;
  */
 public class Contact extends Model {
 
-	@NotNull(message = "{fr.esiea.esieaddress.model.contact.lastname.notNull}")
+	//@NotNull(message = "{fr.esiea.esieaddress.model.contact.lastname.notNull}")
 	//@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u", message="{fr.esiea.esieaddress.model.contact.lastname}")
 
 	@JsonView(ContactView.LightView.class)
 	@Size(max = 20, message = "{fr.esiea.esieaddress.model.contact.lastname.size}")
 	private String lastname;
 
-	@NotNull(message = "{fr.esiea.esieaddress.model.contact.firstname.notNull}")
+	//@NotNull(message = "{fr.esiea.esieaddress.model.contact.firstname.notNull}")
 	//@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u",message="{fr.esiea.esieaddress.model.contact.firstname}")
 	@JsonView(ContactView.LightView.class)
 	@Size(max = 20, message = "{fr.esiea.esieaddress.model.contact.firstname.size}")
