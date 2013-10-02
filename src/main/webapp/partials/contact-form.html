@@ -54,21 +54,45 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail" class="col-lg-2 control-label">Address</label>
-				<div class="btn-group col-lg-10">
+				<label for="inputAddresses" class="col-lg-2 control-label">Addresses</label>
+				<div id="inputAddresses" class="btn-group col-lg-10">
 					<button type="button" class="btn btn-default" ng-click="newAddress()"><span class="glyphicon glyphicon-plus"></span></button>
 					<button type="button" class="btn btn-default" ng-click="deleteLastAddress()"><span class="glyphicon glyphicon-minus"></span></button>
 				</div>
 			</div>
 
-			<div class="col-lg-offset-2 col-lg-8">
-				<div class="form-group" ng-repeat="address in addresses">
+			<div class="address-form col-lg-12" ng-repeat="address in addresses">
+				<div class="form-group">
 					<label for="inputAddress{{$index}}" class="col-lg-2 control-label">Address #{{$index+1}}</label>
-					<div class="col-lg-9">
-						<input type="text" class="form-control" ng-model="addresses[$index].street" id="inputAddress{{$index}}" placeholder="Address">
+					<div class="col-lg-4">
+						<input type="text" class="form-control" ng-model="addresses[$index].label" id="inputAddress{{$index}}" placeholder="Label">
 					</div>
-					<div class="col-lg-1">
+					<div class="col-lg-offset-5 col-lg-1">
 						<button type="button" class="btn btn-default" ng-click="deleteAddress($index)"><span class="glyphicon glyphicon-minus"></span></button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress{{$index}}-number" class="col-lg-2 control-label">Number</label>
+					<div class="col-lg-2">
+						<input type="text" class="form-control" ng-model="addresses[$index].numero" id="inputAddress{{$index}}-number" placeholder="Number">
+					</div>
+					<label for="inputAddress{{$index}}-street" class="col-lg-1 control-label">Street</label>
+					<div class="col-lg-7">
+						<input type="text" class="form-control" ng-model="addresses[$index].street" id="inputAddress{{$index}}-street" placeholder="Street">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress{{$index}}-postalCode" class="col-lg-2 control-label">Postal Code</label>
+					<div class="col-lg-2">
+						<input type="text" class="form-control" ng-model="addresses[$index].postalCode" id="inputAddress{{$index}}-postalCode" placeholder="Postal Code">
+					</div>
+					<label for="inputAddress{{$index}}-city" class="col-lg-1 control-label">City</label>
+					<div class="col-lg-3">
+						<input type="text" class="form-control" ng-model="addresses[$index].city" id="inputAddress{{$index}}-city" placeholder="City">
+					</div>
+					<label for="inputAddress{{$index}}-country" class="col-lg-1 control-label">Country</label>
+					<div class="col-lg-3">
+						<input type="text" class="form-control" ng-model="addresses[$index].country" id="inputAddress{{$index}}-country" placeholder="Country">
 					</div>
 				</div>
 			</div>
