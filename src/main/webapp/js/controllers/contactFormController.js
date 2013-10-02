@@ -9,6 +9,8 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 	$scope.newContact = {};
 	$scope.newContact.actif = true;
 
+	$scope.newContact.addresses = new Array();
+
 	$scope.addressNumber = 0;
 	$scope.addresses = new Array();
 
@@ -28,6 +30,7 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 		if($scope.newContact.id == undefined){
 			console.log("Creating new contact :")
 			console.log($scope.newContact);
+			$scope.newContact.addresses = $scope.addresses;
 			Contact.save($scope.newContact,
 				function(data) {
 					console.log("New contact created");
