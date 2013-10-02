@@ -9,6 +9,7 @@ import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.model.view.ContactView;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.logging.Logger;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -51,7 +50,7 @@ public class CrudContactCtrl {
     @Qualifier("serviceValidationDecorator")
     ICrudService<Contact> crudService;
 
-    private final static Logger LOGGER = Logger.getLogger("CrudContactCtrl");
+    private final static Logger LOGGER = Logger.getLogger(CrudContactCtrl.class);
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
