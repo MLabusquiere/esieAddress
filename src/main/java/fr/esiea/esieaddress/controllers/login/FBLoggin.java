@@ -28,7 +28,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,24 +42,20 @@ import java.io.IOException;
 @RequestMapping("/login")
 public class FBLoggin {
     private static final Logger LOGGER = Logger.getLogger(FBLoggin.class);
-
-    @Value("controller.facebook.app.id")
-    private String FACEBOOK_APP_ID;
-    @Value("controller.facebook.redirect.url")
-    private String FACEBOOK_REDIRECT_URL;
-    @Value("controller.facebook.exchange.key")
-    private String FACEBOOK_EXCHANGE_KEY;
-    @Value("controller.facebook.secret.key")
-    private String FACEBOOK_SECRET_KEY;
+    /*
+     * @Value not working in controller in spring 3.3
+     */
+    @Autowired
+    private FacebookConst FBConst;
 
     @RequestMapping(value = "/facebookAuthentication", method= RequestMethod.GET)
     public void getFacebookLogin(HttpServletRequest request,HttpServletResponse response) {
         LOGGER.info("Send a request to facebook");
         String url="https://www.facebook.com/dialog/oauth/?"
-                + "client_id=" + FACEBOOK_APP_ID
-                + "&redirect_uri=" + FACEBOOK_REDIRECT_URL
+                + "client_id=" + FBConst.FACEBOOK_APP_ID
+                + "&redirect_uri=" + FBConst.FACEBOOK_REDIRECT_URL
                 + "&scope=email,publish_stream,user_about_me,friends_about_me"
-                + "&state=" + FACEBOOK_EXCHANGE_KEY
+                + "&state=" + FBConst.FACEBOOK_EXCHANGE_KEY
                 + "&display=page"
                 + "&response_type=code";
         try {
@@ -78,9 +74,9 @@ public class FBLoggin {
             //use the following url for that, in this url,
             //client_id-our app id(same as above),  redirect_uri-same as above, client_secret-same as                //above, code-the code we just got
             String url="https://graph.facebook.com/oauth/access_token?"
-                    + "client_id=" + FACEBOOK_APP_ID
-                    + "&redirect_uri=" + FACEBOOK_REDIRECT_URL
-                    + "&client_secret=" + FACEBOOK_SECRET_KEY
+                    + "client_id=" + FBConst.FACEBOOK_APP_ID
+                    + "&redirect_uri=" + FBConst.FACEBOOK_REDIRECT_URL
+                    + "&client_secret=" + FBConst.FACEBOOK_SECRET_KEY
                     + "&code=" + code;
             // Create an instance of HttpClient.
             HttpClient client = new HttpClient();
