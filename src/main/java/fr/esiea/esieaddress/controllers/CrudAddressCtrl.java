@@ -48,7 +48,8 @@ public class CrudAddressCtrl {
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void addAddress(@RequestParam String id,@RequestParam String baseLabel,@RequestBody Address address) throws ServiceException, DaoException {
-        Contact contact = crudService.getOne(id);
+	    LOGGER.info("[Controller] Querying to edit addresses of the contact with id : \"" + id + "\"");
+	    Contact contact = crudService.getOne(id);
         contact.addAddress(address);
     }
 

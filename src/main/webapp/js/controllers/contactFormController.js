@@ -4,14 +4,13 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $routeParams, Contact) {
+module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $routeParams, Contact, Address) {
 
 	$scope.newContact = {};
 	$scope.newContact.actif = true;
 
 	$scope.newContact.addresses = new Array();
 
-	$scope.addressNumber = 0;
 	$scope.addresses = new Array();
 
 	if($routeParams.id != undefined){
@@ -21,6 +20,7 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 			id: $routeParams.id
 		}, function(data) {
 			$scope.newContact = data;
+			$scope.addresses = data.addresses;
 		}, function(error) {
 			$location.path('/error/'+error.status);
 		});
@@ -34,6 +34,7 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 			Contact.save($scope.newContact,
 				function(data) {
 					console.log("New contact created");
+					console.log(data);
 					$rootScope.$broadcast('updateContactList');
 				},
 				function(error) {
@@ -43,9 +44,19 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 		}
 		else {
 			console.log("Updating contact "+$scope.newContact.id);
+			Address.update($scope.addresses,
+				function(data) {
+					console.log("Contact addresses updated");
+					console.log(data);
+				},
+				function(error) {
+					console.log("Error "+error.status);
+				}
+			);
 			Contact.update($scope.newContact,
 				function(data) {
-					console.log("Contact updated");
+					console.log("Contact information updated");
+					console.log(data);
 					$rootScope.$broadcast('updateContactList');
 				},
 				function(error) {
