@@ -62,8 +62,11 @@
         <property name="dateOfBirth" value="12/06/1991" />
         <property name="id" value="id3" />
     </bean>
+
     <bean name="user1" class="fr.esiea.esieaddress.model.user.User">
-        <!--TODO complete property-->
+        <property name="mail" value="test@gmail.com"/>
+        <property name="password" value="pwd"/>
+        <property name="id" value="id1"/>
     </bean>
 
 </beans>
