@@ -4,23 +4,26 @@
 		<h1 ng-switch-default>New Contact <small>Congrats you've got a new friend !</small></h1>
 	</div>
 	<div id="pageContent" class="scrollable">
-		<form class="form-horizontal col-lg-10" role="form" ng-submit="saveContact()">
+		<form name="contact_form" novalidate class="form-horizontal col-lg-10" role="form" ng-submit="saveContact()">
 			<div class="form-group">
 				<label for="inputFirstname" class="col-lg-2 control-label">Firstname</label>
 				<div class="col-lg-10">
-					<input type="text" ng-model="newContact.firstname" class="form-control" id="inputFirstname" placeholder="Firstname">
+					<input name="firstname" type="text" ng-model="newContact.firstname" ng-minlength=2 class="form-control" id="inputFirstname" placeholder="Firstname">
+					<span class="text-danger" ng-show="contact_form.firstname.$error.minlength">Too short</span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputLastname" class="col-lg-2 control-label">Lastname</label>
 				<div class="col-lg-10">
-					<input type="text" ng-model="newContact.lastname" class="form-control" id="inputLastname" placeholder="Lastname">
+					<input name="lastname" type="text" ng-model="newContact.lastname" ng-minlength=2 class="form-control" id="inputLastname" placeholder="Lastname">
+					<span class="text-danger" ng-show="contact_form.lastname.$error.minlength">Too short</span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail" class="col-lg-2 control-label">Email</label>
 				<div class="col-lg-10">
-					<input type="email" ng-model="newContact.email" class="form-control" id="inputEmail" placeholder="Email">
+					<input name="email" type="email" ng-model="newContact.email" class="form-control" id="inputEmail" placeholder="Email">
+					<span class="text-danger" ng-show="contact_form.email.$error.email">Not an email address</span>
 				</div>
 			</div>
 
@@ -50,7 +53,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-lg-offset-2 col-lg-10">
-					<button type="submit" class="btn btn-primary">Save</button>
+					<button type="submit" class="btn btn-primary" ng-disabled="contact_form.$invalid">Save</button>
 				</div>
 			</div>
 			<div class="form-group">
