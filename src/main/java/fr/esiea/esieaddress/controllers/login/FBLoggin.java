@@ -37,7 +37,9 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/*
+ * Inspired from http://dncodes.blogspot.fr/2012/06/java-spring-security-authenticate.html
+ */
 @Controller
 @RequestMapping("/login")
 public class FBLoggin {
@@ -65,8 +67,15 @@ public class FBLoggin {
         }
     }
 
+    /**
+     *
+     * @param code
+     */
     @RequestMapping(value = "/facebookRedirect", method= RequestMethod.GET)
     public void getFacebookLogin(@RequestParam("code") String code) {
+        /**
+         * TODO Sheety code change it
+         */
         LOGGER.info("Receive a request from facebook");
         if( ! code.isEmpty())    {
             //If we received a valid code, we can continue to the next step
@@ -95,14 +104,14 @@ public class FBLoggin {
                 byte[] responseBody = method.getResponseBody();
                 // Deal with the response.Use caution: ensure correct character encoding and is
                 // not binary data
-                String responseBodyString=new String(responseBody);
+                String responseBodyString=String.valueOf(responseBody);
                 //will be like below,                                 //access_token=AAADD1QFhDlwBADrKkn87ZABAz6ZCBQZ//DZD&expires=5178320
                 //now get the access_token from the response
                 if(responseBodyString.contains("access_token")){
                     //success
                     String[] mainResponseArray=responseBodyString.split("&");
                     //like //{"access_token= AAADD1QFhDlwBADrKkn87ZABAz6ZCBQZ//DZD ","expires=5178320"}
-                    String accesstoken="";
+                    String accesstoken = "";
                     for (String string : mainResponseArray) {
                         if(string.contains("access_token")){
                             accesstoken=string.replace("access_token=", "").trim();
@@ -126,8 +135,7 @@ public class FBLoggin {
                 }
 
             } catch (IOException e) {
-                System.err.println("Fatal transport error: " + e.getMessage());
-                e.printStackTrace();
+                LOGGER.error("Fatal transport error",e);
             } finally {
                 // Release the connection.
                 method.releaseConnection();
