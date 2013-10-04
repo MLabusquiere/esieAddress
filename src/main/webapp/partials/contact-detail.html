@@ -9,7 +9,7 @@
 		<strong class="col-lg-2 text-right">Phone number</strong><span class="col-10">{{contact.phone}}</span><br/>
 
 		<div ng-repeat="address in contact.addresses">
-			<strong class="col-lg-2 text-right">Address {{address.label}}</strong><span class="col-10">{{address.numero | number}} {{address.street}}, {{address.postalCode | number}} {{address.city}}, {{address.country | uppercase}}</span><br/>
+			<strong class="col-lg-2 text-right">Address {{address.label}}</strong><span class="col-10">{{address.number | number}} {{address.street}}, {{address.postalCode | number}} {{address.city}}, {{address.country | uppercase}}</span><br/>
 		</div>
 	</div>
 

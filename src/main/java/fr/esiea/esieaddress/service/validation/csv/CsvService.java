@@ -82,7 +82,7 @@ public class CsvService {
 			Contact contact = new Contact();
 
 			address.setCity(csvContact.getCity());
-			address.setNumero(csvContact.getNumero());
+			address.setNumber(csvContact.getNumero());
 			address.setPostalCode(csvContact.getPostalCode());
 			address.setStreet(csvContact.getStreet());
 

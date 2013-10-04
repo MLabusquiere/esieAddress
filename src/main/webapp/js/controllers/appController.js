@@ -14,6 +14,24 @@ module.controller('AppCtrl', function ($route, $scope, $location, Login, Logout)
 		backdropFade: true,
 		dialogFade: true
 	};
+
+
+	/**
+	 * Ping server to figure out if user is already logged in.
+	 */
+	function ping() {
+		//Default
+		$scope.logged = false;
+
+		Login.get({}, function (data, status) {
+				$scope.$broadcast('event:loginConfirmed');
+			}, function () {
+				console.info("Not authenticated");
+			}
+
+		);
+	}
+
 	/*
 	 * Called when the authentication form is field
 	 */
@@ -59,22 +77,6 @@ module.controller('AppCtrl', function ($route, $scope, $location, Login, Logout)
 				console.info("logout error");
 			})
 	};
-
-	/**
-	 * Ping server to figure out if user is already logged in.
-	 */
-	function ping() {
-		//Default
-		$scope.logged = false;
-
-		Login.get({}, function (data, status) {
-				$scope.$broadcast('event:loginConfirmed');
-			}, function () {
-				console.info("Not authenticated");
-			}
-
-		);
-	}
 
 	/**
 	 * Holds all the requests which failed due to 401 response.

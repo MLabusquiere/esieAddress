@@ -29,24 +29,33 @@ import java.util.Date;
  */
 public class Address extends Model {
 
-
-    private String numero;
+	private String label;
+    private String number;
     @Facebook
     private String street;
     @Facebook("zip")
     private String postalCode;
     @Facebook
     private String city;
+	@Facebook
 	private String country;
 
     public Address() {}
 
-	public String getNumero() {
-		return numero;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getStreet() {
@@ -84,7 +93,8 @@ public class Address extends Model {
 	@Override
 	public String toString() {
 		return "Address{" +
-				"numero='" + numero + '\'' +
+				"label='" + label + '\'' +
+				", number='" + number + '\'' +
 				", street='" + street + '\'' +
 				", postalCode='" + postalCode + '\'' +
 				", city='" + city + '\'' +

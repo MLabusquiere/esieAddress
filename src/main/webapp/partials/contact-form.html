@@ -70,14 +70,14 @@
 					<div class="col-lg-4">
 						<input type="text" class="form-control" ng-model="addresses[$index].label" id="inputAddress{{$index}}" placeholder="Label">
 					</div>
-					<div class="col-lg-offset-5 col-lg-1">
-						<button type="button" class="btn btn-default" ng-click="deleteAddress($index)"><span class="glyphicon glyphicon-minus"></span></button>
+					<div class="col-lg-offset-5 col-lg-1 text-right">
+						<a class="btn btn-default" ng-click="deleteAddress($index)"><span class="glyphicon glyphicon-minus"></span></a>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputAddress{{$index}}-number" class="col-lg-2 control-label">Number</label>
 					<div class="col-lg-2">
-						<input type="text" class="form-control" ng-model="addresses[$index].numero" id="inputAddress{{$index}}-number" placeholder="Number">
+						<input type="text" class="form-control" ng-model="addresses[$index].number" id="inputAddress{{$index}}-number" placeholder="Number">
 					</div>
 					<label for="inputAddress{{$index}}-street" class="col-lg-1 control-label">Street</label>
 					<div class="col-lg-7">
