@@ -23,44 +23,44 @@
     <bean name="databaseContact" class="fr.esiea.esieaddress.dao.implementation.ContactDao">
         <property name="database">
             <map>
-                <entry key="id1" value-ref="contact1" />
-                <entry key="id2" value-ref="contact2" />
-                <entry key="id3" value-ref="contact3" />
+                <entry key="id1" value-ref="contact1"/>
+                <entry key="id2" value-ref="contact2"/>
+                <entry key="id3" value-ref="contact3"/>
             </map>
         </property>
     </bean>
     <bean name="databaseUser" class="fr.esiea.esieaddress.dao.implementation.UserDao">
         <property name="database">
             <map>
-                <entry key="id1" value-ref="user1" />
+                <entry key="id1" value-ref="user1"/>
             </map>
         </property>
     </bean>
 
     <bean name="contact1" class="fr.esiea.esieaddress.model.contact.Contact">
-        <property name="email" value="labusquiere@gmail.com" />
-        <property name="firstname" value="Maxence" />
-        <property name="lastname" value="Labusquière" />
-        <property name="actif" value="true" />
+        <property name="email" value="labusquiere@gmail.com"/>
+        <property name="firstname" value="Maxence"/>
+        <property name="lastname" value="Labusquière"/>
+        <property name="actif" value="true"/>
         <property name="dateOfBirth" value="12/12/90">
         </property>
-        <property name="id" value="id1" />
+        <property name="id" value="id1"/>
     </bean>
     <bean name="contact2" class="fr.esiea.esieaddress.model.contact.Contact">
-        <property name="email" value="deis@gmail.com" />
-        <property name="firstname" value="Damien" />
-        <property name="lastname" value="Deis" />
-        <property name="actif" value="false" />
+        <property name="email" value="deis@gmail.com"/>
+        <property name="firstname" value="Damien"/>
+        <property name="lastname" value="Deis"/>
+        <property name="actif" value="false"/>
         <property name="dateOfBirth" value="17/11/1991"/>
-        <property name="id" value="id2" />
+        <property name="id" value="id2"/>
     </bean>
     <bean name="contact3" class="fr.esiea.esieaddress.model.contact.Contact">
-        <property name="email" value="girard@gmail.com" />
-        <property name="firstname" value="Rémi" />
-        <property name="lastname" value="Girard" />
-        <property name="actif" value="true" />
-        <property name="dateOfBirth" value="12/06/1991" />
-        <property name="id" value="id3" />
+        <property name="email" value="girard@gmail.com"/>
+        <property name="firstname" value="Rémi"/>
+        <property name="lastname" value="Girard"/>
+        <property name="actif" value="true"/>
+        <property name="dateOfBirth" value="12/06/1991"/>
+        <property name="id" value="id3"/>
     </bean>
 
     <bean name="user1" class="fr.esiea.esieaddress.model.user.User">

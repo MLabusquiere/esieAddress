@@ -2,7 +2,6 @@ package fr.esiea.esieaddress.dao;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.user.User;
-import fr.esiea.esieaddress.service.exception.InvalidIdException;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -26,8 +25,7 @@ import fr.esiea.esieaddress.service.exception.InvalidIdException;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public interface ICrudUserDao extends ICrudDao<User>  {
+public interface ICrudUserDao extends ICrudDao<User> {
 
-    public User getOneByMail(String mail) throws DaoException;
-
+	public User getOneByMail(String mail) throws DaoException;
 }

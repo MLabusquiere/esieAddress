@@ -24,21 +24,22 @@ package fr.esiea.esieaddress.model.exception;
  */
 public class RestException extends Exception {
 
-    private int status = 500;
-    private Object model;
+	private int status = 500;
+	private Object model;
 
-    public RestException() {}
+	public RestException() {
+	}
 
-    public RestException(int status, Object model) {
-        this.status = status;
-        this.model = model;
-    }
+	public RestException(int status, Object model) {
+		this.status = status;
+		this.model = model;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public Object getModel() {
-        return model;
-    }
+	public Object getModel() {
+		return model;
+	}
 }

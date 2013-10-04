@@ -26,33 +26,33 @@ import java.util.UUID;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public abstract class Model implements IModel{
-    @Facebook("uid")
-    private String id;
+public abstract class Model implements IModel {
+	@Facebook("uid")
+	private String id;
 
-    @Override
-    public String getId() {
-        return id;
-    }
+	@Override
+	public String getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
+	@Override
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    @Override
-    public void generateId() {
-        /*
+	@Override
+	public void generateId() {
+	    /*
          * helper for the database to generate Id
          */
-        if(id == null)
-            id = UUID.randomUUID().toString();
-    }
+		if (id == null)
+			id = UUID.randomUUID().toString();
+	}
 
-    @Override
-    public String toString() {
-        return "Model{" +
-                "id='" + id + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Model{" +
+				"id='" + id + '\'' +
+				'}';
+	}
 }

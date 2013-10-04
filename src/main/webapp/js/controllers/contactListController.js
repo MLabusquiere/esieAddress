@@ -4,11 +4,11 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('ContactListCtrl',function($scope, $location, Contact) {
+module.controller('ContactListCtrl', function ($scope, $location, Contact) {
 
 	$scope.sorts = [
-		{predicate:['lastname', 'firstname', 'id'], text:'Last name'},
-		{predicate:['firstname', 'lastname', 'id'], text:'First name'}
+		{predicate: ['lastname', 'firstname', 'id'], text: 'Last name'},
+		{predicate: ['firstname', 'lastname', 'id'], text: 'First name'}
 	];
 	$scope.sort = $scope.sorts[0];
 
@@ -18,14 +18,14 @@ module.controller('ContactListCtrl',function($scope, $location, Contact) {
 
 	$scope.contacts = [];
 
-	var loadContactList = function(){
+	var loadContactList = function () {
 		console.log("Loading contact list");
-		Contact.query(function(data) {
+		Contact.query(function (data) {
 			$scope.contacts = data;
 			console.log("Contact list loaded successfully");
-		}, function(error) {
-			console.log("Error "+error.status);
-			$location.path('/error/'+error.status);
+		}, function (error) {
+			console.log("Error " + error.status);
+			$location.path('/error/' + error.status);
 		});
 	}
 

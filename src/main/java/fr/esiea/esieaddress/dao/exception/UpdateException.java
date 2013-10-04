@@ -24,7 +24,7 @@ package fr.esiea.esieaddress.dao.exception;
  */
 public class UpdateException extends DaoException {
 
-    public UpdateException() {
-        super(404,"You can't update this ressource");
-    }
+	public UpdateException() {
+		super(404, "You can't update this ressource");
+	}
 }

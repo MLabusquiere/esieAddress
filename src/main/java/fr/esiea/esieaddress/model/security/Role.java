@@ -1,6 +1,5 @@
 package fr.esiea.esieaddress.model.security;
 
-
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -25,7 +24,6 @@ package fr.esiea.esieaddress.model.security;
  */
 public class Role {
 
-    public static final String ROLE_USER = "ROLE_USER";
-    public static final String ROLE_ADMIN = "ROLE_ADMIN";
-
+	public static final String ROLE_USER = "ROLE_USER";
+	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 }

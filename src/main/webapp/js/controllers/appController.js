@@ -15,7 +15,6 @@ module.controller('AppCtrl', function ($route, $scope, $location, Login, Logout)
 		dialogFade: true
 	};
 
-
 	/**
 	 * Ping server to figure out if user is already logged in.
 	 */
@@ -130,7 +129,6 @@ module.controller('AppCtrl', function ($route, $scope, $location, Login, Logout)
 			});
 		}
 	});
-
 
 	/**
 	 * On 'event:accessForbidden' pop up a modal

@@ -36,7 +36,6 @@
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 
-
     <context:annotation-config/>
     <context:component-scan base-package="fr.esiea.esieaddress.controllers"/>
 

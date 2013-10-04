@@ -1,7 +1,5 @@
 package fr.esiea.esieaddress.service.validation.csv;
 
-import java.util.Date;
-
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>

@@ -30,19 +30,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class FBService {
 
-    public Contact FBContactToContact(User fbContact)   {
+	public Contact FBContactToContact(User fbContact) {
 
-        Address address = new Address();
-        address.setCity(fbContact.getHometownName());
+		Address address = new Address();
+		address.setCity(fbContact.getHometownName());
 
-        Contact contact = Contact.getBuilder()
-                .setFirstname(fbContact.getFirstName())
-                .setLastname(fbContact.getLastName())
-                .setEmail(fbContact.getEmail())
-                .setDateOfBirth(fbContact.getBirthday())
-                .addAddresses(address)
-                .build();
+		Contact contact = Contact.getBuilder()
+				.setFirstname(fbContact.getFirstName())
+				.setLastname(fbContact.getLastName())
+				.setEmail(fbContact.getEmail())
+				.setDateOfBirth(fbContact.getBirthday())
+				.addAddresses(address)
+				.build();
 
-        return contact;
-    }
+		return contact;
+	}
 }

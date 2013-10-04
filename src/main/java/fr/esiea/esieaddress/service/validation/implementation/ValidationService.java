@@ -8,8 +8,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Collections;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -37,22 +37,21 @@ import java.util.Set;
 @Service
 public class ValidationService<T extends IModel> implements IValidationService<T> {
 
-    private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-    @Override
-    public Map<Object, String> validate(T model) {
+	@Override
+	public Map<Object, String> validate(T model) {
 
-        Set<ConstraintViolation<T>> violations = validator.validate(model);
+		Set<ConstraintViolation<T>> violations = validator.validate(model);
 
-        if( violations.isEmpty())
-            return Collections.EMPTY_MAP;
+		if (violations.isEmpty())
+			return Collections.EMPTY_MAP;
 
-        HashMap<Object, String> errorMap = new HashMap<Object, String>();
-        for(ConstraintViolation<T> violation:violations)   {
-            errorMap.put(violation.getInvalidValue(),violation.getMessage());
-        }
+		HashMap<Object, String> errorMap = new HashMap<Object, String>();
+		for (ConstraintViolation<T> violation : violations) {
+			errorMap.put(violation.getInvalidValue(), violation.getMessage());
+		}
 
-        return errorMap;
-
-    }
+		return errorMap;
+	}
 }

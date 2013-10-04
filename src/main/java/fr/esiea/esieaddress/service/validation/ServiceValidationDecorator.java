@@ -35,54 +35,53 @@ import java.util.Map;
  */
 
 public class ServiceValidationDecorator<T extends IModel> implements ICrudService<T> {
-    private static final Logger LOGGER = Logger.getLogger(ServiceValidationDecorator.class);
+	private static final Logger LOGGER = Logger.getLogger(ServiceValidationDecorator.class);
 
-    private ICrudService<T> crudService;
+	private ICrudService<T> crudService;
 
-    @Autowired
-    private IValidationService validationService;
+	@Autowired
+	private IValidationService validationService;
 
+	@Override
+	public Collection<T> getAll() throws ServiceException, DaoException {
+		return crudService.getAll();
+	}
 
-    @Override
-    public Collection<T> getAll() throws ServiceException, DaoException {
-        return crudService.getAll();
-    }
+	@Override
+	public void remove(String id) throws ServiceException, DaoException {
+		crudService.remove(id);
+	}
 
-    @Override
-    public void remove(String id) throws ServiceException, DaoException {
-        crudService.remove(id);
-    }
+	@Override
+	public void save(T model) throws ServiceException, DaoException {
+		LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
 
-    @Override
-    public void save(T model) throws ServiceException, DaoException {
-        LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
+		final Map<Object, String> errorMap = validationService.validate(model);
 
-        final Map<Object, String> errorMap = validationService.validate(model);
+		if (errorMap.isEmpty())
+			crudService.save(model);
+		else
+			throw new ValidationException(errorMap);
+	}
 
-        if(errorMap.isEmpty())
-            crudService.save(model);
-        else
-            throw new ValidationException(errorMap);}
+	@Override
+	public void insert(T model) throws ServiceException, DaoException {
+		LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
 
-    @Override
-    public void insert(T model) throws ServiceException, DaoException {
-        LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
+		final Map<Object, String> errorMap = validationService.validate(model);
 
-        final Map<Object, String> errorMap = validationService.validate(model);
+		if (errorMap.isEmpty())
+			crudService.insert(model);
+		else
+			throw new ValidationException(errorMap);
+	}
 
-        if(errorMap.isEmpty())
-            crudService.insert(model);
-        else
-            throw new ValidationException(errorMap);
-    }
+	@Override
+	public T getOne(String id) throws ServiceException, DaoException {
+		return crudService.getOne(id);
+	}
 
-    @Override
-    public T getOne(String id) throws ServiceException, DaoException {
-        return crudService.getOne(id);
-    }
-
-    public void setCrudService(ICrudService<T> crudService) {
-        this.crudService = crudService;
-    }
-
+	public void setCrudService(ICrudService<T> crudService) {
+		this.crudService = crudService;
+	}
 }

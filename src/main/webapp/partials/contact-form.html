@@ -1,43 +1,57 @@
 <div class="container">
 	<div class="page-header" ng-switch on="edit">
-		<h1 ng-switch-when="true">Edit Contact <small>Edit contact</small></h1>
-		<h1 ng-switch-default>New Contact <small>Congrats you've got a new friend !</small></h1>
+		<h1 ng-switch-when="true">Edit Contact
+			<small>Edit contact</small>
+		</h1>
+		<h1 ng-switch-default>New Contact
+			<small>Congrats you've got a new friend !</small>
+		</h1>
 	</div>
 	<div id="pageContent" class="scrollable">
 		<form name="contact_form" class="form-horizontal col-lg-10" role="form" ng-submit="saveContact()" novalidate>
 			<div class="form-group">
 				<label for="inputFirstname" class="col-lg-2 control-label">Firstname</label>
+
 				<div class="col-lg-10">
-					<input name="firstname" type="text" ng-model="newContact.firstname" ng-minlength=2 class="form-control" id="inputFirstname" placeholder="Firstname">
+					<input name="firstname" type="text" ng-model="newContact.firstname" ng-minlength=2
+					       class="form-control" id="inputFirstname" placeholder="Firstname">
 					<span class="text-danger" ng-show="contact_form.firstname.$error.minlength">Too short</span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputLastname" class="col-lg-2 control-label">Lastname</label>
+
 				<div class="col-lg-10">
-					<input name="lastname" type="text" ng-model="newContact.lastname" ng-minlength=2 class="form-control" id="inputLastname" placeholder="Lastname">
+					<input name="lastname" type="text" ng-model="newContact.lastname" ng-minlength=2
+					       class="form-control" id="inputLastname" placeholder="Lastname">
 					<span class="text-danger" ng-show="contact_form.lastname.$error.minlength">Too short</span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputEmail" class="col-lg-2 control-label">Email</label>
+
 				<div class="col-lg-10">
-					<input name="email" type="email" ng-model="newContact.email" class="form-control" id="inputEmail" placeholder="Email">
+					<input name="email" type="email" ng-model="newContact.email" class="form-control" id="inputEmail"
+					       placeholder="Email">
 					<span class="text-danger" ng-show="contact_form.email.$error.email">Not an email address</span>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-lg-2 control-label">Birthdate</label>
+
 				<div class="col-lg-10 row">
 					<div class="col-lg-3">
-						<input type="text" ng-model="birthdate.year" class="form-control" id="birthyear" placeholder="Year">
+						<input type="text" ng-model="birthdate.year" class="form-control" id="birthyear"
+						       placeholder="Year">
 					</div>
 					<div class="col-lg-2">
-						<input type="text" ng-model="birthdate.month" class="form-control" id="birthmonth" placeholder="Month">
+						<input type="text" ng-model="birthdate.month" class="form-control" id="birthmonth"
+						       placeholder="Month">
 					</div>
 					<div class="col-lg-2">
-						<input type="text" ng-model="birthdate.day" class="form-control" id="birthday" placeholder="Day">
+						<input type="text" ng-model="birthdate.day" class="form-control" id="birthday"
+						       placeholder="Day">
 					</div>
 				</div>
 			</div>
@@ -58,44 +72,60 @@
 			</div>
 			<div class="form-group">
 				<label for="inputAddresses" class="col-lg-2 control-label">Addresses</label>
+
 				<div id="inputAddresses" class="btn-group col-lg-10">
-					<button type="button" class="btn btn-default" ng-click="newAddress()"><span class="glyphicon glyphicon-plus"></span></button>
-					<button type="button" class="btn btn-default" ng-click="deleteLastAddress()"><span class="glyphicon glyphicon-minus"></span></button>
+					<button type="button" class="btn btn-default" ng-click="newAddress()"><span
+							class="glyphicon glyphicon-plus"></span></button>
+					<button type="button" class="btn btn-default" ng-click="deleteLastAddress()"><span
+							class="glyphicon glyphicon-minus"></span></button>
 				</div>
 			</div>
 
 			<div class="address-form col-lg-12" ng-repeat="address in addresses">
 				<div class="form-group">
 					<label for="inputAddress{{$index}}" class="col-lg-2 control-label">Address #{{$index+1}}</label>
+
 					<div class="col-lg-4">
-						<input type="text" class="form-control" ng-model="addresses[$index].label" id="inputAddress{{$index}}" placeholder="Label">
+						<input type="text" class="form-control" ng-model="addresses[$index].label"
+						       id="inputAddress{{$index}}" placeholder="Label">
 					</div>
 					<div class="col-lg-offset-5 col-lg-1 text-right">
-						<a class="btn btn-default" ng-click="deleteAddress($index)"><span class="glyphicon glyphicon-minus"></span></a>
+						<a class="btn btn-default" ng-click="deleteAddress($index)"><span
+								class="glyphicon glyphicon-minus"></span></a>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputAddress{{$index}}-number" class="col-lg-2 control-label">Number</label>
+
 					<div class="col-lg-2">
-						<input type="text" class="form-control" ng-model="addresses[$index].number" id="inputAddress{{$index}}-number" placeholder="Number">
+						<input type="text" class="form-control" ng-model="addresses[$index].number"
+						       id="inputAddress{{$index}}-number" placeholder="Number">
 					</div>
 					<label for="inputAddress{{$index}}-street" class="col-lg-1 control-label">Street</label>
+
 					<div class="col-lg-7">
-						<input type="text" class="form-control" ng-model="addresses[$index].street" id="inputAddress{{$index}}-street" placeholder="Street">
+						<input type="text" class="form-control" ng-model="addresses[$index].street"
+						       id="inputAddress{{$index}}-street" placeholder="Street">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputAddress{{$index}}-postalCode" class="col-lg-2 control-label">Postal Code</label>
+
 					<div class="col-lg-2">
-						<input type="text" class="form-control" ng-model="addresses[$index].postalCode" id="inputAddress{{$index}}-postalCode" placeholder="Postal Code">
+						<input type="text" class="form-control" ng-model="addresses[$index].postalCode"
+						       id="inputAddress{{$index}}-postalCode" placeholder="Postal Code">
 					</div>
 					<label for="inputAddress{{$index}}-city" class="col-lg-1 control-label">City</label>
+
 					<div class="col-lg-3">
-						<input type="text" class="form-control" ng-model="addresses[$index].city" id="inputAddress{{$index}}-city" placeholder="City">
+						<input type="text" class="form-control" ng-model="addresses[$index].city"
+						       id="inputAddress{{$index}}-city" placeholder="City">
 					</div>
 					<label for="inputAddress{{$index}}-country" class="col-lg-1 control-label">Country</label>
+
 					<div class="col-lg-3">
-						<input type="text" class="form-control" ng-model="addresses[$index].country" id="inputAddress{{$index}}-country" placeholder="Country">
+						<input type="text" class="form-control" ng-model="addresses[$index].country"
+						       id="inputAddress{{$index}}-country" placeholder="Country">
 					</div>
 				</div>
 			</div>

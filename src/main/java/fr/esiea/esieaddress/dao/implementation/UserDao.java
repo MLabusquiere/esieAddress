@@ -32,48 +32,48 @@ import java.util.Map;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class UserDao implements ICrudUserDao {
-    @Autowired
-    private Map<String,User> database;
+	@Autowired
+	private Map<String, User> database;
 
-    @Override
-    public Collection<User> getAll() throws DaoException {
-        return database.values();  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	@Override
+	public Collection<User> getAll() throws DaoException {
+		return database.values();  //To change body of implemented methods use File | Settings | File Templates.
+	}
 
-    @Override
-    public void remove(String idUser) throws DaoException {
-        database.remove(idUser);
-    }
+	@Override
+	public void remove(String idUser) throws DaoException {
+		database.remove(idUser);
+	}
 
-    @Override
-    public void save(User user) throws DaoException {
-        if(null == database.remove(user.getId()))
-            throw new UpdateException();
-        insert(user);
-    }
+	@Override
+	public void save(User user) throws DaoException {
+		if (null == database.remove(user.getId()))
+			throw new UpdateException();
+		insert(user);
+	}
 
-    @Override
-    public void insert(User user) throws DaoException {
-        user.generateId();
-        database.put(user.getId(),user);
-    }
+	@Override
+	public void insert(User user) throws DaoException {
+		user.generateId();
+		database.put(user.getId(), user);
+	}
 
-    @Override
-    public User getOne(String userId) throws DaoException {
-        return database.get(userId);
-    }
+	@Override
+	public User getOne(String userId) throws DaoException {
+		return database.get(userId);
+	}
 
-    public void setDatabase(Map<String, User> database) {
-        this.database = database;
-    }
+	public void setDatabase(Map<String, User> database) {
+		this.database = database;
+	}
 
-    @Override
-    public User getOneByMail(String mail) throws DaoException {
-        final Collection<User> users = database.values();
-        for(User user:users)    {
-            if(user.getMail() == mail)
-                return user;
-        }
-        return null;
-    }
+	@Override
+	public User getOneByMail(String mail) throws DaoException {
+		final Collection<User> users = database.values();
+		for (User user : users) {
+			if (user.getMail() == mail)
+				return user;
+		}
+		return null;
+	}
 }

@@ -1,75 +1,125 @@
-body{background:#f5f5f5;color:#383e4b;border:0;font-family:'Lato',sans-serif;font-weight:400;margin:0;padding:0}
-a{color:#383e4b}
+body { background: #f5f5f5; color: #383e4b; border: 0; font-family: 'Lato', sans-serif; font-weight: 400; margin: 0; padding: 0 }
 
-#content{padding:20px 20px;background:#f5f5f5;line-height: 200%}
-#content.full{width:100%!important;margin-left:0!important}
+a { color: #383e4b }
 
-a#main-menu-toggle{color:white;position:absolute;z-index:1000;top:0;left:5px;padding:10px 12px;font-size:16px;text-shadow:none;text-decoration:none;cursor:pointer}
+#content { padding: 20px 20px; background: #f5f5f5; line-height: 200% }
 
-#sidebar-left{background:#383e4b;padding:10px!important}
-.scrollable{overflow:scroll}
-#sidebar-left .search{background:#2d323d;color:white;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;width:100%;padding:5px 10px;margin:10px 0;border:0}
-#sidebar-left .label{-webkit-border-radius:2px 0 0 2px;-moz-border-radius:2px 0 0 2px;border-radius:2px 0 0 2px;position:absolute;right:0;background:#f5f5f5;color:#383e4b}
-.sidebar-nav>ul{margin:0 -25px;padding:0 10px;border:0;padding-bottom:1px;font-size:14px;white-space:nowrap}
-.sidebar-nav>ul>li>ul{list-style:none;display:none;margin:0}
-.nav-tabs.nav-stacked>li>a{margin:0}
+#content.full { width: 100% !important; margin-left: 0 !important }
+
+a#main-menu-toggle { color: white; position: absolute; z-index: 1000; top: 0; left: 5px; padding: 10px 12px; font-size: 16px; text-shadow: none; text-decoration: none; cursor: pointer }
+
+#sidebar-left { background: #383e4b; padding: 10px !important }
+
+.scrollable { overflow: scroll }
+
+#sidebar-left .search { background: #2d323d; color: white; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; width: 100%; padding: 5px 10px; margin: 10px 0; border: 0 }
+
+#sidebar-left .label { -webkit-border-radius: 2px 0 0 2px; -moz-border-radius: 2px 0 0 2px; border-radius: 2px 0 0 2px; position: absolute; right: 0; background: #f5f5f5; color: #383e4b }
+
+.sidebar-nav>ul { margin: 0 -25px; padding: 0 10px; border: 0; padding-bottom: 1px; font-size: 14px; white-space: nowrap }
+
+.sidebar-nav>ul>li>ul { list-style: none; display: none; margin: 0 }
+
+.nav-tabs.nav-stacked>li>a { margin: 0 }
+
 .nav-tabs.nav-stacked>li>a,
-.nav-tabs.nav-stacked>li>ul>li>a{padding:10px 15px;color:#fff;border:0;background:transparent;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;text-decoration:none;display:block}
-.nav-tabs.nav-stacked>li>ul>li>a{padding:10px 20px;margin-left:-40px}
-.nav-tabs.nav-stacked>li>a>i,
-.nav-tabs.nav-stacked>li>ul>li>a>i{margin-right:10px;width:20px;display:inline-block;text-align:center}
-.nav-tabs.nav-stacked>li>a:hover{background:#2d323d;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
-.nav-tabs.nav-stacked>li>a:hover,
-.nav-tabs.nav-stacked>li>ul>li>a:hover{background:#2d323d;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
-.nav-tabs.nav-stacked>li.active>a,
-.nav-tabs.nav-stacked>li>ul>li.active>a{background:#2d323d}
-.nav-tabs.nav-stacked>li.active>a:hover,
-.nav-tabs.nav-stacked>li>ul>li.active>a:hover{border:0;color:white}
-.nav-tabs.nav-stacked>li.active>ul{padding:5px 0;background:#2d323d}
-.nav-tabs.nav-stacked>li:first-child>a{margin:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
-.nav-tabs.nav-stacked>li:last-child>a{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
+.nav-tabs.nav-stacked>li>ul>li>a { padding: 10px 15px; color: #fff; border: 0; background: transparent; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; text-decoration: none; display: block }
 
-.container{max-width:100%!important}
+.nav-tabs.nav-stacked>li>ul>li>a { padding: 10px 20px; margin-left: -40px }
+
+.nav-tabs.nav-stacked>li>a>i,
+.nav-tabs.nav-stacked>li>ul>li>a>i { margin-right: 10px; width: 20px; display: inline-block; text-align: center }
+
+.nav-tabs.nav-stacked>li>a:hover { background: #2d323d; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
+
+.nav-tabs.nav-stacked>li>a:hover,
+.nav-tabs.nav-stacked>li>ul>li>a:hover { background: #2d323d; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
+
+.nav-tabs.nav-stacked>li.active>a,
+.nav-tabs.nav-stacked>li>ul>li.active>a { background: #2d323d }
+
+.nav-tabs.nav-stacked>li.active>a:hover,
+.nav-tabs.nav-stacked>li>ul>li.active>a:hover { border: 0; color: white }
+
+.nav-tabs.nav-stacked>li.active>ul { padding: 5px 0; background: #2d323d }
+
+.nav-tabs.nav-stacked>li:first-child>a { margin: 0; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
+
+.nav-tabs.nav-stacked>li:last-child>a { -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
+
+.container { max-width: 100% !important }
 
 .address-form {
-    margin-bottom: 30px;
-    border-bottom: 1px solid #dddddd;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #ddd;
 }
 
-#controls{margin-bottom: 10px}
-#config{color:white;margin:0 -10px;padding:10px;background-color: #2D323D}
+#controls { margin-bottom: 10px }
 
+#config { color: white; margin: 0 -10px; padding: 10px; background-color: #2d323d }
 
-.blue{color:#36a9e1}
-.lightBlue{color:#67c2ef}
-.green{color:#bdea74}
-.darkGreen{color:#78cd51}
-.pink{color:#e84c8a}
-.orange{color:#fa603d}
-.lightOrange{color:#fabb3d}
-.red{color:#ff5454}
-.yellow{color:#eae874}
-.white{color:white}
-.grey{color:#c7cbd5}
-.backgroundColor.blue{background:#36a9e1}
-.backgroundColor.lightBlue{background:#67c2ef}
-.backgroundColor.green{background:#bdea74}
-.backgroundColor.darkGreen{background:#78cd51}
-.backgroundColor.pink{background:#e84c8a}
-.backgroundColor.orange{background:#fa603d}
-.backgroundColor.lightOrange{background:#fabb3d}
-.backgroundColor.red{background:#ff5454}
-.backgroundColor.yellow{background:#eae874}
-.backgroundColor.white{background:white}
-.backgroundColor.grey{background:#c7cbd5}
-.backgroundColorTitle.blue .title{background:#36a9e1}
-.backgroundColorTitle.lightBlue .title{background:#67c2ef}
-.backgroundColorTitle.green .title{background:#bdea74}
-.backgroundColorTitle.darkGreen .title{background:#78cd51}
-.backgroundColorTitle.pink .title{background:#e84c8a}
-.backgroundColorTitle.orange .title{background:#fa603d}
-.backgroundColorTitle.lightOrange .title{background:#fabb3d}
-.backgroundColorTitle.red .title{background:#ff5454}
-.backgroundColorTitle.yellow .title{background:#eae874}
-.backgroundColorTitle.white .title{background:white}
-.backgroundColorTitle.grey .title{background:#c7cbd5}
+.blue { color: #36a9e1 }
+
+.lightBlue { color: #67c2ef }
+
+.green { color: #bdea74 }
+
+.darkGreen { color: #78cd51 }
+
+.pink { color: #e84c8a }
+
+.orange { color: #fa603d }
+
+.lightOrange { color: #fabb3d }
+
+.red { color: #ff5454 }
+
+.yellow { color: #eae874 }
+
+.white { color: white }
+
+.grey { color: #c7cbd5 }
+
+.backgroundColor.blue { background: #36a9e1 }
+
+.backgroundColor.lightBlue { background: #67c2ef }
+
+.backgroundColor.green { background: #bdea74 }
+
+.backgroundColor.darkGreen { background: #78cd51 }
+
+.backgroundColor.pink { background: #e84c8a }
+
+.backgroundColor.orange { background: #fa603d }
+
+.backgroundColor.lightOrange { background: #fabb3d }
+
+.backgroundColor.red { background: #ff5454 }
+
+.backgroundColor.yellow { background: #eae874 }
+
+.backgroundColor.white { background: white }
+
+.backgroundColor.grey { background: #c7cbd5 }
+
+.backgroundColorTitle.blue .title { background: #36a9e1 }
+
+.backgroundColorTitle.lightBlue .title { background: #67c2ef }
+
+.backgroundColorTitle.green .title { background: #bdea74 }
+
+.backgroundColorTitle.darkGreen .title { background: #78cd51 }
+
+.backgroundColorTitle.pink .title { background: #e84c8a }
+
+.backgroundColorTitle.orange .title { background: #fa603d }
+
+.backgroundColorTitle.lightOrange .title { background: #fabb3d }
+
+.backgroundColorTitle.red .title { background: #ff5454 }
+
+.backgroundColorTitle.yellow .title { background: #eae874 }
+
+.backgroundColorTitle.white .title { background: white }
+
+.backgroundColorTitle.grey .title { background: #c7cbd5 }

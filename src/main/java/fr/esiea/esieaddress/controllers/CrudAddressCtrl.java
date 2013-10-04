@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,20 +38,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/addresses")
 public class CrudAddressCtrl {
 
-    @Autowired
-    @Qualifier("contactValidationDecorator")
-    ICrudService<Contact> crudService;
+	@Autowired
+	@Qualifier("contactValidationDecorator")
+	ICrudService<Contact> crudService;
 
-    private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);
+	private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);
 
-    @Secured("ROLE_USER")
-    @RequestMapping(value="/{id}", method = RequestMethod.PUT, produces = "application/json")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addAddress(@RequestParam String id,@RequestParam String baseLabel,@RequestBody Address address) throws ServiceException, DaoException {
-	    LOGGER.info("[Controller] Querying to edit addresses of the contact with id : \"" + id + "\"");
-	    Contact contact = crudService.getOne(id);
-        contact.addAddress(address);
-    }
-
+	/*@Secured("ROLE_USER")*/
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void addAddress(@RequestParam String id, @RequestParam String baseLabel, @RequestBody Address address) throws ServiceException, DaoException {
+		LOGGER.info("[Controller] Querying to edit addresses of the contact with id : \"" + id + "\"");
+		Contact contact = crudService.getOne(id);
+		contact.addAddress(address);
+	}
 }

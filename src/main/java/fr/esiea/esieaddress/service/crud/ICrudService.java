@@ -30,14 +30,13 @@ import java.util.Collection;
  */
 public interface ICrudService<T extends IModel> {
 
-    Collection<T> getAll() throws ServiceException, DaoException;
+	Collection<T> getAll() throws ServiceException, DaoException;
 
-    void remove(String id) throws ServiceException, DaoException;
+	void remove(String id) throws ServiceException, DaoException;
 
-    void save(T model) throws ServiceException, DaoException;
+	void save(T model) throws ServiceException, DaoException;
 
-    void insert(T model) throws ServiceException, DaoException;
+	void insert(T model) throws ServiceException, DaoException;
 
-    T getOne(String Id) throws ServiceException, DaoException;
-
+	T getOne(String Id) throws ServiceException, DaoException;
 }

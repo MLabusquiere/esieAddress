@@ -1,8 +1,6 @@
 package fr.esiea.esieaddress.service.crud;
 
-import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.IModel;
 import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 
@@ -29,5 +27,5 @@ import fr.esiea.esieaddress.service.exception.ServiceException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface ICrudUserService extends ICrudService<User> {
-    public User getOneByMail(String mail) throws ServiceException,DaoException;
+	public User getOneByMail(String mail) throws ServiceException, DaoException;
 }

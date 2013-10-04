@@ -11,15 +11,13 @@ import java.io.IOException;
 
 public class Http401DeniedEntryPoint implements AuthenticationEntryPoint {
 
-    private static final Logger LOGGER = Logger.getLogger(Http401DeniedEntryPoint.class);
+	private static final Logger LOGGER = Logger.getLogger(Http401DeniedEntryPoint.class);
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
 
-        LOGGER.info("Denied Entry Point");
-        HttpServletResponse httpResponse = response;
-        httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-
-    }
-
+		LOGGER.info("Denied Entry Point");
+		HttpServletResponse httpResponse = response;
+		httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+	}
 }

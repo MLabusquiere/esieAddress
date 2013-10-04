@@ -45,6 +45,7 @@
         <authentication-provider ref="authenticationProvider"/>
     </authentication-manager>
 
-    <beans:bean id="authenticationProvider" class="fr.esiea.esieaddress.controllers.login.security.CustomAuthenticationProvider"/>
+    <beans:bean id="authenticationProvider"
+                class="fr.esiea.esieaddress.controllers.login.security.CustomAuthenticationProvider"/>
 
 </beans:beans>

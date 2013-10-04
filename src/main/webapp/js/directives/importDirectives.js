@@ -1,4 +1,3 @@
-
 var module = angular.module('esieAddress.directives');
 
 // Inspired from https://github.com/clouddueling/angularjs-drag-n-drop/blob/master/directive.js
@@ -54,10 +53,10 @@ module.directive('ngFileUpload', function () {
 					var tpl = $('' +
 						'<li class="working">' +
 						/*'	<div class="progress">' +
-						'		<div id="loadbar" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">' +
-						'			<span class="sr-only">60% Complete</span>' +
-						'		</div>' +
-						'	</div>' +*/
+						 '		<div id="loadbar" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">' +
+						 '			<span class="sr-only">60% Complete</span>' +
+						 '		</div>' +
+						 '	</div>' +*/
 						/*'	<input type="text" value="0" data-width="48" data-height="48" data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" />' +*/
 						'	<p></p>' +
 						'	<span></span>' +
@@ -103,9 +102,9 @@ module.directive('ngFileUpload', function () {
 					// data.context.find('#loadbar').val(progress).change();
 					/*data.context.find('#loadbar').getAttribute('aria-valuenow').val(progress).change();
 
-					if (progress == 100) {
-						data.context.find('#loadbar').addClass('progress-bar-success');
-					}*/
+					 if (progress == 100) {
+					 data.context.find('#loadbar').addClass('progress-bar-success');
+					 }*/
 				},
 
 				fail: function (e, data) {

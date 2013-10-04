@@ -4,6 +4,6 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('ErrorCtrl',function ($scope, $routeParams, $location) {
+module.controller('ErrorCtrl', function ($scope, $routeParams, $location) {
 
 });

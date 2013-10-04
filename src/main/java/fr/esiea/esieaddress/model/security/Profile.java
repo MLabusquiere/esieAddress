@@ -28,16 +28,16 @@ import java.util.Collections;
  */
 public enum Profile {
 
-    ADMIN(Collections.unmodifiableList(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_USER))),
-    USER(Collections.unmodifiableList(Arrays.asList(Role.ROLE_USER)));
+	ADMIN(Collections.unmodifiableList(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_USER))),
+	USER(Collections.unmodifiableList(Arrays.asList(Role.ROLE_USER)));
 
-    private Profile(Collection<String> roleList) {
-        this.roleList = roleList;
-    }
+	private Profile(Collection<String> roleList) {
+		this.roleList = roleList;
+	}
 
-    private final Collection<String> roleList;
+	private final Collection<String> roleList;
 
-    public Collection<String> getRoleList() {
-        return roleList;
-    }
+	public Collection<String> getRoleList() {
+		return roleList;
+	}
 }

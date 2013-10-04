@@ -53,7 +53,7 @@ public class ImportCtrl {
 	@Autowired
 	private CsvService csvService;
 
-    @Secured("ROLE_USER")
+	@Secured("ROLE_USER")
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public void upload(MultipartHttpServletRequest files, final HttpServletRequest request) throws DaoException, ServiceException, FileNotFoundException {

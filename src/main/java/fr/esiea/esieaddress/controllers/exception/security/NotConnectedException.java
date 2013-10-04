@@ -25,5 +25,5 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class NotConnectedException extends RestException {
-    //TODO
+	//TODO
 }

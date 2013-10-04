@@ -25,5 +25,5 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class NeedToBeAuthenticatedException extends RestException {
-    //TODO
+	//TODO
 }

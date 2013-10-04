@@ -1,15 +1,14 @@
 package fr.esiea.esieaddress.controllers;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.contact.Address;
-import fr.esiea.esieaddress.model.contact.Contact;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -36,13 +35,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/test")
 public class TestController {
-    private static final Logger LOGGER = Logger.getLogger(TestController.class);
+	private static final Logger LOGGER = Logger.getLogger(TestController.class);
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addAddress() throws ServiceException, DaoException {
-        LOGGER.info("You are autentified");
-    }
-
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void addAddress() throws ServiceException, DaoException {
+		LOGGER.info("You are autentified");
+	}
 }

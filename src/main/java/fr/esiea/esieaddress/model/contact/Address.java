@@ -3,8 +3,6 @@ package fr.esiea.esieaddress.model.contact;
 import com.restfb.Facebook;
 import fr.esiea.esieaddress.model.Model;
 
-import java.util.Date;
-
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -30,17 +28,18 @@ import java.util.Date;
 public class Address extends Model {
 
 	private String label;
-    private String number;
-    @Facebook
-    private String street;
-    @Facebook("zip")
-    private String postalCode;
-    @Facebook
-    private String city;
+	private String number;
+	@Facebook
+	private String street;
+	@Facebook("zip")
+	private String postalCode;
+	@Facebook
+	private String city;
 	@Facebook
 	private String country;
 
-    public Address() {}
+	public Address() {
+	}
 
 	public String getLabel() {
 		return label;

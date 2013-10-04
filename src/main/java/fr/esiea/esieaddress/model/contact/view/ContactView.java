@@ -23,6 +23,9 @@ package fr.esiea.esieaddress.model.contact.view;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class ContactView {
-        public static class LightView { }
-        public static class FullView extends LightView { }
+	public static class LightView {
+	}
+
+	public static class FullView extends LightView {
+	}
 }

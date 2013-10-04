@@ -26,31 +26,31 @@ import fr.esiea.esieaddress.model.security.Profile;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class User extends Model {
-    private String mail;
-    private String password;
-    private Profile profile = Profile.USER;
+	private String mail;
+	private String password;
+	private Profile profile = Profile.USER;
 
-    public String getMail() {
-        return mail;
-    }
+	public String getMail() {
+		return mail;
+	}
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public Profile getProfile() {
-        return profile;
-    }
+	public Profile getProfile() {
+		return profile;
+	}
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 }

@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,64 +43,58 @@ import java.io.IOException;
 @RequestMapping("/contacts")
 public class CrudContactCtrl {
 
-    @Autowired
-    @Qualifier("contactValidationDecorator")
-    ICrudService<Contact> crudService;
+	@Autowired
+	@Qualifier("contactValidationDecorator")
+	ICrudService<Contact> crudService;
 
-    private final static Logger LOGGER = Logger.getLogger(CrudContactCtrl.class);
+	private final static Logger LOGGER = Logger.getLogger(CrudContactCtrl.class);
 
-    @Secured("ROLE_USER")
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public void getAll(HttpServletResponse servletResponse) throws ServiceException, DaoException, IOException {
+	/*@Secured("ROLE_USER")*/
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public void getAll(HttpServletResponse servletResponse) throws ServiceException, DaoException, IOException {
 
-        LOGGER.info("[Controller] Querying Contact list");
-        /*
-         * Make the list with only id, firstname, lastname, actif
-         */
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithView(ContactView.LightView.class).writeValue(servletResponse.getOutputStream(),crudService.getAll());
+		LOGGER.info("[Controller] Querying Contact list");
+		/*
+		 * Make the list with only id, firstname, lastname, actif
+		 */
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.writerWithView(ContactView.LightView.class).writeValue(servletResponse.getOutputStream(), crudService.getAll());
+	}
 
-    }
+	/*@Secured("ROLE_USER")*/
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Contact getById(@PathVariable("id") String contactId) throws ServiceException, DaoException {
 
-    @Secured("ROLE_USER")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public Contact getById(@PathVariable("id") String contactId) throws ServiceException, DaoException {
+		LOGGER.info("[Controller] Querying Contact with id : \"" + contactId + "\"");
+		return crudService.getOne(contactId);
+	}
 
-        LOGGER.info("[Controller] Querying Contact with id : \"" + contactId + "\"");
-        return crudService.getOne(contactId);
+	/*@Secured("ROLE_USER")*/
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void create(@RequestBody Contact contact) throws ServiceException, DaoException {
 
-    }
+		LOGGER.info("[Controller] Querying to create new contact : " + contact.toString());
+		crudService.insert(contact);
+	}
 
-    @Secured("ROLE_USER")
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Contact contact) throws ServiceException, DaoException {
+	/*@Secured("ROLE_USER")*/
+	@RequestMapping(value = "", method = RequestMethod.PUT, consumes = "application/json")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void edit(@RequestBody Contact contact) throws ServiceException, DaoException {
 
-        LOGGER.info("[Controller] Querying to create new contact : "+ contact.toString());
-        crudService.insert(contact);
+		LOGGER.info("[Controller] Querying to edit Contact : \"" + contact.toString());
+		crudService.save(contact);
+	}
 
-    }
+	/*@Secured("ROLE_USER")*/
+	@RequestMapping(value = "/{idContact}", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable String idContact) throws ServiceException, DaoException {
 
-    @Secured("ROLE_USER")
-    @RequestMapping(value = "", method = RequestMethod.PUT, consumes = "application/json")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void edit(@RequestBody Contact contact) throws ServiceException, DaoException {
-
-        LOGGER.info("[Controller] Querying to edit Contact : \"" + contact.toString());
-        crudService.save(contact);
-
-    }
-
-    @Secured("ROLE_USER")
-    @RequestMapping(value = "/{idContact}", method = RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String idContact) throws ServiceException, DaoException {
-
-        LOGGER.info("[Controller] Querying to delete Contact with id : \"" + idContact);
-        crudService.remove(idContact);
-
-    }
-
+		LOGGER.info("[Controller] Querying to delete Contact with id : \"" + idContact);
+		crudService.remove(idContact);
+	}
 }

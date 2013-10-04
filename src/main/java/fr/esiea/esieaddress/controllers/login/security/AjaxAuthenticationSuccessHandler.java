@@ -11,14 +11,14 @@ import java.io.IOException;
 
 public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    public static Logger logger = Logger.getLogger(AjaxAuthenticationSuccessHandler.class);
+	public static Logger logger = Logger.getLogger(AjaxAuthenticationSuccessHandler.class);
 
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
-        logger.info("API security - /onAuthenticationSuccess()");
-        response.getWriter().print("Welcome !");
-        response.getWriter().flush();
-    }
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request,
+	                                    HttpServletResponse response,
+	                                    Authentication authentication) throws IOException, ServletException {
+		logger.info("API security - /onAuthenticationSuccess()");
+		response.getWriter().print("Welcome !");
+		response.getWriter().flush();
+	}
 }

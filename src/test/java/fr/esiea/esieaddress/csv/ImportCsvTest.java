@@ -5,7 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -31,26 +34,24 @@ import java.io.*;
  */
 public class ImportCsvTest {
 
-    CsvService csvService = new CsvService();
-    private static String URI;
+	CsvService csvService = new CsvService();
+	private static String URI;
 
-    @Before
-    public void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 
-        URI = new ClassPathResource("csv").getFile().getAbsolutePath().toString();
-        URI = URI.concat(File.separator+"contacts.csv");
-    }
+		URI = new ClassPathResource("csv").getFile().getAbsolutePath().toString();
+		URI = URI.concat(File.separator + "contacts.csv");
+	}
 
-    @Test
-    public void ImportCsvTest() {
+	@Test
+	public void ImportCsvTest() {
 
-        try(Reader file = new FileReader(URI)) {
+		try (Reader file = new FileReader(URI)) {
 
-            csvService.ReadContactCSV(file);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+			csvService.ReadContactCSV(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

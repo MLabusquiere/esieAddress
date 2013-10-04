@@ -35,13 +35,12 @@ import java.util.logging.Logger;
 @ControllerAdvice
 public class ExceptionHandlerCtrl extends ResponseEntityExceptionHandler {
 
-    private final static Logger LOGGER = Logger.getLogger("ExceptionHandlerCtrl");
+	private final static Logger LOGGER = Logger.getLogger("ExceptionHandlerCtrl");
 
-    @ExceptionHandler(value = {RestException.class})
-    protected ResponseEntity<Object> handleException(RestException ex, WebRequest request) {
-        LOGGER.info("An exception was catch by spring mvc :" + ex.getClass() + " : " + ex.getMessage());
-        Object model = ex.getModel();
-        return new ResponseEntity<Object>(model, HttpStatus.valueOf(ex.getStatus()));
-    }
-
+	@ExceptionHandler(value = {RestException.class})
+	protected ResponseEntity<Object> handleException(RestException ex, WebRequest request) {
+		LOGGER.info("An exception was catch by spring mvc :" + ex.getClass() + " : " + ex.getMessage());
+		Object model = ex.getModel();
+		return new ResponseEntity<Object>(model, HttpStatus.valueOf(ex.getStatus()));
+	}
 }

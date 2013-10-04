@@ -34,14 +34,13 @@ $(document).ready(sizeContent);
 //Every resize of window
 $(window).resize(sizeContent);
 
-
 //Dynamically assign height
 function sizeContent() {
 	var newHeight = $(document).height();
 	/*console.log(newHeight);
-	console.log($("#sidebar-header").height());*/
+	 console.log($("#sidebar-header").height());*/
 	$("#sidebar-left").css("height", newHeight + "px");
 	$("#content").css("height", newHeight + "px");
-	$("#contacts").css("height", newHeight/100*88 + "px");
+	$("#contacts").css("height", newHeight / 100 * 88 + "px");
 	/*$("#pageContent").css("height", newHeight-$(".pageHeader").height() + "px");*/
 }

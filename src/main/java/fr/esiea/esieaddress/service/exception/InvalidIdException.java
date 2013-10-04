@@ -24,8 +24,7 @@ package fr.esiea.esieaddress.service.exception;
  */
 public class InvalidIdException extends ServiceException {
 
-    public InvalidIdException() {
-        super(404,"Id doesn't exist");
-    }
-
+	public InvalidIdException() {
+		super(404, "Id doesn't exist");
+	}
 }

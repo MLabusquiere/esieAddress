@@ -15,12 +15,10 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -45,60 +43,56 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        locations = {
-                "classpath*:spring/application-context.xml",
-                "file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml"
-        })
+		locations = {
+				"classpath*:spring/application-context.xml",
+				"file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml"
+		})
 @WebAppConfiguration
 public class SpringMvcIntegrationTest {
 
-    @Autowired
-    private WebApplicationContext wac;
+	@Autowired
+	private WebApplicationContext wac;
 
-    private MockMvc mockMvc;
-    public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
-    private String jsonContact = "{\"id\":\"id10\",\"lastname\":\"Labusquiere\",\"firstname\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"true\"}\n";
-    private String jsonContactUpdate = "{\"id\":\"id10\",\"lastname\":\"Labusquiere\",\"firstname\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"false\"}\n" +
-            "\"";
+	private MockMvc mockMvc;
+	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+	private String jsonContact = "{\"id\":\"id10\",\"lastname\":\"Labusquiere\",\"firstname\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"true\"}\n";
+	private String jsonContactUpdate = "{\"id\":\"id10\",\"lastname\":\"Labusquiere\",\"firstname\":\"Maxence\",\"email\":\"labusquiere@gmail.com\",\"actif\":\"false\"}\n" +
+			"\"";
 
-    @Before
-    public void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+	}
 
-    }
+	@Test
+	public void ContactInsertUpdateGetDelete() throws Exception {
+		this.mockMvc.perform(post("/contacts").accept(APPLICATION_JSON)
+				.contentType(APPLICATION_JSON_UTF8)
+				.content(jsonContact))
+				.andDo(print())
+				.andExpect(status().isCreated());
 
-    @Test
-    public void ContactInsertUpdateGetDelete() throws Exception {
-        this.mockMvc.perform(post("/contacts").accept(APPLICATION_JSON)
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(jsonContact))
-                .andDo(print())
-                .andExpect(status().isCreated());
+		this.mockMvc.perform(put("/contacts").accept(APPLICATION_JSON)
+				.contentType(APPLICATION_JSON_UTF8)
+				.content(jsonContactUpdate))
+				//.andDo(print())
+				.andExpect(status().isNoContent());
 
-        this.mockMvc.perform(put("/contacts").accept(APPLICATION_JSON)
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(jsonContactUpdate))
-                //.andDo(print())
-                .andExpect(status().isNoContent());
+		this.mockMvc.perform(get("/contacts/id10").accept(APPLICATION_JSON))
+				//.andDo(print())
+				//Assert Content
+				.andExpect(status().isOk());
 
-        this.mockMvc.perform(get("/contacts/id10").accept(APPLICATION_JSON))
-                //.andDo(print())
-                //Assert Content
-                .andExpect(status().isOk());
+		this.mockMvc.perform(delete("/contacts/id10").accept(APPLICATION_JSON))
+				//.andDo(print())
+				.andExpect(status().isNoContent());
+	}
 
-        this.mockMvc.perform(delete("/contacts/id10").accept(APPLICATION_JSON))
-                //.andDo(print())
-                .andExpect(status().isNoContent());
-
-    }
-
-    @Test
-    public void ContactGetAll() throws Exception {
-        this.mockMvc.perform(get("/contacts").accept(APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
-
-
+	@Test
+	public void ContactGetAll() throws Exception {
+		this.mockMvc.perform(get("/contacts").accept(APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk());
+	}
 }

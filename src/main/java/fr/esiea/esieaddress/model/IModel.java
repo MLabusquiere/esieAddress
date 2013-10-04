@@ -27,8 +27,10 @@ import fr.esiea.esieaddress.model.contact.view.ContactView;
  */
 public interface IModel {
 
-    @JsonView(ContactView.LightView.class)
-    String getId();
-    void setId(String id);
-    void generateId();
+	@JsonView(ContactView.LightView.class)
+	String getId();
+
+	void setId(String id);
+
+	void generateId();
 }

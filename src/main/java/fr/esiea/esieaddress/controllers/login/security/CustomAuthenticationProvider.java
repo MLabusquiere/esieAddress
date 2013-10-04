@@ -1,6 +1,5 @@
 package fr.esiea.esieaddress.controllers.login.security;
 
-
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.crud.implementation.UserCrudService;
@@ -18,56 +17,53 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.HashSet;
 
-
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomAuthenticationProvider.class);
-    @Autowired
-    private UserCrudService userService;
+	private static final Logger LOGGER = Logger.getLogger(CustomAuthenticationProvider.class);
+	@Autowired
+	private UserCrudService userService;
 
-    public CustomAuthenticationProvider() {
-    }
+	public CustomAuthenticationProvider() {
+	}
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
 
-        String mail = String.valueOf(auth.getPrincipal());
-        String password = String.valueOf(auth.getCredentials());
-        User userToAuthenticate;
+		String mail = String.valueOf(auth.getPrincipal());
+		String password = String.valueOf(auth.getCredentials());
+		User userToAuthenticate;
 
-        try {
-            userToAuthenticate = userService.getOneByMail(mail);
+		try {
+			userToAuthenticate = userService.getOneByMail(mail);
 
-            if (userToAuthenticate == null)
-                throw new BadCredentialsException("Bad Login");
+			if (userToAuthenticate == null)
+				throw new BadCredentialsException("Bad Login");
 
-            if (!userToAuthenticate.getPassword().equals(password))
-                throw new BadCredentialsException("Bad password");
+			if (!userToAuthenticate.getPassword().equals(password))
+				throw new BadCredentialsException("Bad password");
 
-            //Authorities
-            Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+			//Authorities
+			Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 
-            for (String authority : userToAuthenticate.getProfile().getRoleList()) {
-                authorities.add(new SimpleGrantedAuthority(authority));
-            }
+			for (String authority : userToAuthenticate.getProfile().getRoleList()) {
+				authorities.add(new SimpleGrantedAuthority(authority));
+			}
 
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(mail, password, authorities);
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(mail, password, authorities);
 
-            token.setDetails(userToAuthenticate.getId());
+			token.setDetails(userToAuthenticate.getId());
 
-            return token;
+			return token;
+		} catch (DaoException | ServiceException e) {
 
-        } catch (DaoException | ServiceException e) {
+			LOGGER.error("Authentication exception");
+		}
+		return null;
+	}
 
-            LOGGER.error("Authentication exception");
-        }
-        return null;
-    }
-
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return true;  //To indicate that this authenticationprovider can handle the auth request. since there's currently only one way of logging in, always return true
-    }
-
+	@Override
+	public boolean supports(Class<?> aClass) {
+		return true;  //To indicate that this authenticationprovider can handle the auth request. since there's currently only one way of logging in, always return true
+	}
 }

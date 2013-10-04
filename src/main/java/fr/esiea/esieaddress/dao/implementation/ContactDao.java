@@ -33,38 +33,38 @@ import java.util.Map;
  */
 public class ContactDao implements ICrudDao<Contact> {
 
-    @Autowired
-    private Map<String,Contact> database;
+	@Autowired
+	private Map<String, Contact> database;
 
-    @Override
-    public Collection<Contact> getAll() throws DaoException {
-        return database.values();  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	@Override
+	public Collection<Contact> getAll() throws DaoException {
+		return database.values();  //To change body of implemented methods use File | Settings | File Templates.
+	}
 
-    @Override
-    public void remove(String idContact) throws DaoException {
-       database.remove(idContact);
-    }
+	@Override
+	public void remove(String idContact) throws DaoException {
+		database.remove(idContact);
+	}
 
-    @Override
-    public void save(Contact contact) throws DaoException {
-        if(null == database.remove(contact.getId()))
-            throw new UpdateException();
-        insert(contact);
-    }
+	@Override
+	public void save(Contact contact) throws DaoException {
+		if (null == database.remove(contact.getId()))
+			throw new UpdateException();
+		insert(contact);
+	}
 
-    @Override
-    public void insert(Contact contact) throws DaoException {
-        contact.generateId();
-        database.put(contact.getId(),contact);
-    }
+	@Override
+	public void insert(Contact contact) throws DaoException {
+		contact.generateId();
+		database.put(contact.getId(), contact);
+	}
 
-    @Override
-    public Contact getOne(String contactId) throws DaoException {
-        return database.get(contactId);
-    }
+	@Override
+	public Contact getOne(String contactId) throws DaoException {
+		return database.get(contactId);
+	}
 
-    public void setDatabase(Map<String, Contact> database) {
-        this.database = database;
-    }
+	public void setDatabase(Map<String, Contact> database) {
+		this.database = database;
+	}
 }

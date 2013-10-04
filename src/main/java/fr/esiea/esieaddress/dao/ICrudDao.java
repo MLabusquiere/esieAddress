@@ -28,13 +28,13 @@ import java.util.Collection;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface ICrudDao<T extends IModel> {
-    Collection<T> getAll() throws DaoException;
+	Collection<T> getAll() throws DaoException;
 
-    void remove(String id) throws DaoException;
+	void remove(String id) throws DaoException;
 
-    void save(T model) throws DaoException;
+	void save(T model) throws DaoException;
 
-    void insert(T model) throws DaoException;
+	void insert(T model) throws DaoException;
 
-    T getOne(String model) throws DaoException;
+	T getOne(String model) throws DaoException;
 }

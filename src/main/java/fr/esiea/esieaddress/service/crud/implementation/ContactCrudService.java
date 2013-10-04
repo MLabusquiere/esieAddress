@@ -37,36 +37,35 @@ import java.util.Collection;
 @Service
 public class ContactCrudService implements ICrudService<Contact> {
 
-    @Autowired
-    @Qualifier("databaseContact")
-    private ICrudDao<Contact> dao;
+	@Autowired
+	@Qualifier("databaseContact")
+	private ICrudDao<Contact> dao;
 
-    @Override
-    public Collection<Contact> getAll() throws DaoException {
-        return dao.getAll();
-    }
+	@Override
+	public Collection<Contact> getAll() throws DaoException {
+		return dao.getAll();
+	}
 
-    @Override
-    public void remove(String idContact) throws DaoException  {
-        dao.remove(idContact);
-    }
+	@Override
+	public void remove(String idContact) throws DaoException {
+		dao.remove(idContact);
+	}
 
-    @Override
-    public void save(Contact contact) throws DaoException  {
-        dao.save(contact);
-    }
+	@Override
+	public void save(Contact contact) throws DaoException {
+		dao.save(contact);
+	}
 
-    @Override
-    public void insert(Contact contact) throws DaoException {
-        dao.insert(contact);
-    }
+	@Override
+	public void insert(Contact contact) throws DaoException {
+		dao.insert(contact);
+	}
 
-    @Override
-    public Contact getOne(String contactId) throws ServiceException, DaoException  {
-        Contact contact = dao.getOne(contactId);
-        if( null==contact )
-            throw new InvalidIdException();
-        return contact;
-    }
-
+	@Override
+	public Contact getOne(String contactId) throws ServiceException, DaoException {
+		Contact contact = dao.getOne(contactId);
+		if (null == contact)
+			throw new InvalidIdException();
+		return contact;
+	}
 }
