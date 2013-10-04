@@ -34,49 +34,10 @@
     <link href="css/esieAddress.css" rel="stylesheet" media="screen">
 
 </head>
-<body ng-cloak>
+<body ng-cloak ng-controller="AppCtrl">
 
-<div class="container" ng-controller="AppCtrl">
-    <div modal="shouldOpenAuthModal" close="close()" options="opts" id="authenticationModal" class="modal hide fade"
-         tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <form class="modal-form " ng-submit="connect()">
+<div class="container">
 
-                <fieldset>
-                    <legend>Log In</legend>
-
-                    <div class="control-group">
-                        <div id="loginInfo" class="hide"><p class="text-error">Wrong username or password</p></div>
-
-                        <label class="control-label" for="mail">mail : </label>
-
-                        <div class="controls">
-                            <input type="text" ng-model="login.mail" name="mail" id="mail" class="input-medium"
-                                   placeholder="mail" required/>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="password">Password : </label>
-
-                        <div class="controls">
-                            <input type="password" ng-model="login.password" name="password" id="password"
-                                   class="input-medium" placeholder="Password" required/>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button class="btn btn-primary" type="submit">Log In <i class="icon-white icon-ok-sign"></i>
-                        </button>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-warning cancel" ng-click="closeAuthModal()">Cancel</button>
-            <h3>Sign up</h3>
-
-            <p>You do not already have an account? Sign up <a href="#/signin">here</a> !</p>
-        </div>
-    </div>
     <div class="row">
         <div id="sidebar-left" class="col-lg-2 col-sm-2 collapse in" ng-controller="ContactListCtrl">
             <div id="sidebar-header">
@@ -150,7 +111,92 @@
         <div id="content" class="col-lg-10 col-sm-10" ng-view><h2>Content</h2></div>
     </div>
 </div>
+<!--
+<div modal="shouldOpenAuthModal" close="close()" options="opts" id="authenticationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<form class="modal-form " ng-submit="connect()">
 
+			<fieldset>
+				<legend>Log In</legend>
+
+				<div class="control-group">
+					<div id="loginInfo" class="hide"><p class="text-error">Wrong username or password</p></div>
+
+					<label class="control-label" for="mail">mail : </label>
+
+					<div class="controls">
+						<input type="text" ng-model="login.mail" name="mail" id="mail" class="input-medium"
+							   placeholder="mail" required/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="password">Password : </label>
+
+					<div class="controls">
+						<input type="password" ng-model="login.password" name="password" id="password"
+							   class="input-medium" placeholder="Password" required/>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button class="btn btn-primary" type="submit">Log In <i class="icon-white icon-ok-sign"></i>
+					</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-warning cancel" ng-click="closeAuthModal()">Cancel</button>
+		<h3>Sign up</h3>
+
+		<p>You do not already have an account? Sign up <a href="#/signin">here</a> !</p>
+	</div>
+</div>-->
+
+<!-- Button trigger modal -->
+<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Launch demo modal</a>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Sign in</h4>
+			</div>
+			<div class="modal-body">
+				<form name="signin_form" class="form-horizontal" role="form" ng-submit="connect()" novalidate>
+					<div class="form-group">
+						<label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+						<div class="col-lg-10">
+							<input name="email" type="email" class="form-control" id="inputEmail1" placeholder="Email" ng-model="login.email" required>
+							<span class="text-danger" ng-show="signin_form.email.$error.email">Invalid email address</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword1" class="col-lg-2 control-label">Password</label>
+						<div class="col-lg-10">
+							<input type="password" class="form-control" id="inputPassword1" placeholder="Password" ng-model="login.password" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-offset-2 col-lg-10">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox"> Remember me
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-offset-2 col-lg-10">
+							<button type="submit" class="btn btn-primary" ng-disabled="signin_form.$invalid">Sign in</button> <a href="#/signin">Sign up</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!-- Libs -->
 <script src="libs/angular/angular.js"></script>
@@ -181,8 +227,6 @@
 
 <!-- Services -->
 <script src="js/services/services.js"></script>
-<script src="js/services/loginServices.js"></script>
-<script src="js/services/loginServices.js"></script>
 
 <!-- Others -->
 <script src="js/functions.js"></script>

@@ -24,3 +24,16 @@ module.factory('Address', function($resource) {
 		remove: {method:'DELETE', params: {id: 'id'}}
 	});
 });
+
+module.factory('Login', function ($resource) {
+	return $resource('rest/login/', {}, {
+		get: {method: 'GET'},
+		save: {method: 'POST'}
+	});
+});
+
+module.factory('Logout', function ($resource) {
+	return $resource('rest/logout/', {}, {
+		save: {method: 'POST'}
+	});
+});
