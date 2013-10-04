@@ -1,7 +1,7 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.model.user;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import fr.esiea.esieaddress.model.contact.view.ContactView;
+import fr.esiea.esieaddress.model.Model;
+import fr.esiea.esieaddress.model.security.Profile;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -25,10 +25,32 @@ import fr.esiea.esieaddress.model.contact.view.ContactView;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public interface IModel {
+public class User extends Model {
+    private String mail;
+    private String password;
+    private Profile profile = Profile.USER;
 
-    @JsonView(ContactView.LightView.class)
-    String getId();
-    void setId(String id);
-    void generateId();
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 }

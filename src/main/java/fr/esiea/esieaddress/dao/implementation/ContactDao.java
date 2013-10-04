@@ -3,7 +3,7 @@ package fr.esiea.esieaddress.dao.implementation;
 import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.dao.exception.UpdateException;
-import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.contact.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
@@ -31,7 +31,7 @@ import java.util.Map;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class DaoContact implements ICrudDao<Contact> {
+public class ContactDao implements ICrudDao<Contact> {
 
     @Autowired
     private Map<String,Contact> database;

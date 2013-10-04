@@ -1,9 +1,11 @@
 package fr.esiea.esieaddress.service.crud.implementation;
 
 import fr.esiea.esieaddress.dao.ICrudDao;
+import fr.esiea.esieaddress.dao.ICrudUserDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.contact.Contact;
+import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.crud.ICrudService;
+import fr.esiea.esieaddress.service.crud.ICrudUserService;
 import fr.esiea.esieaddress.service.exception.InvalidIdException;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,38 +37,44 @@ import java.util.Collection;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 @Service
-public class ContactCrudService implements ICrudService<Contact> {
-
+public class UserCrudService implements ICrudUserService    {
     @Autowired
-    @Qualifier("databaseContact")
-    private ICrudDao<Contact> dao;
+    @Qualifier("databaseUser")
+    private ICrudUserDao dao;
 
     @Override
-    public Collection<Contact> getAll() throws DaoException {
+    public Collection<User> getAll() throws DaoException {
         return dao.getAll();
     }
 
     @Override
-    public void remove(String idContact) throws DaoException  {
-        dao.remove(idContact);
+    public void remove(String idUser) throws DaoException  {
+        dao.remove(idUser);
     }
 
     @Override
-    public void save(Contact contact) throws DaoException  {
-        dao.save(contact);
+    public void save(User user) throws DaoException  {
+        dao.save(user);
     }
 
     @Override
-    public void insert(Contact contact) throws DaoException {
-        dao.insert(contact);
+    public void insert(User user) throws DaoException {
+        dao.insert(user);
     }
 
     @Override
-    public Contact getOne(String contactId) throws ServiceException, DaoException  {
-        Contact contact = dao.getOne(contactId);
-        if( null==contact )
+    public User getOne(String userId) throws InvalidIdException, DaoException  {
+        User user = dao.getOne(userId);
+        if( null==user )
             throw new InvalidIdException();
-        return contact;
+        return user;
     }
 
+    @Override
+    public User getOneByMail(String mail) throws InvalidIdException,DaoException {
+        User user = dao.getOneByMail(mail);
+        if( null==user )
+            throw new InvalidIdException();
+        return user;
+    }
 }

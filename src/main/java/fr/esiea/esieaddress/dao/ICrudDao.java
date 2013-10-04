@@ -1,7 +1,6 @@
 package fr.esiea.esieaddress.dao;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.model.IModel;
 
 import java.util.Collection;
@@ -29,13 +28,13 @@ import java.util.Collection;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface ICrudDao<T extends IModel> {
-    Collection<Contact> getAll() throws DaoException;
+    Collection<T> getAll() throws DaoException;
 
-    void remove(String idContact) throws DaoException;
+    void remove(String id) throws DaoException;
 
-    void save(T contact) throws DaoException;
+    void save(T model) throws DaoException;
 
-    void insert(T contact) throws DaoException;
+    void insert(T model) throws DaoException;
 
-    T getOne(String contactId) throws DaoException;
+    T getOne(String model) throws DaoException;
 }

@@ -1,4 +1,8 @@
-package fr.esiea.esieaddress.model.view;
+package fr.esiea.esieaddress.dao;
+
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.model.user.User;
+import fr.esiea.esieaddress.service.exception.InvalidIdException;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -22,7 +26,8 @@ package fr.esiea.esieaddress.model.view;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class ContactView {
-        public static class LightView { }
-        public static class FullView extends LightView { }
+public interface ICrudUserDao extends ICrudDao<User>  {
+
+    public User getOneByMail(String mail) throws DaoException;
+
 }

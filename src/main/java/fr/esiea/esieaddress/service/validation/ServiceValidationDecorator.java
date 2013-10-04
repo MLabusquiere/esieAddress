@@ -1,22 +1,15 @@
 package fr.esiea.esieaddress.service.validation;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.IModel;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -40,54 +33,56 @@ import java.util.Set;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-@Service
-public class ServiceValidationDecorator implements ICrudService<Contact> {
+
+public class ServiceValidationDecorator<T extends IModel> implements ICrudService<T> {
     private static final Logger LOGGER = Logger.getLogger(ServiceValidationDecorator.class);
-    @Autowired
-    @Qualifier("contactCrudService")
-    private ICrudService<Contact> crudService;
+
+    private ICrudService<T> crudService;
 
     @Autowired
     private IValidationService validationService;
 
+
     @Override
-    public Collection<Contact> getAll() throws ServiceException, DaoException {
+    public Collection<T> getAll() throws ServiceException, DaoException {
         return crudService.getAll();
     }
 
     @Override
-    public void remove(String idContact) throws ServiceException, DaoException {
-        crudService.remove(idContact);
+    public void remove(String id) throws ServiceException, DaoException {
+        crudService.remove(id);
     }
 
     @Override
-    public void save(Contact contact) throws ServiceException, DaoException {
-        LOGGER.info("[VALIDATION] Do the validation on updatedContact contact " + contact.getId());
+    public void save(T model) throws ServiceException, DaoException {
+        LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
 
-        final Map<Object, String> errorMap = validationService.validate(contact);
+        final Map<Object, String> errorMap = validationService.validate(model);
 
         if(errorMap.isEmpty())
-            crudService.save(contact);
+            crudService.save(model);
+        else
+            throw new ValidationException(errorMap);}
+
+    @Override
+    public void insert(T model) throws ServiceException, DaoException {
+        LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
+
+        final Map<Object, String> errorMap = validationService.validate(model);
+
+        if(errorMap.isEmpty())
+            crudService.insert(model);
         else
             throw new ValidationException(errorMap);
-
     }
 
     @Override
-    public void insert(Contact contact) throws ServiceException, DaoException {
-        LOGGER.info("[VALIDATION] Do the validation on a new contact");
-
-        final Map<Object,String> errorMaps = validationService.validate(contact);
-
-        if(errorMaps.isEmpty())
-            crudService.insert(contact);
-        else
-            throw new ValidationException(errorMaps);
+    public T getOne(String id) throws ServiceException, DaoException {
+        return crudService.getOne(id);
     }
 
-    @Override
-    public Contact getOne(String contactId) throws ServiceException, DaoException {
-        return crudService.getOne(contactId);
+    public void setCrudService(ICrudService<T> crudService) {
+        this.crudService = crudService;
     }
 
 }

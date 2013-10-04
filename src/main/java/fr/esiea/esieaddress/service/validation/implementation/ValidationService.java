@@ -1,8 +1,7 @@
 package fr.esiea.esieaddress.service.validation.implementation;
 
-import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.IModel;
 import fr.esiea.esieaddress.service.validation.IValidationService;
-import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
@@ -36,20 +35,20 @@ import java.util.Set;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 @Service
-public class ValidationService implements IValidationService {
+public class ValidationService<T extends IModel> implements IValidationService<T> {
 
     private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     @Override
-    public Map<Object, String> validate(Contact contact) {
+    public Map<Object, String> validate(T model) {
 
-        Set<ConstraintViolation<Contact>> violations = validator.validate(contact);
+        Set<ConstraintViolation<T>> violations = validator.validate(model);
 
         if( violations.isEmpty())
             return Collections.EMPTY_MAP;
 
         HashMap<Object, String> errorMap = new HashMap<Object, String>();
-        for(ConstraintViolation<Contact> violation:violations)   {
+        for(ConstraintViolation<T> violation:violations)   {
             errorMap.put(violation.getInvalidValue(),violation.getMessage());
         }
 

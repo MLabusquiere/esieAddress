@@ -1,16 +1,10 @@
-package fr.esiea.esieaddress.service.crud.implementation;
+package fr.esiea.esieaddress.service.crud;
 
 import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.contact.Contact;
-import fr.esiea.esieaddress.service.crud.ICrudService;
-import fr.esiea.esieaddress.service.exception.InvalidIdException;
+import fr.esiea.esieaddress.model.IModel;
+import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.exception.ServiceException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -34,39 +28,6 @@ import java.util.Collection;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-@Service
-public class ContactCrudService implements ICrudService<Contact> {
-
-    @Autowired
-    @Qualifier("databaseContact")
-    private ICrudDao<Contact> dao;
-
-    @Override
-    public Collection<Contact> getAll() throws DaoException {
-        return dao.getAll();
-    }
-
-    @Override
-    public void remove(String idContact) throws DaoException  {
-        dao.remove(idContact);
-    }
-
-    @Override
-    public void save(Contact contact) throws DaoException  {
-        dao.save(contact);
-    }
-
-    @Override
-    public void insert(Contact contact) throws DaoException {
-        dao.insert(contact);
-    }
-
-    @Override
-    public Contact getOne(String contactId) throws ServiceException, DaoException  {
-        Contact contact = dao.getOne(contactId);
-        if( null==contact )
-            throw new InvalidIdException();
-        return contact;
-    }
-
+public interface ICrudUserService extends ICrudService<User> {
+    public User getOneByMail(String mail) throws ServiceException,DaoException;
 }

@@ -3,8 +3,8 @@ package fr.esiea.esieaddress.service.validation.csv;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
-import fr.esiea.esieaddress.model.Address;
-import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.contact.Address;
+import fr.esiea.esieaddress.model.contact.Contact;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

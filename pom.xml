@@ -40,6 +40,12 @@
         <junit.version>4.11</junit.version>
         <opencsv.version>2.3</opencsv.version>
         <commons.fileupload.version>1.3</commons.fileupload.version>
+        <httpclient.version>4.3</httpclient.version>
+        <slf4j-log4j12.version>1.5.6</slf4j-log4j12.version>
+        <log4j.version>1.2.17</log4j.version>
+        <restfb.version>1.6.12</restfb.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <spring-security.version>3.1.4.RELEASE</spring-security.version>
     </properties>
 
     <build>
@@ -86,6 +92,28 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!--
+            Spring security dependencies
+        -->
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
 
         <!--
@@ -144,7 +172,7 @@
         <dependency>
             <groupId>com.restfb</groupId>
             <artifactId>restfb</artifactId>
-            <version>1.6.12</version>
+            <version>${restfb.version}</version>
         </dependency>
         <!--
             LOGGER
@@ -153,13 +181,13 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>${log4j.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.6</version>
+            <version>${slf4j-log4j12.version}</version>
         </dependency>
         <!--
             TEST
@@ -182,20 +210,22 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.3</version>
+            <version>${httpclient.version}</version>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.0.1</version>
         </dependency>
+
 
     </dependencies>
 </project>

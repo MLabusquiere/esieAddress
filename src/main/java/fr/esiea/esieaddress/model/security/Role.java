@@ -1,7 +1,5 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.model.security;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import fr.esiea.esieaddress.model.contact.view.ContactView;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -25,10 +23,9 @@ import fr.esiea.esieaddress.model.contact.view.ContactView;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public interface IModel {
+public class Role {
 
-    @JsonView(ContactView.LightView.class)
-    String getId();
-    void setId(String id);
-    void generateId();
+    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+
 }
