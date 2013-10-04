@@ -9,9 +9,9 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 	$scope.newContact = {};
 	$scope.newContact.actif = true;
 
-	$scope.newContact.addresses = new Array();
+	$scope.newContact.addresses = [];
 
-	$scope.addresses = new Array();
+	$scope.addresses = [];
 
 	if($routeParams.id != undefined){
 		console.log("Edit contact "+$routeParams.id)
@@ -21,15 +21,19 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 		}, function(data) {
 			$scope.newContact = data;
 			$scope.addresses = data.addresses;
+			console.log($scope.newContact);
+			console.log($scope.addresses);
 		}, function(error) {
 			$location.path('/error/'+error.status);
 		});
 	}
 
 	$scope.saveContact = function () {
+		console.log("Save function");
+		console.log($scope.newContact);
+		console.log($scope.addresses);
 		if($scope.newContact.id == undefined){
-			console.log("Creating new contact :")
-			console.log($scope.newContact);
+			console.log("Creating new contact :");
 			$scope.newContact.addresses = $scope.addresses;
 			Contact.save($scope.newContact,
 				function(data) {
@@ -44,15 +48,19 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 		}
 		else {
 			console.log("Updating contact "+$scope.newContact.id);
-			Address.update($scope.addresses,
-				function(data) {
-					console.log("Contact addresses updated");
-					console.log(data);
-				},
-				function(error) {
-					console.log("Error "+error.status);
-				}
-			);
+			for (var i = 0; i < $scope.addresses.length; i++) {
+				console.log("Updating address");
+				console.log($scope.addresses[i]);
+				Address.update($scope.addresses[i],
+					function(data) {
+						console.log("Added address to contact");
+						console.log(data);
+					},
+					function(error) {
+						console.log("Updating addresses : Error "+error.status);
+					}
+				);
+			}
 			Contact.update($scope.newContact,
 				function(data) {
 					console.log("Contact information updated");
@@ -60,7 +68,7 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 					$rootScope.$broadcast('updateContactList');
 				},
 				function(error) {
-					console.log("Error "+error.status);
+					console.log("Updating contact info : Error "+error.status);
 				}
 			);
 		}
@@ -69,7 +77,6 @@ module.controller('ContactFormCtrl',function($rootScope, $scope, $location, $rou
 	$scope.newAddress = function () {
 		var address = {};
 		address.street = "";
-		address.id = $scope.addresses.length;
 		console.log("Adding address ");
 		$scope.addresses[$scope.addresses.length] = address;
 	};
