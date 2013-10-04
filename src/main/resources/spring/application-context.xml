@@ -51,5 +51,4 @@
         <!-- Temporary solution -->
         <bean class="fr.esiea.esieaddress.controllers.login.FacebookConst" />
     </beans>
-
 </beans>

@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Damien
- * Date: 27/09/13
- * Time: 11:18
- * To change this template use File | Settings | File Templates.
- */
 
 var module = angular.module('esieAddress.directives');
 

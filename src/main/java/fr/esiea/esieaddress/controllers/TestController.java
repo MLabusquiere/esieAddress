@@ -3,15 +3,13 @@ package fr.esiea.esieaddress.controllers;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.contact.Address;
 import fr.esiea.esieaddress.model.contact.Contact;
-import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -36,23 +34,15 @@ import org.springframework.web.bind.annotation.*;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 @Controller
-@RequestMapping("/addresses")
-public class CrudAddressCtrl {
+@RequestMapping("/test")
+public class TestController {
+    private static final Logger LOGGER = Logger.getLogger(TestController.class);
 
-    @Autowired
-    @Qualifier("contactValidationDecorator")
-    ICrudService<Contact> crudService;
-
-    private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);
-
-    @Secured("ROLE_USER")
-    @RequestMapping(value="/{id}", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addAddress(@RequestParam String id,@RequestParam String baseLabel,@RequestBody Address address) throws ServiceException, DaoException {
-	    LOGGER.info("[Controller] Querying to edit addresses of the contact with id : \"" + id + "\"");
-	    Contact contact = crudService.getOne(id);
-        contact.addAddress(address);
+    public void addAddress() throws ServiceException, DaoException {
+        LOGGER.info("You are autentified");
     }
 
 }

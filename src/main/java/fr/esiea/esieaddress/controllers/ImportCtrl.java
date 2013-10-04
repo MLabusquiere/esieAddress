@@ -8,6 +8,7 @@ import fr.esiea.esieaddress.service.validation.csv.CsvService;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,6 +53,7 @@ public class ImportCtrl {
 	@Autowired
 	private CsvService csvService;
 
+    @Secured("ROLE_USER")
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public void upload(MultipartHttpServletRequest files, final HttpServletRequest request) throws DaoException, ServiceException, FileNotFoundException {
