@@ -1,8 +1,8 @@
 package fr.esiea.esieaddress.controllers;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.Address;
-import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.contact.Address;
+import fr.esiea.esieaddress.model.contact.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.apache.log4j.Logger;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.*;
 public class CrudAddressCtrl {
 
     @Autowired
-    @Qualifier("serviceValidationDecorator")
+    @Qualifier("contactValidationDecorator")
     ICrudService<Contact> crudService;
 
     private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);

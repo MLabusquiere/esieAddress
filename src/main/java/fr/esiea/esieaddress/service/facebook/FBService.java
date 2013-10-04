@@ -1,8 +1,8 @@
-package fr.esiea.esieaddress.facebook;
+package fr.esiea.esieaddress.service.facebook;
 
 import com.restfb.types.User;
-import fr.esiea.esieaddress.model.Address;
-import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.contact.Address;
+import fr.esiea.esieaddress.model.contact.Contact;
 import org.springframework.stereotype.Service;
 
 /**

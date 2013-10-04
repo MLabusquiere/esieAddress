@@ -1,12 +1,9 @@
 package fr.esiea.esieaddress.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.Contact;
-import fr.esiea.esieaddress.model.view.ContactView;
+import fr.esiea.esieaddress.model.contact.Contact;
+import fr.esiea.esieaddress.model.contact.view.ContactView;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.apache.log4j.Logger;
@@ -47,7 +44,7 @@ import java.io.IOException;
 public class CrudContactCtrl {
 
     @Autowired
-    @Qualifier("serviceValidationDecorator")
+    @Qualifier("contactValidationDecorator")
     ICrudService<Contact> crudService;
 
     private final static Logger LOGGER = Logger.getLogger(CrudContactCtrl.class);

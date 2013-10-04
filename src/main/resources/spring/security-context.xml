@@ -1,0 +1,50 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <beans:description>
+        This file defines all of the necessary security
+        configuration.
+
+        It is split from the applicationContext.xml file to make
+        it clearer
+        which beans and configuration elements are related to
+        security. It also makes it more reusable for other projects, as this
+        file can be copied to replicate the security configuration.
+    </beans:description>
+
+    <!--
+
+        Create the auth restrictions. create-session="stateless" means that
+        a session will never be created, the user will have to send auth credentials
+        each time.
+
+    -->
+
+    <http auto-config="true" entry-point-ref="authenticationEntryPoint">
+        <form-login authentication-success-handler-ref="ajaxAuthenticationSuccessHandler"
+                    authentication-failure-handler-ref="ajaxAuthenticationFailureHandler"/>
+        <logout success-handler-ref="ajaxLogoutSuccessHandler"/>
+        <http-basic/>
+    </http>
+
+    <beans:bean id="authenticationEntryPoint"
+                class="fr.esiea.esieaddress.controllers.login.security.Http401DeniedEntryPoint"/>
+    <beans:bean id="ajaxAuthenticationSuccessHandler"
+                class="fr.esiea.esieaddress.controllers.login.security.AjaxAuthenticationSuccessHandler"/>
+    <beans:bean id="ajaxAuthenticationFailureHandler"
+                class="fr.esiea.esieaddress.controllers.login.security.AjaxAuthenticationFailureHandler"/>
+    <beans:bean id="ajaxLogoutSuccessHandler"
+                class="fr.esiea.esieaddress.controllers.login.security.AjaxLogoutSuccessHandler"/>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="authenticationProvider"/>
+    </authentication-manager>
+
+    <beans:bean id="authenticationProvider" class="fr.esiea.esieaddress.controllers.login.security.CustomAuthenticationProvider"/>
+
+</beans:beans>

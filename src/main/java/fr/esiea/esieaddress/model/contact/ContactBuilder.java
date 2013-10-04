@@ -1,4 +1,4 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.model.contact;
 
 import java.util.*;
 

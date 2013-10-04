@@ -14,4 +14,11 @@
         <property name="defaultEncoding" value="UTF-8" />
     </bean>
 
+    <bean id="userValidationDecorator" class="fr.esiea.esieaddress.service.validation.ServiceValidationDecorator">
+        <property name="crudService" ref="userCrudService"/>
+    </bean>
+
+    <bean id="contactValidationDecorator" class="fr.esiea.esieaddress.service.validation.ServiceValidationDecorator">
+        <property name="crudService" ref="contactCrudService"/>
+    </bean>
 </beans>

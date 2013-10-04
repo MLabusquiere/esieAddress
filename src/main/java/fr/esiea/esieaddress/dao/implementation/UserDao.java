@@ -1,16 +1,13 @@
-package fr.esiea.esieaddress.service.crud.implementation;
+package fr.esiea.esieaddress.dao.implementation;
 
-import fr.esiea.esieaddress.dao.ICrudDao;
+import fr.esiea.esieaddress.dao.ICrudUserDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.contact.Contact;
-import fr.esiea.esieaddress.service.crud.ICrudService;
-import fr.esiea.esieaddress.service.exception.InvalidIdException;
-import fr.esiea.esieaddress.service.exception.ServiceException;
+import fr.esiea.esieaddress.dao.exception.UpdateException;
+import fr.esiea.esieaddress.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -34,39 +31,49 @@ import java.util.Collection;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-@Service
-public class ContactCrudService implements ICrudService<Contact> {
-
+public class UserDao implements ICrudUserDao {
     @Autowired
-    @Qualifier("databaseContact")
-    private ICrudDao<Contact> dao;
+    private Map<String,User> database;
 
     @Override
-    public Collection<Contact> getAll() throws DaoException {
-        return dao.getAll();
+    public Collection<User> getAll() throws DaoException {
+        return database.values();  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public void remove(String idContact) throws DaoException  {
-        dao.remove(idContact);
+    public void remove(String idUser) throws DaoException {
+        database.remove(idUser);
     }
 
     @Override
-    public void save(Contact contact) throws DaoException  {
-        dao.save(contact);
+    public void save(User user) throws DaoException {
+        if(null == database.remove(user.getId()))
+            throw new UpdateException();
+        insert(user);
     }
 
     @Override
-    public void insert(Contact contact) throws DaoException {
-        dao.insert(contact);
+    public void insert(User user) throws DaoException {
+        user.generateId();
+        database.put(user.getId(),user);
     }
 
     @Override
-    public Contact getOne(String contactId) throws ServiceException, DaoException  {
-        Contact contact = dao.getOne(contactId);
-        if( null==contact )
-            throw new InvalidIdException();
-        return contact;
+    public User getOne(String userId) throws DaoException {
+        return database.get(userId);
     }
 
+    public void setDatabase(Map<String, User> database) {
+        this.database = database;
+    }
+
+    @Override
+    public User getOneByMail(String mail) throws DaoException {
+        final Collection<User> users = database.values();
+        for(User user:users)    {
+            if(user.getMail() == mail)
+                return user;
+        }
+        return null;
+    }
 }

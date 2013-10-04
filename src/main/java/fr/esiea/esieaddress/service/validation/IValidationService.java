@@ -1,6 +1,5 @@
 package fr.esiea.esieaddress.service.validation;
 
-import fr.esiea.esieaddress.model.Contact;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 
 import java.util.Map;
@@ -27,6 +26,6 @@ import java.util.Map;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public interface IValidationService {
-    Map<Object, String> validate(Contact contact) throws ValidationException;
+public interface IValidationService<T> {
+    Map<Object, String> validate(T model) throws ValidationException;
 }

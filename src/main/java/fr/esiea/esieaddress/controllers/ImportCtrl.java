@@ -1,9 +1,8 @@
 package fr.esiea.esieaddress.controllers;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.Contact;
+import fr.esiea.esieaddress.model.contact.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
-import fr.esiea.esieaddress.service.crud.implementation.ContactCrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.validation.csv.CsvService;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
@@ -18,7 +17,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.nio.file.Files;
 import java.util.*;
 
 /**

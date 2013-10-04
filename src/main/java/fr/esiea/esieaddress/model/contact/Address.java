@@ -1,6 +1,7 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.model.contact;
 
 import com.restfb.Facebook;
+import fr.esiea.esieaddress.model.Model;
 
 import java.util.Date;
 

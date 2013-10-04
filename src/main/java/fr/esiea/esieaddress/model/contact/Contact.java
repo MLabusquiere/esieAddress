@@ -1,12 +1,11 @@
-package fr.esiea.esieaddress.model;
+package fr.esiea.esieaddress.model.contact;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.restfb.Facebook;
-import fr.esiea.esieaddress.model.view.ContactView;
+import fr.esiea.esieaddress.model.Model;
+import fr.esiea.esieaddress.model.contact.view.ContactView;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.*;
