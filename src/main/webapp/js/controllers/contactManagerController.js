@@ -46,8 +46,10 @@ module.controller('ContactManagerCtrl', function ($rootScope, $location, $scope,
 				if(action == "show"){
 					visibility.visible = true;
 				}
-				Contact.updateVisibility({id: $scope.contacts[i].id}
-				, "test"
+				Contact.updateVisibility({
+                        id: $scope.contacts[i].id,
+                        visibility:visibility.visible
+                    }
 				, function () {
 					$rootScope.$broadcast('updateContactList');
 					$scope.contacts[i].actif = visible;
