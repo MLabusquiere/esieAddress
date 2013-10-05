@@ -6,12 +6,16 @@
 	<div class="content">
 
 		<div>
-			<a data-toggle="modal" href="#modal" class="btn btn-primary btn-sm" ng-click="modal = 'delete'">Delete
-				<span class="glyphicon glyphicon-trash"></span></a>
-			<a class="btn btn-primary btn-sm" ng-click="showContact()">Visible
-				<span class="glyphicon glyphicon-eye-open"></span></a>
-			<a class="btn btn-primary btn-sm" ng-click="hideContact()">Hide
-				<span class="glyphicon glyphicon-eye-close"></span></a>
+			<a data-toggle="modal" href="#modal" class="btn btn-primary btn-sm" ng-click="modal = 'delete'"
+			   title="Delete selected contacts">
+				Delete <span class="glyphicon glyphicon-trash"></span>
+			</a>
+			<a class="btn btn-primary btn-sm" ng-click="showContact()" title="Display selected contacts">
+				Visible <span class="glyphicon glyphicon-eye-open"></span>
+			</a>
+			<a class="btn btn-primary btn-sm" ng-click="hideContact()" title="Hide selected contacts">
+				Hide <span class="glyphicon glyphicon-eye-close"></span>
+			</a>
 		</div>
 
 		<table class="table table-striped">

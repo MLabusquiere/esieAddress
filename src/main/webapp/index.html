@@ -34,23 +34,31 @@
 	<link href="css/esieAddress.css" rel="stylesheet" media="screen">
 
 </head>
-<body ng-cloak ng-controller="AppCtrl">
+<body ng-controller="AppCtrl" ng-cloak>
 
 <div class="container">
 
 	<div class="row">
-		<div id="sidebar-left" class="col-lg-2 col-sm-2 collapse in" ng-controller="ContactListCtrl">
+		<div id="sidebar-left" class="col-lg-2 col-sm-2 collapse in" ng-controller="ContactListCtrl" ng-cloak>
 			<div id="sidebar-header">
 				<div id="controls">
 					<div class="pull-left">
-						<a class="btn btn-primary" href="#/contacts"><span class="glyphicon glyphicon-home"></span></a>
-						<a class="btn btn-primary" href="#/new"><span class="glyphicon glyphicon-pencil"></span></a>
-						<a class="btn btn-primary" href="#/manage"><span class="glyphicon glyphicon-book"></span></a>
+						<a class="btn btn-primary" href="#/contacts" title="Home"
+						    data-placement="bottom">
+							<span class="glyphicon glyphicon-home"></span>
+						</a>
+						<a class="btn btn-primary" href="#/manage" title="Manage contacts" data-placement="bottom">
+							<span class="glyphicon glyphicon-book"></span>
+						</a>
+						<a class="btn btn-primary" href="#/new" title="Create contact" data-placement="bottom">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
 					</div>
 
 					<div class="btn-group pull-right">
-						<a class="btn btn-primary" data-toggle="collapse" data-target="#config"><span
-								class="glyphicon glyphicon-cog"></span></a>
+						<a class="btn btn-primary" data-toggle="collapse" data-target="#config" title="Settings" data-placement="bottom">
+							<span class="glyphicon glyphicon-cog"></span>
+						</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -62,22 +70,23 @@
 						<div class="col-lg-3">Display</div>
 						<div class="btn-group col-lg-9">
 							<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'list'}"
-							        ng-click="layout = 'list'">
+							        ng-click="layout = 'list'" title="Display contact as list">
 								<span class="glyphicon glyphicon-list"></span>
 							</button>
 							<button type="button" class="btn btn-primary btn-sm"
-							        ng-class="{active: layout == 'th-list'}" ng-click="layout = 'th-list'">
+							        ng-class="{active: layout == 'th-list'}" ng-click="layout = 'th-list'"
+							        title="Display contact as list with thumbail">
 								<span class="glyphicon glyphicon-th-list"></span>
 							</button>
 							<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'grid'}"
-							        ng-click="layout = 'grid'">
+							        ng-click="layout = 'grid'" title="Display contact as grid">
 								<span class="glyphicon glyphicon-th"></span>
 							</button>
 						</div>
 						<div class="col-lg-3">Hide/Show</div>
 						<div class="col-lg-9" ng-click="showAll = !showAll">
 							<div class="make-switch switch-small">
-								<input ng-model="showAll" type="checkbox">
+								<input ng-model="showAll" type="checkbox" title="Show/Hide inactive contacts">
 							</div>
 						</div>
 						<div class="col-lg-3">Sort by</div>
@@ -86,13 +95,13 @@
 							</select>
 						</div>
 						<div class="col-lg-3">Import</div>
-						<div class="col-lg-3">
-							<a class="btn btn-primary btn-sm" href="#/import"><span
+						<div class="col-lg-9">
+							<a class="btn btn-primary btn-sm" href="#/import" title="Import contacts"><span
 									class="glyphicon glyphicon-import"></span></a>
 						</div>
 						<div class="col-lg-3">Export</div>
-						<div class="col-lg-3">
-							<a class="btn btn-primary btn-sm" href="#/export"><span
+						<div class="col-lg-9">
+							<a class="btn btn-primary btn-sm" href="#/export" title="Export contacts"><span
 									class="glyphicon glyphicon-export"></span></a>
 						</div>
 					</div>
@@ -173,7 +182,7 @@
 						<div class="col-lg-offset-2 col-lg-4">
 							<button type="submit" class="btn btn-primary" ng-disabled="signin_form.$invalid">Sign in
 							</button>
-							<a href="#/signin">Sign up</a>
+							<a href="#/signup">Sign up</a>
 						</div>
 						<div class="col-lg-6 text-right">
 							<a href="rest/login/facebookAuthentication">
@@ -216,6 +225,7 @@
 <script src="js/controllers/importController.js"></script>
 <script src="js/controllers/appController.js"></script>
 <script src="js/controllers/homeController.js"></script>
+<script src="js/controllers/signUpController.js"></script>
 <script src="js/controllers/contactManagerController.js"></script>
 
 <!-- Directives -->

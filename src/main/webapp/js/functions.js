@@ -44,3 +44,9 @@ function sizeContent() {
 	$("#contacts").css("height", newHeight / 100 * 88 + "px");
 	/*$("#pageContent").css("height", newHeight-$(".pageHeader").height() + "px");*/
 }
+
+$(function (){
+	$('a').tooltip();
+	$('button').tooltip();
+	$('input').tooltip();
+});
