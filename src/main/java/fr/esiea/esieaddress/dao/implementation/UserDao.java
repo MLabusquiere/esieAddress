@@ -71,7 +71,7 @@ public class UserDao implements ICrudUserDao {
 	public User getOneByMail(String mail) throws DaoException {
 		final Collection<User> users = database.values();
 		for (User user : users) {
-			if (user.getMail() == mail)
+			if (user.getMail().equals(mail))
 				return user;
 		}
 		return null;
