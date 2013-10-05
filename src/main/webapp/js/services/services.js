@@ -8,12 +8,11 @@ var module = angular.module('esieAddress.services');
 module.factory('Contact', function ($resource) {
 	return $resource(path + '/contacts/:id/:param', {}, {
 		query: {method: 'GET', isArray: true},
-		get: {method: 'GET', params: {id: 'id'}},
+		get: {method: 'GET', params: {id: ':id'}},
 		save: {method: 'POST'},
-		update: {method: 'PUT',params: {id: 'id'}},
-        updateVisibility: {method: 'PUT',params: {param:'visibility'}},
-
-        remove: {method: 'DELETE', params: {id: 'id'}}
+		update: {method: 'PUT'},
+		updateVisibility: {method: 'PUT', params: {id: '@id', param: 'visibility'}},
+		remove: {method: 'DELETE', params: {id: 'id'}}
 	});
 });
 
