@@ -90,6 +90,20 @@ public class CrudContactCtrl {
 		crudService.save(contact);
 	}
 
+    /*@Secured("ROLE_USER")*/
+    @RequestMapping(value = "/{id}/visibility", method = RequestMethod.PUT, consumes = "application/json")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void edit(@RequestParam("id") String id, @RequestBody boolean visibility) throws ServiceException, DaoException {
+
+        //Permit to update the visibility of a client without have all informations
+        LOGGER.info("[Controller] Querying set visibility "+ visibility +" to contact : \"" + id);
+        Contact contact = crudService.getOne(id);
+        if(visibility != contact.isActif() )    {
+            contact.setActif(visibility);
+            crudService.save(contact);
+        }
+    }
+
 	/*@Secured("ROLE_USER")*/
 	@RequestMapping(value = "/{idContact}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
