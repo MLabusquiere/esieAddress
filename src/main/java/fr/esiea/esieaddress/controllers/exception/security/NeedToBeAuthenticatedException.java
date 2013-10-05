@@ -1,6 +1,7 @@
 package fr.esiea.esieaddress.controllers.exception.security;
 
 import fr.esiea.esieaddress.model.exception.RestException;
+import org.springframework.http.HttpStatus;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -25,5 +26,9 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class NeedToBeAuthenticatedException extends RestException {
-	//TODO
+
+    public NeedToBeAuthenticatedException() {
+        super(HttpStatus.UNAUTHORIZED.value(), null);
+    }
+
 }

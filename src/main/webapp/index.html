@@ -24,20 +24,21 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="esieAddress">
 <head>
-	<title>esieAddress</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>esieAddress</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- Bootstrap -->
-	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
-	<link href="css/bootstrap-switch.css" rel="stylesheet" media="screen">
-	<link href="css/style.css" rel="stylesheet" media="screen">
-	<link href="css/esieAddress.css" rel="stylesheet" media="screen">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-switch.css" rel="stylesheet" media="screen">
+    <link href="css/style.css" rel="stylesheet" media="screen">
+    <link href="css/esieAddress.css" rel="stylesheet" media="screen">
 
 </head>
 <body ng-cloak ng-controller="AppCtrl">
 
 <div class="container">
 
+<<<<<<< HEAD
 	<div class="row">
 		<div id="sidebar-left" class="col-lg-2 col-sm-2 collapse in" ng-controller="ContactListCtrl">
 			<div id="sidebar-header">
@@ -128,50 +129,93 @@
 
 		<div id="content" class="col-lg-10 col-sm-10" ng-view><h2>Content</h2></div>
 	</div>
+=======
+    <div class="row" >
+        <div id="sidebar-left" class="col-lg-2 col-sm-2 collapse in" ng-controller="ContactListCtrl">
+            <div id="sidebar-header">
+                <div id="controls">
+                    <div class="pull-left">
+                        <a class="btn btn-primary" href="#/contacts"><span class="glyphicon glyphicon-home"></span></a>
+                        <a class="btn btn-primary" href="#/new"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </div>
+
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-primary" data-toggle="collapse" data-target="#config"><span
+                                class="glyphicon glyphicon-cog"></span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="config" class="panel-collapse collapse">
+                    <h4 class="text-center">Settings</h4>
+
+                    <div class="row">
+                        <div class="col-lg-3">Display</div>
+                        <div class="btn-group col-lg-9">
+                            <button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'list'}"
+                                    ng-click="layout = 'list'">
+                                <span class="glyphicon glyphicon-list"></span>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    ng-class="{active: layout == 'th-list'}" ng-click="layout = 'th-list'">
+                                <span class="glyphicon glyphicon-th-list"></span>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'grid'}"
+                                    ng-click="layout = 'grid'">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </button>
+                        </div>
+                        <div class="col-lg-3">Hide/Show</div>
+                        <div class="col-lg-9" ng-click="showAll = !showAll">
+                            <div class="make-switch switch-small">
+                                <input ng-model="showAll" type="checkbox">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">Sort by</div>
+                        <div class="col-lg-9">
+                            <select class="form-control" ng-model="sort" ng-options="s.text for s in sorts">
+                            </select>
+                        </div>
+                        <div class="col-lg-3">Import</div>
+                        <div class="col-lg-3">
+                            <a class="btn btn-primary btn-sm" href="#/import"><span
+                                    class="glyphicon glyphicon-import"></span></a>
+                        </div>
+                        <div class="col-lg-3">Export</div>
+                        <div class="col-lg-3">
+                            <a class="btn btn-primary btn-sm" href="#/export"><span
+                                    class="glyphicon glyphicon-export"></span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
+            </div>
+
+            <div class="sidebar-nav">
+                <ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable" ng-show="layout == 'list'">
+                    <li ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
+                        ng-show="contact.actif == true || showAll == true">
+                        <a href="#/contacts/{{contact.id}}">{{contact.firstname}} <strong>{{contact.lastname |
+                            uppercase}}</strong></a>
+                    </li>
+                </ul>
+                <div ng-show="layout == 'th-list'">
+                    <span class="label">Thumbail list not implemented</span>
+                </div>
+                <div ng-show="layout == 'grid'">
+                    <span class="label">Grid not implemented</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="col-lg-10 col-sm-10" ng-view><h2>Content</h2></div>
+    </div>
+>>>>>>> 69b6b59b746749e9a55f01f3f01573bebe89bcaa
 </div>
-<!--
-<div modal="shouldOpenAuthModal" close="close()" options="opts" id="authenticationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header">
-		<form class="modal-form " ng-submit="connect()">
-
-			<fieldset>
-				<legend>Log In</legend>
-
-				<div class="control-group">
-					<div id="loginInfo" class="hide"><p class="text-error">Wrong username or password</p></div>
-
-					<label class="control-label" for="mail">mail : </label>
-
-					<div class="controls">
-						<input type="text" ng-model="login.mail" name="mail" id="mail" class="input-medium"
-							   placeholder="mail" required/>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="password">Password : </label>
-
-					<div class="controls">
-						<input type="password" ng-model="login.password" name="password" id="password"
-							   class="input-medium" placeholder="Password" required/>
-					</div>
-				</div>
-				<div class="form-actions">
-					<button class="btn btn-primary" type="submit">Log In <i class="icon-white icon-ok-sign"></i>
-					</button>
-				</div>
-			</fieldset>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-warning cancel" ng-click="closeAuthModal()">Cancel</button>
-		<h3>Sign up</h3>
-
-		<p>You do not already have an account? Sign up <a href="#/signin">here</a> !</p>
-	</div>
-</div>-->
-
 <!-- Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<<<<<<< HEAD
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -221,7 +265,67 @@
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
+=======
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Sign in</h4>
+            </div>
+            <div class="modal-body">
+                <form name="signin_form" class="form-horizontal" role="form" ng-submit="connect()" novalidate>
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+
+                        <div class="col-lg-10">
+                            <input name="mail" type="email" class="form-control" id="inputEmail1" placeholder="Email"
+                                   ng-model="login.mail" required>
+							<span class="text-danger"
+                                  ng-show="signin_form.email.$error.email">Invalid email address</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
+
+                        <div class="col-lg-10">
+                            <input type="password" class="form-control" id="inputPassword1" placeholder="Password"
+                                   ng-model="login.password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Remember me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p>
+                            <a href="rest/login/facebookAuthentication">
+                            Or <img src="img/fbconnect.png" alt="Connect with Facebook" />
+                            </a>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button type="submit" class="btn btn-primary" ng-disabled="signin_form.$invalid">Sign in
+                            </button>
+                            <a href="#/signin">Sign up</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+>>>>>>> 69b6b59b746749e9a55f01f3f01573bebe89bcaa
 </div>
+
+</body>
 <!-- /.modal -->
 
 <!-- Libs -->

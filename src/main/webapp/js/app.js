@@ -47,11 +47,12 @@ esieAddressApp.config(['$routeProvider', '$httpProvider', function ($routeProvid
 			}
 
 			if (status == 401) {
-				var deferred = $q.defer();
+                    var deferred = $q.defer();
 				var req = {
 					config: response.config,
 					deferred: deferred
 				};
+                console.log("Pushed in request401 " + req)
 				scope.requests401.push(req);
 				scope.$broadcast('event:loginRequired');
 				return deferred.promise;
