@@ -33,6 +33,12 @@ module.factory('Login', function ($resource) {
 	});
 });
 
+module.factory('Signup', function ($resource) {
+	return $resource('rest/users/', {}, {
+		save: {method: 'POST'}
+	});
+});
+
 module.factory('Logout', function ($resource) {
 	return $resource('rest/logout/', {}, {
 		save: {method: 'POST'}
