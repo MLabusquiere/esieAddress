@@ -12,17 +12,17 @@ module.factory('Contact', function ($resource) {
 		save: {method: 'POST'},
 		update: {method: 'PUT'},
 		updateVisibility: {method: 'PUT', params: {id: '@id', param: 'visibility',visibility:'@visibility'}},
-		remove: {method: 'DELETE', params: {id: 'id'}}
+		remove: {method: 'DELETE', params: {id: ':id'}}
 	});
 });
 
 module.factory('Address', function ($resource) {
 	return $resource(path + '/addresses/:id', {}, {
 		query: {method: 'GET', isArray: true},
-		get: {method: 'GET', params: {id: 'id'}},
+		get: {method: 'GET', params: {id: ':id'}},
 		save: {method: 'POST'},
-		update: {method: 'PUT', params: {id: 'id'}},
-		remove: {method: 'DELETE', params: {id: 'id'}}
+		update: {method: 'PUT', params: {id: ':id'}},
+		remove: {method: 'DELETE', params: {id: ':id'}}
 	});
 });
 
