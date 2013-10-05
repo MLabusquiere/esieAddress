@@ -15,7 +15,8 @@ var path = "rest";
 esieAddressApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 	$routeProvider.
 		/* Related Contacts Pages */
-		when('/contacts', {templateUrl: 'partials/home.html', controller: 'ContactListCtrl'}).
+		when('/contacts', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'}).
+		when('/manage', {templateUrl: 'partials/manager.html', controller: 'ContactManagerCtrl'}).
 		when('/contacts/:id', {templateUrl: 'partials/contact-detail.html', controller: 'ContactDetailCtrl'}).
 		when('/contacts/:id/edit', {templateUrl: 'partials/contact-form.html', controller: 'ContactFormCtrl'}).
 
