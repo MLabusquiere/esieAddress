@@ -23,6 +23,9 @@ package fr.esiea.esieaddress.controllers.login;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.types.User;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -121,7 +124,7 @@ public class FBLoggin {
 
 					LOGGER.info("Congratulation " + accesstoken);
 
-                       /*
+
                        //now we have the access token :)
                        //Great. Now we have the access token, I have used restfb to get the user details here
                        FacebookClient facebookClient = new DefaultFacebookClient(accesstoken);
@@ -129,7 +132,7 @@ public class FBLoggin {
                        //In this user object, you will have the details you want from Facebook,  Since we have    the  access token with us, can play around and see what more can be done
                        //CAME UP TO HERE AND WE KNOW THE USER HAS BEEN AUTHENTICATED BY FACEBOOK, LETS AUTHENTICATE HIM IN OUR APPLICATION
                        //NOW I WILL CALL MY doAutoLogin METHOD TO AUTHENTICATE THE USER IN MY SPRING SECURITY CONTEXT
-                       */
+
 				} else {
 					//failed
 					return;
