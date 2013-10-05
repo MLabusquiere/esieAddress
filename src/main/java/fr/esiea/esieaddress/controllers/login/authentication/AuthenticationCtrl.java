@@ -109,6 +109,6 @@ public class AuthenticationCtrl {
 				+ context.getAuthentication().getName().toString() + "\"");
 
 		if (context.getAuthentication() != null)
-			SecurityContextHolder.getContext().setAuthentication(null);
+			SecurityContextHolder.clearContext();
 	}
 }
