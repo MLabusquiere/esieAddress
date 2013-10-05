@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="page-header">
+		<h1>Contact manager</h1>
+	</div>
+
+	<div class="content">
+
+		<div>
+			<a data-toggle="modal" href="#modal" class="btn btn-primary btn-sm" ng-click="modal = 'delete'">Delete
+				<span class="glyphicon glyphicon-trash"></span></a>
+			<a class="btn btn-primary btn-sm" ng-click="showContact()">Visible
+				<span class="glyphicon glyphicon-eye-open"></span></a>
+			<a class="btn btn-primary btn-sm" ng-click="hideContact()">Hide
+				<span class="glyphicon glyphicon-eye-close"></span></a>
+		</div>
+
+		<table class="table table-striped">
+			<tr>
+				<th></th>
+				<th><a href="" ng-click="predicate = 'firstname'; reverse=false">First Name</a></th>
+				<th><a href="" ng-click="predicate = 'lastname'; reverse=false">Last Name</a></th>
+				<th>Categories</th>
+				<th><a href="" ng-click="predicate = 'actif'; reverse=false">Visible</a></th>
+			</tr>
+			<tr ng-repeat="contact in contacts | orderBy:predicate:reverse">
+				<td class="col-lg-1 text-center">
+					<input ng-model="contact.selected" type="checkbox">
+				</td>
+				<td>{{contact.firstname}}</td>
+				<td>{{contact.lastname}}</td>
+				<td><span class="label label-default" ng-repeat="category in contact.categories">{{category}}</span></td>
+				<td><span class="glyphicon glyphicon-{{contact.actif | checkmark}}"></span></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body" ng-show="modal == 'delete'">
+				<p>Are you sure you want to delete selected contacts?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="deleteContact()" ng-show="modal == 'delete'">Delete</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
