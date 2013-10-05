@@ -4,21 +4,44 @@
 	</div>
 
 	<div class="content">
-		<form role="form">
-			<div class="form-group">
-				<label for="inputEmail">Email address</label>
-				<input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+		<form name="signup_form" class="form-horizontal" novalidate ng-submit="signup()" role="form">
+
+			<div ng-class="{'has-error': signup_form.email.$invalid}" class="form-group">
+				<label class="col-lg-2 control-label" for="inputEmail">Email address</label>
+				<div class="col-lg-10">
+					<input type="email" name="email" class="form-control" id="inputEmail" placeholder="Enter email"
+					       ng-model="user.email" required>
+					<small class="text-danger" ng-show="signup_form.email.$error.email">This is not valid email.
+						Please input a valid email.
+					</small>
+				</div>
 			</div>
-			<div class="form-group">
-				<label for="inputPassword">Password</label>
-				<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+
+			<div ng-class="{'has-error': signup_form.password.$invalid}" class="form-group">
+				<label class="col-lg-2 control-label" for="inputPassword">Password</label>
+				<div class="col-lg-10">
+					<input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password"
+					       ng-model="user.password" required>
+				</div>
 			</div>
-			<div class="form-group">
-				<label for="inputPasswordConfirm">Password Confirmation</label>
-				<input type="password" class="form-control" id="inputPasswordConfirm"
-				       placeholder="Retype your password">
+
+			<div ng-class="{'has-error': signup_form.passwordConfirm.$invalid || user.password != passwordConfirm}"
+			     class="form-group">
+				<label class="col-lg-2 control-label" for="inputPasswordConfirm">Password Confirmation</label>
+				<div class="col-lg-10">
+					<input type="password" name="passwordConfirm" class="form-control" id="inputPasswordConfirm"
+					       placeholder="Retype your password" ng-model="passwordConfirm" required>
+					<small class="text-danger"
+					       ng-show="user.password != passwordConfirm && passwordConfirm != null">Passwords do not
+						match.
+					</small>
+				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+
+			<button type="submit" class="col-lg-offset-2 btn btn-primary"
+			        ng-disabled="signup_form.$invalid || user.password != passwordConfirm">
+				Submit
+			</button>
 		</form>
 	</div>
 </div>
