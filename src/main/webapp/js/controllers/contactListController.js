@@ -18,18 +18,19 @@ module.controller('ContactListCtrl', function ($scope, $location, Contact) {
 
 	$scope.contacts = [];
 
-	var loadContactList = function () {
+	loadContactList();
+
+	function loadContactList() {
 		console.log("Loading contact list");
 		Contact.query(function (data) {
 			$scope.contacts = data;
-			console.log("Contact list loaded successfully");
+			console.log("Contact list loaded successfully:", data);
 		}, function (error) {
 			console.log("Error " + error.status);
 			$location.path('/error/' + error.status);
 		});
 	}
 
-	loadContactList();
 
 	$scope.$on('updateContactList', function () {
 		console.log("Querying contact list update");

@@ -3,142 +3,130 @@
 /* Controllers */
 
 var module = angular.module('esieAddress.controllers');
-module.controller('AppCtrl', function ($rootScope,$route, $scope, $location, Login, Logout) {
+module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $location, Login, Logout) {
 
-    $scope.login = {};
+	$scope.login = {};
+	$scope.user = {};
+	$scope.logged = false;
 
-    //Permet de verifier après un rafraichissement si on est loggué
-    ping();
+	$('#loginInfo').hide();
 
-    $scope.opts = {
-        backdropFade: true,
-        dialogFade: true
-    };
+	//Permet de verifier après un rafraichissement si on est loggué
+	fetchUserData();
 
-    /**
-     * Ping server to figure out if user is already logged in.
-     */
-    function ping() {
-        //Default
-        $scope.logged = false;
+	/**
+	 * Ping server to figure out if user is already logged in.
+	 */
+	function fetchUserData() {
+		Login.get(
+			{},
+			function (data) {
+				$scope.user = data;
+				$scope.logged = true;
+				console.log("Fetched user: ", data);
+				$scope.$broadcast('event:loginConfirmed');
+			},
+			function (error) {
+				console.log("Login failed : Error", error.status);
+				$scope.logged = false;
+			}
+		);
+	}
 
-        Login.get({}, function (data, status) {
-                $scope.$broadcast('event:loginConfirmed');
-            }, function () {
-                console.info("404 is a proof than the user is not authenticated");
-            }
+	/*
+	 * Called when the authentication form is field
+	 */
+	$scope.connect = function () {
+		$scope.$broadcast('event:loginRequest');
+	};
 
-        );
-    }
+	/*
+	 * Permit to broadcast that a login  is required
+	 */
+	$scope.loginRequired = function () {
+		console.info("Send event login request");
+		$scope.$broadcast('event:loginRequired');
+	};
 
-    /*
-     * Called when the authentication form is field
-     */
-    $scope.connect = function () {
-        $scope.$broadcast('event:loginRequest');
-    };
+	/**
+	 * On 'logoutRequest' invoke logout on the server and broadcast 'event:loginRequired'.
+	 */
+	$scope.logout = function () {
+		Logout.get({}, function () {
+				$scope.logged = false;
+				console.info("logout success");
+				$scope.user = {};
+				$route.reload();
+			}
+			, function () {
+				console.info("Logout failed:", error.status);
+			})
+	};
 
-    $scope.openAuthModal = function () {
-        console.info("In open AuthModal");
-        $scope.shouldOpenAuthModal = true;
-        $('#loginModal').modal('show');
-    };
+	/**
+	 * Holds all the requests which failed due to 401 response.
+	 */
+	$rootScope.$on('event:loginRequired', function () {
+		console.log("Login required: isVisible");
+		if ($('#loginModal').is(":visible")) {
+			$('#loginInfo').show();
+		}
+		else {
+			$('#loginModal').modal('show');
+		}
+	});
 
-    $scope.closeAuthModal = function () {
-        console.info("In close AuthModal");
-        $('#loginModal').modal('hide');
-    };
-    /*
-     * Permit to broadcast that a login  is required
-     */
-    $scope.loginRequired = function () {
-        console.info("Send event login request");
-        $scope.$broadcast('event:loginRequired');
-    };
+	/**
+	 * On 'event:loginRequest' Ask the server with scope.login
+	 */
+	$scope.$on('event:loginRequest', function (event) {
+		console.info("Login requested", $scope.login);
+		Login.save(
+			$scope.login,
+			function (data) {
+				if (data != null) {
+					$scope.$broadcast('event:loginConfirmed');
+					fetchUserData();
+					$scope.login = {};
+				}
+			},
+			function (error) {
+				console.log("Login failed (the interceptor may not works):", error.status);
+				$('#loginInfo').show();
+			}
+		);
+	});
 
-    /*
-     * Set data when an user is connected
-     */
-    function connected() {
-        console.log("the user is connected");
-        $scope.logged = true;
-    }
+	/**
+	 * On 'event:loginConfirmed', resend all the 401 requests.
+	 */
+	$scope.$on('event:loginConfirmed', function () {
+		console.info("in login confirmed");
+		$('#loginModal').modal('hide');
+		var i, requests = $scope.requests401;
+		console.info("request length " + requests.length);
+		for (i = 0; i < requests.length; i++) {
+			retry(requests[i]);
+		}
+		$scope.requests401 = [];
+		$route.reload();
 
-    /**
-     * On 'logoutRequest' invoke logout on the server and broadcast 'event:loginRequired'.
-     */
-    $scope.logout = function () {
-        Logout.get({}, function () {
-                $scope.logged = false;
-                console.info("logout succes");
-            }
-            , function () {
-                console.info("logout error");
-            })
-    };
+		function retry(req) {
+			$http(req.config).then(function (response) {
+				req.deferred.resolve(response);
+			});
+		}
 
-    /**
-     * Holds all the requests which failed due to 401 response.
-     */
-    $scope.requests401 = [];
-    $scope.$on('event:loginRequired', function () {
-        if ($scope.shouldOpenAuthModal) {
-            $('#loginInfo').show();
-        }
+		//Handle the fact the the side bar is not in this scope
+//		$rootScope.$broadcast('updateContactList');
+	});
 
-        else {
-            $scope.openAuthModal();
-        }
-    });
-
-    /**
-     * On 'event:loginRequest' Ask the server with scope.login
-     */
-    $scope.$on('event:loginRequest', function (event) {
-        console.info($scope.login);
-        Login.save($scope.login, function (data) {
-            if (data != null)
-                $scope.$broadcast('event:loginConfirmed');
-
-        }, function (error) {
-            console.log("Login error if you are here the interceptor doesn't work");
-            //can't go here because of the intercepteur
-        });
-        $scope.login = {};
-
-    });
-
-    /**
-     * On 'event:loginConfirmed', resend all the 401 requests.
-     */
-    $scope.$on('event:loginConfirmed', function () {
-        $route.reload();
-        console.info("in login confirmed");
-        $scope.closeAuthModal();
-        connected();
-        var i, requests = $scope.requests401;
-        console.info("request length " + requests.length);
-        for (i = 0; i < requests.length; i++) {
-            retry(requests[i]);
-        }
-        $scope.requests401 = [];
-        $route.reload();
-
-        function retry(req) {
-            $http(req.config).then(function (response) {
-                req.deferred.resolve(response);
-            });
-        }
-        //Handle the fact the the side bar is not in this scope
-        $rootScope.$broadcast('updateContactList');
-    });
-
-    /**
-     * On 'event:accessForbidden' pop up a modal
-     */
-    $scope.$on('event:accessForbidden', function (event, Login) {
-        $scope.shouldOpenAccessForbiddenModal = true;
-        console.info("accesForbidden in appController")
-    });
+	/**
+	 * On 'event:accessForbidden' pop up a modal
+	 */
+	$scope.$on('event:accessForbidden', function (event, Login) {
+		$scope.shouldOpenAccessForbiddenModal = true;
+		console.info("accesForbidden in appController")
+	});
 
 });

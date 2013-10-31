@@ -32,46 +32,48 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 		console.log("Save function");
 		console.log($scope.newContact);
 		console.log($scope.addresses);
-		if ($scope.newContact.id == undefined) {
-			console.log("Creating new contact :");
-			$scope.newContact.addresses = $scope.addresses;
+		if ($scope.newContact) {
+			if ($scope.newContact.id == undefined) {
+				console.log("Creating new contact :");
+				$scope.newContact.addresses = $scope.addresses;
 
-            Contact.save($scope.newContact,
-				function (data) {
-					console.log("New contact created");
-					console.log(data);
-					$rootScope.$broadcast('updateContactList');
-				},
-				function (error) {
-					console.log("Error " + error.status);
-				}
-			);
-		}
-		else {
-			console.log("Updating contact " + $scope.newContact.id);
-			for (var i = 0; i < $scope.addresses.length; i++) {
-				console.log("Updating address");
-				console.log($scope.addresses[i]);
-				Address.update($scope.addresses[i],
+				Contact.save($scope.newContact,
 					function (data) {
-						console.log("Added address to contact");
+						console.log("New contact created");
 						console.log(data);
+						$rootScope.$broadcast('updateContactList');
 					},
 					function (error) {
-						console.log("Updating addresses : Error " + error.status);
+						console.log("Error " + error.status);
 					}
 				);
 			}
-			Contact.update($scope.newContact,
-				function (data) {
-					console.log("Contact information updated");
-					console.log(data);
-					$rootScope.$broadcast('updateContactList');
-				},
-				function (error) {
-					console.log("Updating contact info : Error " + error.status);
+			else {
+				console.log("Updating contact " + $scope.newContact.id);
+				for (var i = 0; i < $scope.addresses.length; i++) {
+					console.log("Updating address");
+					console.log($scope.addresses[i]);
+					Address.update($scope.addresses[i],
+						function (data) {
+							console.log("Added address to contact");
+							console.log(data);
+						},
+						function (error) {
+							console.log("Updating addresses : Error " + error.status);
+						}
+					);
 				}
-			);
+				Contact.update($scope.newContact,
+					function (data) {
+						console.log("Contact information updated");
+						console.log(data);
+						$rootScope.$broadcast('updateContactList');
+					},
+					function (error) {
+						console.log("Updating contact info : Error " + error.status);
+					}
+				);
+			}
 		}
 	};
 
@@ -79,17 +81,20 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 		var address = {};
 		address.street = "";
 		console.log("Adding address ");
-		$scope.addresses[$scope.addresses.length] = address;
+		$scope.addresses.push(address);
+		sizeContent();
 	};
 
 	$scope.deleteLastAddress = function () {
 		console.log("Deleting last address");
-		$scope.addresses.splice($scope.addresses.length - 1, 1);
+		$scope.addresses.pop();
+		sizeContent()
 	};
 
 	$scope.deleteAddress = function (index) {
 		console.log("Deleting address # " + index);
 		$scope.addresses.splice(index, 1);
+		sizeContent()
 	};
 
 	/*	$scope.days = new Array();
