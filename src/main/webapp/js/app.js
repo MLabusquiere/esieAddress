@@ -9,7 +9,17 @@ angular.module('esieAddress.services', ['ngResource']);
 angular.module('esieAddress.controllers', ['ngResource']);
 angular.module('esieAddress.filters', ['ngResource']);
 angular.module('esieAddress.directives', ['ngResource']);
-var esieAddressApp = angular.module('esieAddress', ['esieAddress.services', 'esieAddress.controllers', 'esieAddress.filters', 'esieAddress.directives', 'ui.bootstrap.dialog']);
+angular.module('esieAddress.interceptors', ['ngResource']);
+
+var esieAddressApp = angular.module('esieAddress', [
+	'esieAddress.services',
+	'esieAddress.controllers',
+	'esieAddress.filters',
+	'esieAddress.directives',
+	'esieAddress.interceptors',
+	'ui.bootstrap.dialog'
+]);
+
 var path = "rest";
 
 esieAddressApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
@@ -29,47 +39,8 @@ esieAddressApp.config(['$routeProvider', '$httpProvider', function ($routeProvid
 
 		otherwise({redirectTo: '/contacts'});
 
-	//Interceptor for error 401
-	var interceptor401_403 = ['$rootScope', '$q', function (scope, $q) {
-
-		scope.requests401 = [];
-
-		function success(response) {
-			return response;
-		}
-
-		function error(response) {
-			console.log("In the intercepter");
-			var status = response.status;
-			if (status == 403) {
-				console.info("403 detected");
-				scope.$broadcast('event:accessForbidden');
-				return;
-			}
-
-			if (status == 401) {
-                    var deferred = $q.defer();
-				var req = {
-					config: response.config,
-					deferred: deferred
-				};
-                console.log("Pushed in request401 " + req)
-				scope.requests401.push(req);
-				scope.$broadcast('event:loginRequired');
-				return deferred.promise;
-			}
-			// otherwise
-			return $q.reject(response);
-
-		}
-
-		return function (promise) {
-			return promise.then(success, error);
-		}
-
-	}];
 
 	//Push Interceptor in the http provider
-	$httpProvider.responseInterceptors.push(interceptor401_403);
+	$httpProvider.responseInterceptors.push('interceptor401_403');
 }]);
 

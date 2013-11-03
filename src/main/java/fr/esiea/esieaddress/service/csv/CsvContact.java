@@ -31,7 +31,6 @@ public class CsvContact {
 	private String email;
 	private String phone;
 	private boolean actif;
-	private String numero;
 	private String street;
 	private String postalCode;
 	private String city;
@@ -103,14 +102,6 @@ public class CsvContact {
 		this.actif = actif;
 	}
 
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
 	public String getStreet() {
 		return street;
 	}
@@ -137,7 +128,6 @@ public class CsvContact {
 				", email='" + email + '\'' +
 				", dateOfBirth=" + dateOfBirth +
 				", actif=" + actif +
-				", numero='" + numero + '\'' +
 				", street='" + street + '\'' +
 				", postalCode='" + postalCode + '\'' +
 				", city='" + city + '\'' +

@@ -41,6 +41,7 @@ function sizeContent() {
 	 console.log($("#sidebar-header").height());*/
 	$("#sidebar-left").css("height", newHeight + "px");
 	$("#content").css("height", newHeight + "px");
+	$("#pageContent").css("height", newHeight-200 + "px");
 	$("#contacts").css("height", newHeight / 100 * 88 + "px");
 	/*$("#pageContent").css("height", newHeight-$(".pageHeader").height() + "px");*/
 }

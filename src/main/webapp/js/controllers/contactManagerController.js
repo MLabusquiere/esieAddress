@@ -40,23 +40,18 @@ module.controller('ContactManagerCtrl', function ($rootScope, $location, $scope,
 	}
 
 	$scope.contactVisibility = function(action) {
-		var visibility = {visible: false};
 		for (var i = 0; i < $scope.contacts.length; i++) {
 			if($scope.contacts[i].selected == true){
+				$scope.contacts[i].actif = false;
 				if(action == "show"){
-					visibility.visible = true;
+					$scope.contacts[i].actif = true;
 				}
-				Contact.updateVisibility({
-                        id: $scope.contacts[i].id,
-                        visibility:visibility.visible
-                    }
+				$scope.contacts[i].selected = undefined;
+				Contact.updateVisibility({id: $scope.contacts[i].id, visibility:$scope.contacts[i].actif}
 				, function () {
 					$rootScope.$broadcast('updateContactList');
-					$scope.contacts[i].actif = visible;
-					$scope.contacts[i].selected = undefined;
 				}, function (error) {
 					console.log(error);
-//					$location.path('/error/' + error.status);
 				});
 			}
 		}

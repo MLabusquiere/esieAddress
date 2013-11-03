@@ -3,6 +3,7 @@
 /* Controllers */
 
 var module = angular.module('esieAddress.controllers');
+
 module.controller('AppCtrl', function ($rootScope, $scope,$route,$location, Login, Logout) {
 
     $scope.login = {};

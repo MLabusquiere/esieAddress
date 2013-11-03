@@ -28,7 +28,6 @@ import fr.esiea.esieaddress.model.Model;
 public class Address extends Model {
 
 	private String label;
-	private String number;
 	@Facebook
 	private String street;
 	@Facebook("zip")
@@ -47,14 +46,6 @@ public class Address extends Model {
 
 	public void setLabel(String label) {
 		this.label = label;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public String getStreet() {
@@ -93,7 +84,6 @@ public class Address extends Model {
 	public String toString() {
 		return "Address{" +
 				"label='" + label + '\'' +
-				", number='" + number + '\'' +
 				", street='" + street + '\'' +
 				", postalCode='" + postalCode + '\'' +
 				", city='" + city + '\'' +
