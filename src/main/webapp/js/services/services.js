@@ -44,3 +44,9 @@ module.factory('Logout', function ($resource) {
 		save: {method: 'POST'}
 	});
 });
+
+module.factory('Facebook', function ($resource) {
+	return $resource('rest/facebook/', {}, {
+		synchronize: {method: 'GET', isArray: true}
+	});
+});

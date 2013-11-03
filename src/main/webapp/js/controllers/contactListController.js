@@ -44,4 +44,17 @@ module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Co
 		loadContactList();
 	});
 
+	$scope.synchronizeFacebook = function() {
+		Facebook.synchronizeFacebook(
+			{},
+			{},
+			function(data) {
+				$scope.contacts = data;
+			},
+			function(error) {
+				console.log("Failed to synchronize contacts with Facebook: Error", error.status, error.data);
+			}
+		);
+	};
+
 });

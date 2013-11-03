@@ -96,13 +96,20 @@
 						</div>
 						<div class="col-lg-3">Import</div>
 						<div class="col-lg-9">
-							<a class="btn btn-primary btn-sm" href="#/import" title="Import contacts"><span
-									class="glyphicon glyphicon-import"></span></a>
+							<a class="btn btn-primary btn-sm" href="#/import" title="Import contacts"><span class="glyphicon glyphicon-import"></span></a>
 						</div>
 						<div class="col-lg-3">Export</div>
 						<div class="col-lg-9">
-							<a class="btn btn-primary btn-sm" href="#/export" title="Export contacts"><span
-									class="glyphicon glyphicon-export"></span></a>
+							<a class="btn btn-primary btn-sm" href="#/export" title="Export contacts"><span class="glyphicon glyphicon-export"></span></a>
+						</div>
+						<div class="col-lg-3" ng-show="user.accountFacebook">Facebook</div>
+						<div class="col-lg-9" ng-show="user.accountFacebook">
+							<a class="btn btn-primary btn-facebook btn-sm" ng-click="synchronizeFacebook()" title="Export contacts">Synchronize</a>
+						</div>
+
+						<div class="col-lg-3">Disconnect</div>
+						<div class="col-lg-9">
+							<a class="btn btn-primary btn-sm" ng-click="logout()" title="Disconnect"><span class="glyphicon glyphicon-log-out"></span></a>
 						</div>
 					</div>
 				</div>
