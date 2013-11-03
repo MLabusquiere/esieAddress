@@ -27,26 +27,26 @@ module.factory('Address', function ($resource) {
 });
 
 module.factory('Login', function ($resource) {
-	return $resource('rest/login/', {}, {
+	return $resource('rest/login', {}, {
 		get: {method: 'GET'},
 		save: {method: 'POST'}
 	});
 });
 
 module.factory('Signup', function ($resource) {
-	return $resource('rest/users/', {}, {
+	return $resource('rest/users', {}, {
 		save: {method: 'POST'}
 	});
 });
 
 module.factory('Logout', function ($resource) {
-	return $resource('rest/logout/', {}, {
+	return $resource('rest/logout', {}, {
 		save: {method: 'POST'}
 	});
 });
 
 module.factory('Facebook', function ($resource) {
-	return $resource('rest/facebook/', {}, {
+	return $resource('rest/facebook', {}, {
 		synchronize: {method: 'GET', isArray: true}
 	});
 });

@@ -56,7 +56,7 @@ module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $locat
 				$scope.logged = false;
 				console.info("logout success");
 				$scope.user = {};
-				$route.reload();
+				$location.path("/");
 			}
 			, function () {
 				console.info("Logout failed:", error.status);
@@ -67,12 +67,14 @@ module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $locat
 	 * Holds all the requests which failed due to 401 response.
 	 */
 	$rootScope.$on('event:loginRequired', function () {
-		console.log("Login required: isVisible");
-		if ($('#loginModal').is(":visible")) {
-			$('#loginInfo').show();
-		}
-		else {
-			$('#loginModal').modal('show');
+		console.log("Login required");
+		if($route.current.$$route.controller != "SignUpCtrl") {
+			if ($('#loginModal').is(":visible")) {
+				$('#loginInfo').show();
+			}
+			else {
+				$('#loginModal').modal('show');
+			}
 		}
 	});
 
