@@ -66,9 +66,7 @@ public class FBLoggin {
 	@RequestMapping(value = "/facebookRedirect", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public void getFacebookLogin(@RequestParam("code") String code) throws ServiceException, DaoException {
-		/**
-		 * TODO Sheety code change it
-		 */
+
 		LOGGER.info("Receive a request from facebook");
         fbAuth.handleFacebookRedirect(code);
 	}

@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,8 @@ public class CrudContactCtrl {
 	@Qualifier("contactValidationDecorator")
 	ICrudService<Contact> crudService;
 
-	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @Secured("ROLE_USER")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public void getAll(HttpServletResponse servletResponse) throws ServiceException, DaoException, IOException {
 
@@ -60,7 +62,8 @@ public class CrudContactCtrl {
 		objectMapper.writerWithView(ContactView.LightView.class).writeValue(servletResponse.getOutputStream(), crudService.getAll());
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    @Secured("ROLE_USER")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Contact getById(@PathVariable("id") String contactId) throws ServiceException, DaoException {
 
@@ -68,7 +71,8 @@ public class CrudContactCtrl {
 		return crudService.getOne(contactId);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+    @Secured("ROLE_USER")
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody Contact contact) throws ServiceException, DaoException {
 
@@ -76,7 +80,8 @@ public class CrudContactCtrl {
 		crudService.insert(contact);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.PUT, consumes = "application/json")
+    @Secured("ROLE_USER")
+    @RequestMapping(value = "", method = RequestMethod.PUT, consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public void edit(@RequestBody Contact contact) throws ServiceException, DaoException {
 
@@ -84,7 +89,8 @@ public class CrudContactCtrl {
 		crudService.save(contact);
 	}
 
-	@RequestMapping(value = "/{idContact}/visibility/{visibility}", method = RequestMethod.PUT, consumes = "application/json")
+    @Secured("ROLE_USER")
+    @RequestMapping(value = "/{idContact}/visibility/{visibility}", method = RequestMethod.PUT, consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public void edit(@PathVariable String idContact,@PathVariable Boolean visibility) throws ServiceException,
 			DaoException {
@@ -97,7 +103,8 @@ public class CrudContactCtrl {
 		}
 	}
 
-	@RequestMapping(value = "/{idContact}", method = RequestMethod.DELETE)
+    @Secured("ROLE_USER")
+    @RequestMapping(value = "/{idContact}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable String idContact) throws ServiceException, DaoException {
 

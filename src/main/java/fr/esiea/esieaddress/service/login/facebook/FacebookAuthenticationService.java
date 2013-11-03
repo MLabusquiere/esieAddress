@@ -52,27 +52,12 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
 
     private static final Logger LOGGER = Logger.getLogger(FacebookAuthenticationService.class);
 
-    @Value("${controller.facebook.app.id}")
-    public String FACEBOOK_APP_ID;
-    @Value("${controller.facebook.redirect.url}")
-    public String FACEBOOK_REDIRECT_URL;
-    @Value("${controller.facebook.exchange.key}")
-    public String FACEBOOK_EXCHANGE_KEY;
-    @Value("${controller.facebook.secret.key}")
-    public String FACEBOOK_SECRET_KEY;
 
-    private final String redirectUrl = "https://www.facebook.com/dialog/oauth/?"
-            + "client_id=" + FACEBOOK_APP_ID
-            + "&redirect_uri=" + FACEBOOK_REDIRECT_URL
-            + "&scope=email,publish_stream,user_about_me,friends_about_me"
-            + "&state=" + FACEBOOK_EXCHANGE_KEY
-            + "&display=page"
-            + "&response_type=code";
 
-    private final String postUrlBase = "https://graph.facebook.com/oauth/access_token?"
-            + "client_id=" + FACEBOOK_APP_ID
-            + "&redirect_uri=" + FACEBOOK_REDIRECT_URL
-            + "&client_secret=" + FACEBOOK_SECRET_KEY; //Add the cade at the end
+    @Value("${controller.facebook.redirect_url}")
+    private String redirectUrl;
+    @Value("${controller.facebook.base_post_url}")
+    private String postUrlBase ;
 
     @Autowired
     ICrudUserDao userDao;
@@ -101,6 +86,9 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
     }
 
     private String getAccessToken(String code) {
+        /**
+         * TODO Sheety code change it
+         */
         if (!code.isEmpty()) {
             //If we received a valid code, we can continue to the next step
             //Next we want to get the access_token from Facebook using the code we got,
@@ -110,7 +98,8 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
             // Create an instance of HttpClient.
             HttpClient client = new HttpClient();
             // Create a method instance.
-            GetMethod method = new GetMethod(postUrlBase.concat( "&code=" + code));
+            String url = postUrlBase.concat("&code=" + code);
+            GetMethod method = new GetMethod(url);
             // Provide custom retry handler is necessary
             method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
                     new DefaultHttpMethodRetryHandler(3, false));
@@ -121,8 +110,9 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
                     LOGGER.error("Method failed: " + method.getStatusLine());
                 }
                 // Read the response body.
+                LOGGER.info("token lenght: " +method.getResponseBody().length);
                 String responseBodyString = String.valueOf( method.getResponseBody());
-
+                LOGGER.info("token : " +responseBodyString);
                 if (responseBodyString.contains("access_token")) {
                     //success
                     String[] mainResponseArray = responseBodyString.split("&");
