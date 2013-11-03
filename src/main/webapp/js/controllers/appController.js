@@ -56,6 +56,7 @@ module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $locat
 				$scope.logged = false;
 				console.info("logout success");
 				$scope.user = {};
+				$rootScope.$broadcast('updateContactList');
 				$location.path("/");
 			}
 			, function () {

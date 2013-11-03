@@ -43,6 +43,7 @@ module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Co
 
 	$scope.$on('updateContactList', function () {
 		console.log("Querying contact list update");
+		$scope.contacts = [];
 		loadContactList();
 	});
 
