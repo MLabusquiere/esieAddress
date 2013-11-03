@@ -107,7 +107,9 @@
 					</div>
 				</div>
 
-				<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
+				<div id="search">
+					<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
+				</div>
 			</div>
 			<div class="sidebar-nav">
 				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable">
@@ -134,7 +136,7 @@
 			</div>
 		</div>
 
-		<div id="content" class="col-lg-10 col-sm-10" ng-view><h2>Content</h2></div>
+		<div id="content" class="col-lg-10 col-sm-10" ng-view></div>
 	</div>
 
 </div>

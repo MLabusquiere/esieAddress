@@ -17,11 +17,11 @@ module.factory('Contact', function ($resource) {
 });
 
 module.factory('Address', function ($resource) {
-	return $resource(path + '/addresses/:id', {}, {
+	return $resource(path + '/addresses/:contactid', {}, {
 		query: {method: 'GET', isArray: true},
 		get: {method: 'GET', params: {id: ':id'}},
 		save: {method: 'POST'},
-		update: {method: 'PUT', params: {id: ':id'}},
+		update: {method: 'PUT', params: {contactid: ':contactid', id: ':id', baseLabel: ':label'}},
 		remove: {method: 'DELETE', params: {id: ':id'}}
 	});
 });

@@ -49,25 +49,13 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 				);
 			}
 			else {
-				console.log("Updating contact " + $scope.newContact.id);
-				for (var i = 0; i < $scope.addresses.length; i++) {
-					console.log("Updating address");
-					console.log($scope.addresses[i]);
-					Address.update($scope.addresses[i],
-						function (data) {
-							console.log("Added address to contact");
-							console.log(data);
-						},
-						function (error) {
-							console.log("Updating addresses : Error " + error.status);
-						}
-					);
-				}
-				Contact.update($scope.newContact,
+				console.log("Updating contact ", $scope.newContact.id);
+				Contact.update(
+					$scope.newContact,
 					function (data) {
-						console.log("Contact information updated");
-						console.log(data);
+						console.log("Contact information updated", data);
 						$rootScope.$broadcast('updateContactList');
+						$location.path("contacts/"+$routeParams.id);
 					},
 					function (error) {
 						console.log("Updating contact info : Error " + error.status);
@@ -96,22 +84,5 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 		$scope.addresses.splice(index, 1);
 		sizeContent()
 	};
-
-	/*	$scope.days = new Array();
-	 $scope.months = new Array();
-	 $scope.years = new Array();
-
-	 for(var i = 0; i<31; i++){
-	 $scope.days[i] = (i+1);
-	 }
-
-	 for(i = 0; i<12; i++){
-	 $scope.months[i] = (i+1);
-	 }
-
-	 for(i = 0; i<120; i++){
-	 var date = new Date().getFullYear();
-	 $scope.years[i] = (date-i);
-	 }*/
 
 });

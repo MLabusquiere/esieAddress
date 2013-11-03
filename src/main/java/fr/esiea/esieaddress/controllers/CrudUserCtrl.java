@@ -47,7 +47,7 @@ public class CrudUserCtrl {
     @Qualifier("userCrudService")
     ICrudUserService crudService;
 
-    private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);
+    private final static Logger LOGGER = Logger.getLogger(CrudUserCtrl.class);
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     @ResponseStatus(HttpStatus.CREATED)
