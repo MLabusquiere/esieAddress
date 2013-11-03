@@ -129,6 +129,8 @@ public class FBLoggin {
                        //Great. Now we have the access token, I have used restfb to get the user details here
                        FacebookClient facebookClient = new DefaultFacebookClient(accesstoken);
                        User user = facebookClient.fetchObject("me", User.class);
+
+
                        //In this user object, you will have the details you want from Facebook,  Since we have    the  access token with us, can play around and see what more can be done
                        //CAME UP TO HERE AND WE KNOW THE USER HAS BEEN AUTHENTICATED BY FACEBOOK, LETS AUTHENTICATE HIM IN OUR APPLICATION
                        //NOW I WILL CALL MY doAutoLogin METHOD TO AUTHENTICATE THE USER IN MY SPRING SECURITY CONTEXT

@@ -1,6 +1,7 @@
-package fr.esiea.esieaddress.controllers.exception.security;
+package fr.esiea.esieaddress.service.exception.security;
 
 import fr.esiea.esieaddress.model.exception.RestException;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -25,10 +26,9 @@ import org.springframework.http.HttpStatus;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class NeedToBeAuthenticatedException extends RestException {
+public class NotConnectedException extends ServiceException {
 
-    public NeedToBeAuthenticatedException() {
-        super(HttpStatus.UNAUTHORIZED.value(), null);
+    public NotConnectedException() {
+        super(HttpStatus.NOT_FOUND.value(),null);
     }
-
 }

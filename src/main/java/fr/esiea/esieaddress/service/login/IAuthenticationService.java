@@ -1,7 +1,10 @@
-package fr.esiea.esieaddress.controllers.exception.security;
+package fr.esiea.esieaddress.service.login;
 
-import fr.esiea.esieaddress.model.exception.RestException;
-import org.springframework.http.HttpStatus;
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.model.user.User;
+import fr.esiea.esieaddress.service.exception.ServiceException;
+import fr.esiea.esieaddress.service.exception.security.NotConnectedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -25,9 +28,8 @@ import org.springframework.http.HttpStatus;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class NotConnectedException extends RestException {
-
-    public NotConnectedException() {
-        super(HttpStatus.NOT_FOUND.value(),null);
-    }
+public interface IAuthenticationService {
+    void login(UsernamePasswordAuthenticationToken token) throws ServiceException, DaoException;
+    User getCurrentAccount() throws ServiceException, DaoException;
+    void logout() throws ServiceException, DaoException;
 }

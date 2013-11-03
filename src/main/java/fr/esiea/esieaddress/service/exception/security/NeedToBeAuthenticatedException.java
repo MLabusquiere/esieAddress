@@ -1,14 +1,7 @@
-package fr.esiea.esieaddress.controllers;
+package fr.esiea.esieaddress.service.exception.security;
 
-import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.service.exception.ServiceException;
-import org.apache.log4j.Logger;
+import fr.esiea.esieaddress.model.exception.RestException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -32,15 +25,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-@Controller
-@RequestMapping("/test")
-public class TestController {
-	private static final Logger LOGGER = Logger.getLogger(TestController.class);
+public class NeedToBeAuthenticatedException extends RestException {
 
-	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void addAddress() throws ServiceException, DaoException {
-		LOGGER.info("You are autentified");
-	}
+    public NeedToBeAuthenticatedException() {
+        super(HttpStatus.UNAUTHORIZED.value(), null);
+    }
+
 }

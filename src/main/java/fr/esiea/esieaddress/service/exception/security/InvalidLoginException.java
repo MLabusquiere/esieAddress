@@ -1,6 +1,7 @@
-package fr.esiea.esieaddress.controllers.exception;
+package fr.esiea.esieaddress.service.exception.security;
 
-import fr.esiea.esieaddress.model.exception.RestException;
+import fr.esiea.esieaddress.service.exception.ServiceException;
+import org.springframework.http.HttpStatus;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -24,8 +25,10 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class NotUniqueEmailException extends RestException {
-    public NotUniqueEmailException() {
-        super(400, "This email already exist");
+public class InvalidLoginException extends ServiceException {
+
+    public InvalidLoginException() {
+        super(HttpStatus.UNAUTHORIZED.value(), 0);
     }
+
 }

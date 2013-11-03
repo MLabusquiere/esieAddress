@@ -1,10 +1,9 @@
-package fr.esiea.esieaddress.controllers;
+package fr.esiea.esieaddress.controllers.crud;
 
-import fr.esiea.esieaddress.controllers.exception.NotUniqueEmailException;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.user.User;
+import fr.esiea.esieaddress.model.contact.Address;
+import fr.esiea.esieaddress.model.contact.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
-import fr.esiea.esieaddress.service.crud.ICrudUserService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,34 +35,21 @@ import org.springframework.web.bind.annotation.*;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 @Controller
-@RequestMapping("/users")
-public class CrudUserCtrl {
+@RequestMapping("/addresses")
+public class CrudAddressCtrl {
 
-    @Autowired
-    @Qualifier("userValidationDecorator")
-    ICrudService<User> crudValidationService;
+	@Autowired
+	@Qualifier("contactValidationDecorator")
+	ICrudService<Contact> crudService;
 
-    @Autowired
-    @Qualifier("userCrudService")
-    ICrudUserService crudService;
+	private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);
 
-    private final static Logger LOGGER = Logger.getLogger(CrudAddressCtrl.class);
-
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void login(@RequestBody User user) throws ServiceException, DaoException, NotUniqueEmailException {
-
-        LOGGER.info("[Controller] Querying to create new user : " + user.toString() + "\"");
-        if(checkUniqueEmail(user.getMail()))
-            crudValidationService.insert(user);
-        else
-            throw new NotUniqueEmailException();
-
-    }
-
-    private boolean checkUniqueEmail(String mail) throws ServiceException, DaoException {
-        return null == crudService.getOneByMail(mail);
-    }
-
-
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void addAddress(@RequestParam String id, @RequestParam String baseLabel, @RequestBody Address address) throws ServiceException, DaoException {
+		LOGGER.info("[Controller] Querying to edit addresses of the contact with id : \"" + id + "\"");
+		Contact contact = crudService.getOne(id);
+		contact.addAddress(address);
+	}
 }

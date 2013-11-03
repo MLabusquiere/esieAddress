@@ -1,6 +1,6 @@
 package fr.esiea.esieaddress.csv;
 
-import fr.esiea.esieaddress.service.validation.csv.CsvService;
+import fr.esiea.esieaddress.service.csv.CsvService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;

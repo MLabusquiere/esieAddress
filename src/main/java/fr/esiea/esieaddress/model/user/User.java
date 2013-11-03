@@ -29,8 +29,9 @@ public class User extends Model {
 	private String mail;
 	private String password;
 	private Profile profile = Profile.USER;
+    private boolean accountFacebook = false;
 
-	public String getMail() {
+    public String getMail() {
 		return mail;
 	}
 
@@ -53,4 +54,12 @@ public class User extends Model {
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
+
+    public boolean isAccountFacebook() {
+        return accountFacebook;
+    }
+
+    public void setAccountFacebook(boolean accountFacebook) {
+        this.accountFacebook = accountFacebook;
+    }
 }

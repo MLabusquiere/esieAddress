@@ -1,24 +1,19 @@
 package fr.esiea.esieaddress.controllers.login.authentication;
 
-import fr.esiea.esieaddress.controllers.exception.security.InvalidLoginException;
-import fr.esiea.esieaddress.controllers.exception.security.NeedToBeAuthenticatedException;
-import fr.esiea.esieaddress.controllers.exception.security.NotConnectedException;
+import fr.esiea.esieaddress.service.exception.security.InvalidLoginException;
+import fr.esiea.esieaddress.service.exception.security.NeedToBeAuthenticatedException;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.user.User;
-import fr.esiea.esieaddress.service.crud.ICrudUserService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
+import fr.esiea.esieaddress.service.login.IAuthenticationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -45,70 +40,42 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping()
 public class AuthenticationCtrl {
-	@Autowired
-	@Qualifier("userCrudService")
-	private ICrudUserService userService;
 
-	@Autowired
-	@Qualifier(value = "authenticationManager")
-	AuthenticationManager authenticationManager;
+    public static final String FACEBOOK_AUTHENTICATION_URL = "rest/login/authenticationFacebook";
 
-	private static final Logger LOGGER = Logger.getLogger(AuthenticationCtrl.class);
+    @Autowired
+    private IAuthenticationService authService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	public void login(@RequestBody User userToLog) throws InvalidLoginException {
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationCtrl.class);
 
-		LOGGER.info("[Controller] Querying to log in User \"" + userToLog.toString() + "\"");
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public void login(@RequestBody User user, HttpServletResponse response) throws ServiceException, DaoException {
 
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userToLog.getMail(), userToLog.getPassword());
+        LOGGER.info("[Controller] Querying to log in User \"" + user.toString() + "\"");
 
-		try {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword());
+        authService.login(token);
 
-			Authentication auth = authenticationManager.authenticate(token);
-			SecurityContextHolder.getContext().setAuthentication(auth);
-		} catch (BadCredentialsException ex) {
-			throw new InvalidLoginException();
-		}
-	}
+    }
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	public User currentAccount() throws DaoException, NotConnectedException {
-		LOGGER.info("[Controller] Querying to get User connected in User");
-		//TODO refaire ce code
-		// We send a 204 error /!\
-		Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public User currentAccount() throws DaoException, ServiceException {
 
-		if (!(details instanceof String))
-			throw new NotConnectedException();
-		String id = (String) details;
-		if (id.equals("anonymousUser"))
-			throw new NotConnectedException();
-		final User userConnected;
-		try {
-			userConnected = userService.getOne(id);
-		} catch (ServiceException e) {
-			throw new NotConnectedException();
-		}
+        LOGGER.info("[Controller] Querying to get User connected");
 
-		LOGGER.info("[Controller] Querying get the current account " + userConnected);
-		return userConnected;
-	}
+        return authService.getCurrentAccount();
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	@ResponseBody
-	public void logout() throws InvalidLoginException, NeedToBeAuthenticatedException, DaoException {
-		//Should may override spring security logout
+    }
 
-		SecurityContext context = SecurityContextHolder.getContext();
-
-		LOGGER.info("[Controller] Querying to log out User : \""
-				+ context.getAuthentication().getName().toString() + "\"");
-
-		if (context.getAuthentication() != null)
-			SecurityContextHolder.clearContext();
-	}
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @ResponseBody
+    public void logout() throws ServiceException, DaoException {
+        //Should may override spring security logout
+        LOGGER.info("[Controller] Logout request");
+        authService.logout();
+    }
 }

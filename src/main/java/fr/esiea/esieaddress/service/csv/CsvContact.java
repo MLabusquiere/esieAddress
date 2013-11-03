@@ -1,4 +1,4 @@
-package fr.esiea.esieaddress.service.validation.csv;
+package fr.esiea.esieaddress.service.csv;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs

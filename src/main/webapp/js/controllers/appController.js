@@ -3,7 +3,7 @@
 /* Controllers */
 
 var module = angular.module('esieAddress.controllers');
-module.controller('AppCtrl', function ($rootScope,$route, $scope, $location, Login, Logout) {
+module.controller('AppCtrl', function ($rootScope, $scope,$route,$location, Login, Logout) {
 
     $scope.login = {};
 
@@ -112,7 +112,6 @@ module.controller('AppCtrl', function ($rootScope,$route, $scope, $location, Log
      * On 'event:loginConfirmed', resend all the 401 requests.
      */
     $scope.$on('event:loginConfirmed', function () {
-        $route.reload();
         console.info("in login confirmed");
         $scope.closeAuthModal();
         connected();
@@ -122,15 +121,15 @@ module.controller('AppCtrl', function ($rootScope,$route, $scope, $location, Log
             retry(requests[i]);
         }
         $scope.requests401 = [];
-        $route.reload();
 
         function retry(req) {
             $http(req.config).then(function (response) {
                 req.deferred.resolve(response);
             });
         }
+        //$scope.$broadcast('updateContactList');
+        $route.reload();
         //Handle the fact the the side bar is not in this scope
-        $rootScope.$broadcast('updateContactList');
     });
 
     /**
