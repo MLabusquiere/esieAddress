@@ -5,6 +5,7 @@ import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.exception.security.NotConnectedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -29,7 +30,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface IAuthenticationService {
-    void login(UsernamePasswordAuthenticationToken token) throws ServiceException, DaoException;
+    void login(Authentication token) throws ServiceException, DaoException;
     User getCurrentAccount() throws ServiceException, DaoException;
     void logout() throws ServiceException, DaoException;
 }

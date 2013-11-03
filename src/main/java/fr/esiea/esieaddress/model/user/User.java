@@ -1,5 +1,6 @@
 package fr.esiea.esieaddress.model.user;
 
+import com.restfb.Facebook;
 import fr.esiea.esieaddress.model.Model;
 import fr.esiea.esieaddress.model.security.Profile;
 
@@ -26,6 +27,7 @@ import fr.esiea.esieaddress.model.security.Profile;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class User extends Model {
+    @Facebook("email")
 	private String mail;
 	private String password;
 	private Profile profile = Profile.USER;

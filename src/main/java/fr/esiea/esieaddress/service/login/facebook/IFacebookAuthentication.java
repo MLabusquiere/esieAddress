@@ -1,6 +1,7 @@
-package fr.esiea.esieaddress.controllers.login;
+package fr.esiea.esieaddress.service.login.facebook;
 
-import org.springframework.beans.factory.annotation.Value;
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -24,18 +25,9 @@ import org.springframework.beans.factory.annotation.Value;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+public interface IFacebookAuthentication {
 
-public class FacebookConst {
-	/*
-	 * Useful because @Value not working in @Controller
-	 * TODO improve this solution
-	 */
-	@Value("${controller.facebook.app.id}")
-	public String FACEBOOK_APP_ID;
-	@Value("${controller.facebook.redirect.url}")
-	public String FACEBOOK_REDIRECT_URL;
-	@Value("${controller.facebook.exchange.key}")
-	public String FACEBOOK_EXCHANGE_KEY;
-	@Value("${controller.facebook.secret.key}")
-	public String FACEBOOK_SECRET_KEY;
+    String getRedirectUrl();
+
+    void handleFacebookRedirect(String code) throws DaoException, ServiceException;
 }

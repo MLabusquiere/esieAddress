@@ -52,7 +52,7 @@ public class AuthenticationService implements IAuthenticationService {
     @Qualifier(value = "authenticationManager")
     AuthenticationManager authenticationManager;
 
-    public void login(UsernamePasswordAuthenticationToken token) throws ServiceException {
+    public void login(Authentication token) throws ServiceException {
         try {
 
             Authentication auth = authenticationManager.authenticate(token);
