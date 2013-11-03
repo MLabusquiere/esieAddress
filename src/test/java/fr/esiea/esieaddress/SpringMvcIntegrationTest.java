@@ -94,7 +94,7 @@ public class SpringMvcIntegrationTest {
 
 		this.mockMvc.perform(delete("/contacts/id10").accept(APPLICATION_JSON))
 				//.andDo(print())
-				.andExpect(status().isNoContent());
+				.andExpect(status().isOk());
 	}
 
 	@Test

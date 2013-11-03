@@ -82,7 +82,7 @@ public class CrudContactCtrl {
 
     @Secured("ROLE_USER")
     @RequestMapping(value = "", method = RequestMethod.PUT, consumes = "application/json")
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void edit(@RequestBody Contact contact) throws ServiceException, DaoException {
 
 		LOGGER.info("[Controller] Querying to edit Contact : \"" + contact.toString() + "\"");
