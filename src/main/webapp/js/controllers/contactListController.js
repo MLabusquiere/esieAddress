@@ -4,7 +4,7 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('ContactListCtrl', function ($scope, $location, Contact) {
+module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Contact) {
 
 	$scope.sorts = [
 		{predicate: ['lastname', 'firstname', 'id'], text: 'Last name'},
@@ -17,6 +17,13 @@ module.controller('ContactListCtrl', function ($scope, $location, Contact) {
 	$scope.showAll = false;
 
 	$scope.contacts = [];
+
+	$('.label-toggle-switch').on('switch-change', function (e, data) {
+		var scope = angular.element($(".container")).scope();
+		scope.$apply(function(){
+			$scope.showAll = !$scope.showAll;
+		});
+	});
 
 	loadContactList();
 
@@ -36,9 +43,5 @@ module.controller('ContactListCtrl', function ($scope, $location, Contact) {
 		console.log("Querying contact list update");
 		loadContactList();
 	});
-
-	$scope.test = function () {
-		console.log("switch");
-	};
 
 });

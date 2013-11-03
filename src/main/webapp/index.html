@@ -84,8 +84,8 @@
 							</button>
 						</div>
 						<div class="col-lg-3">Hide/Show</div>
-						<div class="col-lg-9" ng-click="showAll = !showAll">
-							<div class="make-switch switch-small">
+						<div class="col-lg-9">
+							<div class="label-toggle-switch make-switch switch-small">
 								<input ng-model="showAll" type="checkbox" title="Show/Hide inactive contacts">
 							</div>
 						</div>
@@ -109,7 +109,6 @@
 
 				<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
 			</div>
-
 			<div class="sidebar-nav">
 				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable">
 					<li ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
