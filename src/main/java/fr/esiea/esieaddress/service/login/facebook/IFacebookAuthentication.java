@@ -1,7 +1,7 @@
-package fr.esiea.esieaddress.controllers.exception.security;
+package fr.esiea.esieaddress.service.login.facebook;
 
-import fr.esiea.esieaddress.model.exception.RestException;
-import org.springframework.http.HttpStatus;
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.service.exception.ServiceException;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -25,9 +25,9 @@ import org.springframework.http.HttpStatus;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class NotConnectedException extends RestException {
+public interface IFacebookAuthentication {
 
-    public NotConnectedException() {
-        super(HttpStatus.NOT_FOUND.value(),null);
-    }
+    String getRedirectUrl();
+
+    void handleFacebookRedirect(String code) throws DaoException, ServiceException;
 }

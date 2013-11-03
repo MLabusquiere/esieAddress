@@ -1,7 +1,11 @@
-package fr.esiea.esieaddress.controllers.exception.security;
+package fr.esiea.esieaddress.service.login;
 
-import fr.esiea.esieaddress.model.exception.RestException;
-import org.springframework.http.HttpStatus;
+import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.model.user.User;
+import fr.esiea.esieaddress.service.exception.ServiceException;
+import fr.esiea.esieaddress.service.exception.security.NotConnectedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -25,10 +29,8 @@ import org.springframework.http.HttpStatus;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class InvalidLoginException extends RestException {
-
-    public InvalidLoginException() {
-        super(HttpStatus.UNAUTHORIZED.value(), 0);
-    }
-
+public interface IAuthenticationService {
+    void login(Authentication token) throws ServiceException, DaoException;
+    User getCurrentAccount() throws ServiceException, DaoException;
+    void logout() throws ServiceException, DaoException;
 }

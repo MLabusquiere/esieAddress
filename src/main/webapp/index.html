@@ -151,13 +151,14 @@
 			<div class="modal-body">
 				<form name="signin_form" class="form-horizontal" role="form" ng-submit="connect()" novalidate>
 					<div class="form-group">
-						<label for="inputEmail1" class="col-lg-2 control-label">Email</label>
 
 						<div id="loginInfo" class="col-lg-offset-2 col-lg-10">
 							<small class="text-danger">
 								Wrong matching email and password.
 							</small>
 						</div>
+						<label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+
 						<div class="col-lg-10">
 							<input name="mail" type="email" class="form-control" id="inputEmail1" placeholder="Email"
 							       ng-model="login.mail" required>

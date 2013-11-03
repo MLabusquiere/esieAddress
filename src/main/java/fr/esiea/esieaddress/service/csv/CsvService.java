@@ -1,4 +1,4 @@
-package fr.esiea.esieaddress.service.validation.csv;
+package fr.esiea.esieaddress.service.csv;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;

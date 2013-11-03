@@ -48,7 +48,5 @@
         <context:component-scan base-package="fr.esiea.esieaddress.model"/>
         <context:component-scan base-package="fr.esiea.esieaddress.service"/>
 
-        <!-- Temporary solution -->
-        <bean class="fr.esiea.esieaddress.controllers.login.FacebookConst"/>
     </beans>
 </beans>

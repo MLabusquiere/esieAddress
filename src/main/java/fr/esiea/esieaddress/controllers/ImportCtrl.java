@@ -4,7 +4,7 @@ import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.contact.Contact;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
-import fr.esiea.esieaddress.service.validation.csv.CsvService;
+import fr.esiea.esieaddress.service.csv.CsvService;
 import fr.esiea.esieaddress.service.validation.exception.ValidationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +53,9 @@ public class ImportCtrl {
 	@Autowired
 	private CsvService csvService;
 
-	@Secured("ROLE_USER")
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
+    @Secured("ROLE_USER")
 	public void upload(MultipartHttpServletRequest files, final HttpServletRequest request) throws DaoException, ServiceException, FileNotFoundException {
 		LOGGER.info("[IMPORT] Start to import contact");
 

@@ -67,18 +67,12 @@ module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $locat
 	 * Holds all the requests which failed due to 401 response.
 	 */
 	$rootScope.$on('event:loginRequired', function () {
-		console.log("Login required:");
-
-		if ($route.current.$$route.controller != "SignUpCtrl") {
-			if ($('#loginModal').is(":visible")) {
-				$('#loginInfo').show();
-			}
-			else {
-				$('#loginModal').modal('show');
-			}
+		console.log("Login required: isVisible");
+		if ($('#loginModal').is(":visible")) {
+			$('#loginInfo').show();
 		}
 		else {
-			console.log("No login on sign up page");
+			$('#loginModal').modal('show');
 		}
 	});
 

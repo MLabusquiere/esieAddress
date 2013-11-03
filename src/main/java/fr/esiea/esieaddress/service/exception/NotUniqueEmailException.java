@@ -1,4 +1,4 @@
-package fr.esiea.esieaddress.controllers.exception;
+package fr.esiea.esieaddress.service.exception;
 
 import fr.esiea.esieaddress.model.exception.RestException;
 
@@ -24,7 +24,7 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class NotUniqueEmailException extends RestException {
+public class NotUniqueEmailException extends ServiceException {
     public NotUniqueEmailException() {
         super(400, "This email already exist");
     }
