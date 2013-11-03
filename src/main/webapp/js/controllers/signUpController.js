@@ -4,7 +4,7 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('SignUpCtrl', function ($scope, Signup) {
+module.controller('SignUpCtrl', function ($scope,$location, Signup) {
 
 	$scope.user = {};
 	$scope.errors = {};
@@ -16,7 +16,21 @@ module.controller('SignUpCtrl', function ($scope, Signup) {
 			{},
 			$scope.user,
 			function(data){
-				console.log("Successfully signed up", data)
+                $scope.login ={};
+                //Not Working
+                $scope.login.email = $scope.user.email;
+                $scope.login.password = $scope.user.password;
+
+                $scope.$emit('event:loginRequest');
+
+                if ($scope.previousRoute && $scope.previousRoute != "/signup") {
+                    $location.path($scope.previousRoute);
+                }
+                else {
+                    $location.path("/");
+                }
+
+                console.log("Successfully signed up", data)
 			},
 			function(error){
 				console.log("Error", error.status, error.data);

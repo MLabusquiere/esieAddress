@@ -49,7 +49,8 @@ public class ValidationService<T extends IModel> implements IValidationService<T
 
 		HashMap<Object, String> errorMap = new HashMap<Object, String>();
 		for (ConstraintViolation<T> violation : violations) {
-			errorMap.put(violation.getInvalidValue(), violation.getMessage());
+            String[] propertyPath = violation.getPropertyPath().toString().split("\\.");
+            errorMap.put(propertyPath[propertyPath.length-1], violation.getMessage());
 		}
 
 		return errorMap;

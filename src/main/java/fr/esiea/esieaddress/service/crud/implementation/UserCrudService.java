@@ -79,8 +79,6 @@ public class UserCrudService implements ICrudUserService {
     @Override
     public User getOneByMail(String mail) throws InvalidIdException, DaoException {
         User user = dao.getOneByMail(mail);
-        if (null == user)
-            throw new InvalidIdException();
         return user;
     }
 
