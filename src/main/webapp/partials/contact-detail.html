@@ -1,5 +1,5 @@
 <div class="container">
-	<img src="{{contact.pictureURL}}" alt="" class="img-circle col-lg-1 col-md-2">
+	<img src="{{contact.pictureURL}}" alt="" class="img-circle col-lg-1 col-md-2" ng-show="contact.pictureURL">
 	<div div="header" class="page-header">
 		<h1>{{contact.firstname}} {{contact.lastname | uppercase}}
 			<small>
@@ -16,8 +16,9 @@
 
 		<div ng-repeat="address in contact.addresses">
 			<strong class="col-lg-2 text-right">{{address.label}} Address</strong>
-			<span class="col-10">{{address.street}}, {{address.postalCode}}
-				{{address.city}}, {{address.country | uppercase}}</span><br />
+			<span class="col-10">{{address.street}}<br/>
+				{{address.postalCode}} {{address.city}}<br />
+				 {{address.country | uppercase}}</span>
 		</div>
 	</div>
 

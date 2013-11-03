@@ -126,7 +126,7 @@
 						<a href="#/contacts/{{contact.id}}">{{contact.firstname}} <strong>{{contact.lastname |
 							uppercase}}</strong></a>
 					</li>
-					<li class="contact-th col-lg-6"
+					<li class="contact-th col-lg-4"
 						ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
 						ng-show="(contact.actif == true || showAll == true) && layout == 'grid'">
 						<a href="#/contacts/{{contact.id}}" rel="tooltip" title="{{contact.firstname}} {{contact.lastname | uppercase}}">

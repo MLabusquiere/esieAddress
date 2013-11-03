@@ -58,7 +58,7 @@ a#main-menu-toggle { color: white; position: absolute; z-index: 1000; top: 0; le
 	background-color: #6D8BC9;
 }
 
-.nav > li.contact-th.col-lg-6 {
+.nav > li.contact-th {
 	float:left;
 }
 

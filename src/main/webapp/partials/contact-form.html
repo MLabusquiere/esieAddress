@@ -10,49 +10,84 @@
 	<div id="pageContent" class="scrollable">
 		<form name="contact_form" class="form-horizontal col-lg-10" role="form" ng-submit="saveContact()" novalidate>
 			<div class="form-group">
+
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="errors.firstname">
+					<small>
+						{{errors.firstname}}
+					</small>
+				</div>
 				<label for="inputFirstname" class="col-lg-2 control-label">Firstname</label>
-
 				<div class="col-lg-10">
-					<input name="firstname" type="text" ng-model="newContact.firstname" ng-minlength=2
-					       class="form-control" id="inputFirstname" placeholder="Firstname">
-					<span class="text-danger" ng-show="contact_form.firstname.$error.minlength">Too short</span>
+					<input name="firstname" type="text" ng-model="newContact.firstname"
+					       class="form-control" id="inputFirstname" placeholder="Firstname" ng-minlength=2 ng-maxlength=20>
+				</div>
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.firstname.$dirty && signup_form.firstname.$invalid">
+					<small ng-show="contact_form.firstname.$error.minlength">
+						The firstname must be at least 2 characters.
+					</small>
+					<small ng-show="contact_form.firstname.$error.maxlength">
+						The firstname can not be longer than 20 characters.
+					</small>
 				</div>
 			</div>
+
+
 			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="errors.lastname">
+					<small>
+						{{errors.lastname}}
+					</small>
+				</div>
 				<label for="inputLastname" class="col-lg-2 control-label">Lastname</label>
-
 				<div class="col-lg-10">
-					<input name="lastname" type="text" ng-model="newContact.lastname" ng-minlength=2
-					       class="form-control" id="inputLastname" placeholder="Lastname">
-					<span class="text-danger" ng-show="contact_form.lastname.$error.minlength">Too short</span>
+					<input name="lastname" type="text" ng-model="newContact.lastname"
+					       class="form-control" id="inputLastname" placeholder="Lastname" ng-minlength=2 ng-maxlength=20>
+				</div>
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.lastname.$dirty && contact_form.lastname.$invalid">
+					<small ng-show="contact_form.lastname.$error.minlength">
+						The lastname must be at least 2 characters.
+					</small>
+					<small ng-show="contact_form.lastname.$error.maxlength">
+						The lastname can not be longer than 20 characters.
+					</small>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="inputEmail" class="col-lg-2 control-label">Email</label>
 
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="errors.email">
+					<small>
+						{{errors.email}}
+					</small>
+				</div>
+				<label for="inputEmail" class="col-lg-2 control-label">Email</label>
 				<div class="col-lg-10">
 					<input name="email" type="email" ng-model="newContact.email" class="form-control" id="inputEmail"
-					       placeholder="Email">
-					<span class="text-danger" ng-show="contact_form.email.$error.email">Not an email address</span>
+					       placeholder="Email" ng-minlength=3 ng-maxlength=20>
+				</div>
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.email.$dirty && contact_form.email.$invalid">
+					<small ng-show="contact_form.email.$error.email">
+						The email is not valid.
+					</small>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-lg-2 control-label">Birthdate</label>
+				<label for="dateOfBirth" class="col-lg-2 control-label">Birthdate</label>
 
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="errors.dateOfBirth">
+					<small>
+						{{errors.dateOfBirth}}
+					</small>
+				</div>
 				<div class="col-lg-10 row">
 					<div class="col-lg-3">
-						<input type="text" ng-model="birthdate.year" class="form-control" id="birthyear"
-						       placeholder="Year">
+						<input type="date" name="date" ng-model="newContact.dateOfBirth" class="form-control" id="dateOfBirth">
 					</div>
-					<div class="col-lg-2">
-						<input type="text" ng-model="birthdate.month" class="form-control" id="birthmonth"
-						       placeholder="Month">
-					</div>
-					<div class="col-lg-2">
-						<input type="text" ng-model="birthdate.day" class="form-control" id="birthday"
-						       placeholder="Day">
-					</div>
+				</div>
+				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.date.$dirty && contact_form.date.$invalid">
+					<small ng-show="contact_form.month.$error.date">
+						The date is invalid.
+					</small>
 				</div>
 			</div>
 
@@ -84,42 +119,80 @@
 			<div class="address-form col-lg-12" ng-repeat="address in addresses">
 				<div class="form-group">
 					<label for="inputAddress{{$index}}" class="col-lg-2 control-label">Address #{{$index+1}}</label>
-
 					<div class="col-lg-4">
-						<input type="text" class="form-control" ng-model="addresses[$index].label"
-						       id="inputAddress{{$index}}" placeholder="Label">
+						<input type="text" name="label" class="form-control" ng-model="addresses[$index].label"
+						       id="inputAddress{{$index}}" placeholder="Label" ng-minlength=3 ng-maxlength=20>
 					</div>
 					<div class="col-lg-offset-5 col-lg-1 text-right">
 						<a class="btn btn-default" ng-click="deleteAddress($index)"><span
 								class="glyphicon glyphicon-minus"></span></a>
+					</div>
+					<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.label.$dirty && contact_form.label.$invalid">
+						<small ng-show="contact_form.label.$error.minlength">
+							The label must be at least 3 characters.
+						</small>
+						<small ng-show="contact_form.label.$error.maxlength">
+							The label can not be longer than 20 characters.
+						</small>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputAddress{{$index}}-street" class="col-lg-2 control-label">Street</label>
 
 					<div class="col-lg-10">
-						<input type="text" class="form-control" ng-model="addresses[$index].street"
-						       id="inputAddress{{$index}}-street" placeholder="Street">
+						<input type="text" name="street" class="form-control" ng-model="addresses[$index].street"
+						       id="inputAddress{{$index}}-street" placeholder="Street" ng-minlength=3 ng-maxlength=20>
+					</div>
+					<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.street.$dirty && contact_form.street.$invalid">
+						<small ng-show="contact_form.street.$error.minlength">
+							The street must be at least 3 characters.
+						</small>
+						<small ng-show="contact_form.street.$error.maxlength">
+							The street can not be longer than 20 characters.
+						</small>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputAddress{{$index}}-postalCode" class="col-lg-2 control-label">Postal Code</label>
-
 					<div class="col-lg-2">
-						<input type="text" class="form-control" ng-model="addresses[$index].postalCode"
-						       id="inputAddress{{$index}}-postalCode" placeholder="Postal Code">
+						<input type="text" name="zipcode" class="form-control" ng-model="addresses[$index].postalCode"
+						       id="inputAddress{{$index}}-postalCode" placeholder="Postal Code" ng-minlength=3 ng-maxlength=20>
 					</div>
+					<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.zipcode.$dirty && contact_form.zipcode.$invalid">
+						<small ng-show="contact_form.zipcode.$error.minlength">
+							The zipcode must be at least 3 characters.
+						</small>
+						<small ng-show="contact_form.zipcode.$error.maxlength">
+							The zipcode can not be longer than 20 characters.
+						</small>
+					</div>
+			
 					<label for="inputAddress{{$index}}-city" class="col-lg-1 control-label">City</label>
-
 					<div class="col-lg-3">
-						<input type="text" class="form-control" ng-model="addresses[$index].city"
-						       id="inputAddress{{$index}}-city" placeholder="City">
+						<input type="text" name="city" class="form-control" ng-model="addresses[$index].city"
+						       id="inputAddress{{$index}}-city" placeholder="City" ng-minlength=3 ng-maxlength=20>
 					</div>
+					<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.city.$dirty && contact_form.city.$invalid">
+						<small ng-show="contact_form.city.$error.minlength">
+							The city must be at least 3 characters.
+						</small>
+						<small ng-show="contact_form.city.$error.maxlength">
+							The city can not be longer than 20 characters.
+						</small>
+					</div>
+					
 					<label for="inputAddress{{$index}}-country" class="col-lg-1 control-label">Country</label>
-
 					<div class="col-lg-3">
-						<input type="text" class="form-control" ng-model="addresses[$index].country"
-						       id="inputAddress{{$index}}-country" placeholder="Country">
+						<input type="text" name="country" class="form-control" ng-model="addresses[$index].country"
+						       id="inputAddress{{$index}}-country" placeholder="Country" ng-minlength=3 ng-maxlength=20>
+					</div>
+					<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="contact_form.country.$dirty && contact_form.country.$invalid">
+						<small ng-show="contact_form.country.$error.minlength">
+							The country must be at least 3 characters.
+						</small>
+						<small ng-show="contact_form.country.$error.maxlength">
+							The country can not be longer than 20 characters.
+						</small>
 					</div>
 				</div>
 			</div>

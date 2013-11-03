@@ -9,16 +9,20 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 	$scope.newContact = {};
 	$scope.newContact.actif = true;
 
+	$scope.errors = {};
+	$scope.birthdate = {};
+
 	$scope.newContact.addresses = [];
 
 	$scope.addresses = [];
 
 	if ($routeParams.id != undefined) {
-		console.log("Edit contact " + $routeParams.id)
+		console.log("Edit contact", $routeParams.id)
 		$scope.edit = true;
 		Contact.get({
 			id: $routeParams.id
 		}, function (data) {
+			console.log("Contact", data)
 			$scope.newContact = data;
 			$scope.addresses = data.addresses;
 			console.log($scope.newContact);
@@ -30,13 +34,12 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 
 	$scope.saveContact = function () {
 		console.log("Save function");
-		console.log($scope.newContact);
-		console.log($scope.addresses);
+		$scope.newContact.addresses = $scope.addresses;
+		console.log("Contact:", $scope.newContact);
+
 		if ($scope.newContact) {
 			if ($scope.newContact.id == undefined) {
 				console.log("Creating new contact :");
-				$scope.newContact.addresses = $scope.addresses;
-
 				Contact.save($scope.newContact,
 					function (data) {
 						console.log("New contact created");
@@ -44,7 +47,8 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 						$rootScope.$broadcast('updateContactList');
 					},
 					function (error) {
-						console.log("Error " + error.status);
+						console.log("Error", error.status, error.data);
+						$scope.errors = error.data;
 					}
 				);
 			}
@@ -58,7 +62,8 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 						$location.path("contacts/"+$routeParams.id);
 					},
 					function (error) {
-						console.log("Updating contact info : Error " + error.status);
+						console.log("Updating contact info : Error ", error.status, error.data);
+						$scope.errors = error.data;
 					}
 				);
 			}
@@ -70,6 +75,7 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 		address.street = "";
 		console.log("Adding address ");
 		$scope.addresses.push(address);
+		console.log("form", $scope.contact_form);
 		sizeContent();
 	};
 
