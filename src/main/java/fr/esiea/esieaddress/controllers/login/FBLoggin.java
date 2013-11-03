@@ -47,7 +47,10 @@ public class FBLoggin {
 
     @Autowired
     private IFacebookAuthentication fbAuth;
-
+    /*
+     * The facebook login should get a param with a redirect url for the user
+     *
+     */
 	@RequestMapping(value = "/facebookAuthentication", method = RequestMethod.GET)
 	public void getFacebookLogin(HttpServletRequest request, HttpServletResponse response) {
 		LOGGER.info("Send a request to facebook");
@@ -65,9 +68,10 @@ public class FBLoggin {
 	 */
 	@RequestMapping(value = "/facebookRedirect", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public void getFacebookLogin(@RequestParam("code") String code) throws ServiceException, DaoException {
+    public String getFacebookLogin(@RequestParam("code") String code, HttpServletResponse httpServletResponse ) throws ServiceException, DaoException {
 
 		LOGGER.info("Receive a request from facebook");
         fbAuth.handleFacebookRedirect(code);
+        return "redirect:" + fbAuth.getRedirectUserPage();
 	}
 }

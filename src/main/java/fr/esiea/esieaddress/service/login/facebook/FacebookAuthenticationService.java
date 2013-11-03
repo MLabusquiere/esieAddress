@@ -17,9 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -58,13 +63,15 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
     private String redirectUrl;
     @Value("${controller.facebook.base_post_url}")
     private String postUrlBase ;
-
+    @Value("${controller.facebook.redirect_user_page}")
+    private String redirectUserPage;
     @Autowired
     ICrudUserDao userDao;
 
     @Autowired
     private IAuthenticationService authService;
 
+    @Deprecated
     @Override
     public String getRedirectUrl() {
         return redirectUrl;
@@ -78,11 +85,30 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
         User user = facebookClient.fetchObject("me", User.class);
         user.setAccountFacebook(true);
         //Update or create the contact
-        userDao.save(user);
-        //Make the autentication
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword());
-        authService.login(token);
+        User one = userDao.getOne(user.getId());
+        if(null == one) {
+            userDao.insert(user); //insert a new user
+        }else {
+            if(one.equals(user))
+                userDao.save(user); //Update the user
+        }
+//Authorities
+        Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 
+        for (String authority : user.getProfile().getRoleList()) {
+            authorities.add(new SimpleGrantedAuthority(authority));
+        }
+
+        //Make the autentication
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword(),authorities);
+        token.setDetails(user.getId());
+        SecurityContextHolder.getContext().setAuthentication(token);
+
+    }
+
+    @Override
+    public String getRedirectUserPage() {
+        return redirectUserPage;
     }
 
     private String getAccessToken(String code) {
@@ -110,8 +136,10 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
                     LOGGER.error("Method failed: " + method.getStatusLine());
                 }
                 // Read the response body.
-                LOGGER.info("token lenght: " +method.getResponseBody().length);
-                String responseBodyString = String.valueOf( method.getResponseBody());
+                byte[] responseBody = method.getResponseBody();
+                // Deal with the response.Use caution: ensure correct character encoding and is
+                // not binary data
+                String responseBodyString = new String(responseBody);
                 LOGGER.info("token : " +responseBodyString);
                 if (responseBodyString.contains("access_token")) {
                     //success

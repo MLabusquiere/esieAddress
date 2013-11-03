@@ -30,4 +30,6 @@ public interface IFacebookAuthentication {
     String getRedirectUrl();
 
     void handleFacebookRedirect(String code) throws DaoException, ServiceException;
+
+    String getRedirectUserPage();
 }

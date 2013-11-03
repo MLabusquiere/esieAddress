@@ -47,7 +47,7 @@ public class UserDao implements ICrudUserDao {
 
 	@Override
 	public void save(User user) throws DaoException {
-		if (null == database.remove(user.getId()))
+		if (null == database.get(user.getId()))
 			throw new UpdateException();
 		insert(user);
 	}
