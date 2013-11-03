@@ -25,4 +25,5 @@ $(function (){
 	$('a').tooltip();
 	$('button').tooltip();
 	$('input').tooltip();
+	$('img').tooltip();
 });

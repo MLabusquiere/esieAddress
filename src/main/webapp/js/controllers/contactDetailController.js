@@ -6,13 +6,15 @@ module.controller('ContactDetailCtrl', function ($rootScope, $scope, $location, 
 
 	$scope.contact = {};
 
-	Contact.get({
-		id: $routeParams.id
-	}, function (data) {
-		$scope.contact = data;
-	}, function (error) {
-		$location.path('/error/' + error.status);
-	});
+	Contact.get(
+		{id: $routeParams.id},
+		{},
+		function (data) {
+			$scope.contact = data;
+		}, function (error) {
+			$location.path('/error/' + error.status);
+		}
+	);
 
 	$scope.deleteContact = function() {
 		Contact.remove({

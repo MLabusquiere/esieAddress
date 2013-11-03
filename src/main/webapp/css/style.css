@@ -17,34 +17,26 @@ a#main-menu-toggle { color: white; position: absolute; z-index: 1000; top: 0; le
 
 .sidebar-nav>ul { margin: 0 -25px; padding: 0 10px; border: 0; padding-bottom: 1px; font-size: 14px; white-space: nowrap }
 
-.sidebar-nav>ul>li>ul { list-style: none; display: none; margin: 0 }
+/*.sidebar-nav>ul>li>ul { list-style: none; display: none; margin: 0 }*/
 
-.nav-tabs.nav-stacked>li>a { margin: 0 }
+.nav-tabs.nav-stacked>li.contact-list>a { margin: 0 }
 
-.nav-tabs.nav-stacked>li>a,
-.nav-tabs.nav-stacked>li>ul>li>a { padding: 10px 15px; color: #fff; border: 0; background: transparent; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; text-decoration: none; display: block }
+.nav-tabs.nav-stacked>li.contact-list>a { padding: 10px 15px; color: #fff; border: 0; background: transparent; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; text-decoration: none; display: block }
 
-.nav-tabs.nav-stacked>li>ul>li>a { padding: 10px 20px; margin-left: -40px }
+.nav-tabs.nav-stacked>li.contact-list>a>i { margin-right: 10px; width: 20px; display: inline-block; text-align: center }
 
-.nav-tabs.nav-stacked>li>a>i,
-.nav-tabs.nav-stacked>li>ul>li>a>i { margin-right: 10px; width: 20px; display: inline-block; text-align: center }
+.nav-tabs.nav-stacked>li.contact-list>a:hover { background: #2d323d; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
 
-.nav-tabs.nav-stacked>li>a:hover { background: #2d323d; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
+.nav-tabs.nav-stacked>li.contact-list.active>a { background: #2d323d }
 
-.nav-tabs.nav-stacked>li>a:hover,
-.nav-tabs.nav-stacked>li>ul>li>a:hover { background: #2d323d; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
+.nav-tabs.nav-stacked>li.contact-list.active>a:hover { border: 0; color: white }
 
-.nav-tabs.nav-stacked>li.active>a,
-.nav-tabs.nav-stacked>li>ul>li.active>a { background: #2d323d }
 
-.nav-tabs.nav-stacked>li.active>a:hover,
-.nav-tabs.nav-stacked>li>ul>li.active>a:hover { border: 0; color: white }
+.nav-tabs.nav-stacked>li.contact-list:first-child>a { margin: 0; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
 
-.nav-tabs.nav-stacked>li.active>ul { padding: 5px 0; background: #2d323d }
+.nav-tabs.nav-stacked>li.contact-list:last-child>a { -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
 
-.nav-tabs.nav-stacked>li:first-child>a { margin: 0; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
 
-.nav-tabs.nav-stacked>li:last-child>a { -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0 }
 
 .container { max-width: 100% !important }
 
@@ -66,5 +58,25 @@ a#main-menu-toggle { color: white; position: absolute; z-index: 1000; top: 0; le
 	background-color: #6D8BC9;
 }
 
+.nav > li.contact-th.col-lg-6 {
+	float:left;
+}
+
+.nav > li.contact-th > a {
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.nav > li.contact-th > a:hover {
+	border: 0px;
+	background-color: transparent;
+}
+
+.nav > li.contact-th > a > img.col-lg-12 {
+	margin: 0;
+	padding: 0;
+}
 
 .scrollable { overflow: scroll }

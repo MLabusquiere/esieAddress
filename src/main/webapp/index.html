@@ -44,7 +44,7 @@
 				<div id="controls">
 					<div class="pull-left">
 						<a class="btn btn-primary" href="#/contacts" title="Home"
-						    data-placement="bottom">
+						   data-placement="bottom">
 							<span class="glyphicon glyphicon-home"></span>
 						</a>
 						<a class="btn btn-primary" href="#/manage" title="Manage contacts" data-placement="bottom">
@@ -56,7 +56,8 @@
 					</div>
 
 					<div class="btn-group pull-right">
-						<a class="btn btn-primary" data-toggle="collapse" data-target="#config" title="Settings" data-placement="bottom">
+						<a class="btn btn-primary" data-toggle="collapse" data-target="#config" title="Settings"
+						   data-placement="bottom">
 							<span class="glyphicon glyphicon-cog"></span>
 						</a>
 					</div>
@@ -70,16 +71,11 @@
 						<div class="col-lg-3">Display</div>
 						<div class="btn-group col-lg-9">
 							<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'list'}"
-							        ng-click="layout = 'list'" title="Display contact as list">
+									ng-click="layout = 'list'" title="Display contact as list">
 								<span class="glyphicon glyphicon-list"></span>
 							</button>
-							<button type="button" class="btn btn-primary btn-sm"
-							        ng-class="{active: layout == 'th-list'}" ng-click="layout = 'th-list'"
-							        title="Display contact as list with thumbail">
-								<span class="glyphicon glyphicon-th-list"></span>
-							</button>
 							<button type="button" class="btn btn-primary btn-sm" ng-class="{active: layout == 'grid'}"
-							        ng-click="layout = 'grid'" title="Display contact as grid">
+									ng-click="layout = 'grid'" title="Display contact as grid">
 								<span class="glyphicon glyphicon-th"></span>
 							</button>
 						</div>
@@ -96,47 +92,46 @@
 						</div>
 						<div class="col-lg-3">Import</div>
 						<div class="col-lg-9">
-							<a class="btn btn-primary btn-sm" href="#/import" title="Import contacts"><span class="glyphicon glyphicon-import"></span></a>
+							<a class="btn btn-primary btn-sm" href="#/import" title="Import contacts"><span
+									class="glyphicon glyphicon-import"></span></a>
 						</div>
 						<div class="col-lg-3">Export</div>
 						<div class="col-lg-9">
-							<a class="btn btn-primary btn-sm" href="#/export" title="Export contacts"><span class="glyphicon glyphicon-export"></span></a>
+							<a class="btn btn-primary btn-sm" href="#/export" title="Export contacts"><span
+									class="glyphicon glyphicon-export"></span></a>
 						</div>
 						<div class="col-lg-3" ng-show="user.accountFacebook">Facebook</div>
 						<div class="col-lg-9" ng-show="user.accountFacebook">
-							<a class="btn btn-primary btn-facebook btn-sm" ng-click="synchronizeFacebook()" title="Export contacts">Synchronize</a>
+							<a class="btn btn-primary btn-facebook btn-sm" ng-click="synchronizeFacebook()"
+							   title="Synchronise with Facebook">Synchronize</a>
 						</div>
 
 						<div class="col-lg-3">Disconnect</div>
 						<div class="col-lg-9">
-							<a class="btn btn-primary btn-sm" ng-click="logout()" title="Disconnect"><span class="glyphicon glyphicon-log-out"></span></a>
+							<a class="btn btn-primary btn-sm" ng-click="logout()" title="Disconnect"><span
+									class="glyphicon glyphicon-log-out"></span></a>
 						</div>
 					</div>
 				</div>
 
 				<div id="search">
-					<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search" />
+					<input type="text" class="search hidden-sm" placeholder="Search" ng-model="search"/>
 				</div>
 			</div>
 			<div class="sidebar-nav">
 				<ul id="contacts" class="nav nav-tabs nav-stacked main-menu scrollable">
-					<li ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
-					    ng-show="(contact.actif == true || showAll == true) && layout == 'list'">
+					<li class="contact-list"
+						ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
+						ng-show="(contact.actif == true || showAll == true) && layout == 'list'">
 						<a href="#/contacts/{{contact.id}}">{{contact.firstname}} <strong>{{contact.lastname |
 							uppercase}}</strong></a>
 					</li>
-					<li ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
-					    ng-show="(contact.actif == true || showAll == true) && layout == 'th-list'">
-						<a href="#/contacts/{{contact.id}}">
-							<!--<img data-src="holder.js/50x50/industrial">-->
-							{{contact.firstname}} <strong>{{contact.lastname | uppercase}}</strong>
-						</a>
-					</li>
-					<li class="col-lg-6"
-					    ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
-					    ng-show="(contact.actif == true || showAll == true) && layout == 'grid'">
-						<a href="#/contacts/{{contact.id}}">
-							<!--<img data-src="holder.js/80x80/industrial">-->
+					<li class="contact-th col-lg-6"
+						ng-repeat="contact in contacts | orderBy:sort.predicate:reverse | filter:search"
+						ng-show="(contact.actif == true || showAll == true) && layout == 'grid'">
+						<a href="#/contacts/{{contact.id}}" rel="tooltip" title="{{contact.firstname}} {{contact.lastname | uppercase}}">
+							<img src="{{contact.pictureURL}}" alt="{{contact.firstname}} {{contact.lastname | uppercase}}" class="col-lg-12" ng-show="contact.pictureURL">
+							<img src="{{noImage}}" alt="{{contact.firstname}} {{contact.lastname | uppercase}}" class="col-lg-12" ng-hide="contact.pictureURL">
 						</a>
 					</li>
 				</ul>
@@ -168,9 +163,9 @@
 
 						<div class="col-lg-10">
 							<input name="mail" type="email" class="form-control" id="inputEmail1" placeholder="Email"
-							       ng-model="login.mail" required>
+								   ng-model="login.mail" required>
 							<span class="text-danger"
-							      ng-show="signin_form.email.$error.email">Invalid email address</span>
+								  ng-show="signin_form.email.$error.email">Invalid email address</span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -178,7 +173,7 @@
 
 						<div class="col-lg-10">
 							<input type="password" class="form-control" id="inputPassword1" placeholder="Password"
-							       ng-model="login.password" required>
+								   ng-model="login.password" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -198,7 +193,8 @@
 							<a href="#/signup">Sign up</a>
 						</div>
 						<div class="col-lg-6 text-right">
-							Or <a class="btn btn-primary btn-facebook" href="rest/login/facebookAuthentication">Connect with Facebook</a>
+							Or <a class="btn btn-primary btn-facebook" href="rest/login/facebookAuthentication">Connect
+							with Facebook</a>
 						</div>
 					</div>
 

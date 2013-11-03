@@ -16,6 +16,8 @@ module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Co
 	$scope.layout = 'list';
 	$scope.showAll = false;
 
+	$scope.noImage = "http://images.wikia.com/prettylittleliars/images/d/d7/Length-unknown.png";
+
 	$scope.contacts = [];
 
 	$('.label-toggle-switch').on('switch-change', function (e, data) {
