@@ -39,7 +39,7 @@
 
     <context-param>
         <param-name>spring.profiles.default</param-name>
-        <param-value>dev</param-value>
+        <param-value>jenkins</param-value>
     </context-param>
 
     <servlet>
