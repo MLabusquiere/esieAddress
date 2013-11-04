@@ -67,7 +67,7 @@ public class Contact extends Model {
 	//May a map to specify an type of an address
 	@Valid
 	@JsonView(ContactView.FullView.class)
-	@Facebook("current_address")
+	@Facebook("current_location")
 	private List<Address> addresses = new ArrayList<Address>();
 
 	@Facebook("pic_with_logo")

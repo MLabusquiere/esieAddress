@@ -52,6 +52,7 @@ module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Co
 			{},
 			{},
 			function() {
+                $rootScope.$broadcast('updateContactList');
 			},
 			function(error) {
 				console.log("Failed to synchronize contacts with Facebook: Error", error.status, error.data);

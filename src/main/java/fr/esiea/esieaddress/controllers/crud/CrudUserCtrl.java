@@ -36,7 +36,8 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/users")
-public class CrudUserCtrl {
+public class
+        CrudUserCtrl {
 
     @Autowired
     @Qualifier("userValidationDecorator")

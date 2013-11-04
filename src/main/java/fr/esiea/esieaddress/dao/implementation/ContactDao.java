@@ -82,7 +82,6 @@ public class ContactDao implements ICrudDao<Contact> {
 
     public static String getCurrendUserId() {
         String id = (String) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        LOGGER.info("Id " +id);
         if( null == id || id.isEmpty()) {
             String message = "Conception architecture default : No user connected but there is an access to a database";
             LOGGER.error(message);

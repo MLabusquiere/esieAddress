@@ -3,6 +3,7 @@ package fr.esiea.esieaddress.service.facebook;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
+import com.restfb.types.User;
 import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.contact.Contact;
@@ -64,5 +65,13 @@ public class FBImportationService {
                 contactDao.save(contact);
 
         }
+
+
+    /*    for (User user :facebookClient.executeFqlQuery(QUERY, User.class,
+                Parameter.with("return_ssl_resources", "true")))  {
+            System.out.println(user);
+
+        }
+    */
     }
 }
