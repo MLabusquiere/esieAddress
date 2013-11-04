@@ -1,4 +1,4 @@
-body { background: #f5f5f5; color: #383e4b; border: 0; font-family: 'Lato', sans-serif; font-weight: 400; margin: 0; padding: 0 }
+body { background: #383e4b; color: #383e4b; border: 0; font-family: 'Lato', sans-serif; font-weight: 400; margin: 0; padding: 0 }
 
 a { color: #383e4b }
 
@@ -79,4 +79,4 @@ a#main-menu-toggle { color: white; position: absolute; z-index: 1000; top: 0; le
 	padding: 0;
 }
 
-.scrollable { overflow: scroll }
+.scrollable { overflow-y: auto}
