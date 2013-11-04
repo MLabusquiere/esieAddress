@@ -4,9 +4,12 @@ import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.dao.exception.UpdateException;
 import fr.esiea.esieaddress.model.contact.Contact;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -33,22 +36,26 @@ import java.util.Map;
  */
 public class ContactDao implements ICrudDao<Contact> {
 
-	@Autowired
-	private Map<String, Contact> database;
+    private static final Logger LOGGER = Logger.getLogger(ContactDao.class);
 
-	@Override
-	public Collection<Contact> getAll() throws DaoException {
-		return database.values();  //To change body of implemented methods use File | Settings | File Templates.
-	}
+    @Autowired
+	private DatabaseMock database;
+
+
+
+    @Override
+    public Collection<Contact> getAll() throws DaoException {
+        return database.values(getCurrendUserId());
+    }
 
 	@Override
 	public void remove(String idContact) throws DaoException {
-		database.remove(idContact);
+        database.remove(getCurrendUserId(),idContact);
 	}
 
 	@Override
 	public void save(Contact contact) throws DaoException {
-		if (null == database.remove(contact.getId()))
+        if (null == database.remove(getCurrendUserId(),contact.getId()))
 			throw new UpdateException();
 		insert(contact);
 	}
@@ -56,15 +63,22 @@ public class ContactDao implements ICrudDao<Contact> {
 	@Override
 	public void insert(Contact contact) throws DaoException {
 		contact.generateId();
-		database.put(contact.getId(), contact);
+		database.put(getCurrendUserId(), contact.getId(), contact);
 	}
 
 	@Override
 	public Contact getOne(String contactId) throws DaoException {
-		return database.get(contactId);
+		return database.get(getCurrendUserId(),contactId);
 	}
 
-	public void setDatabase(Map<String, Contact> database) {
-		this.database = database;
-	}
+    public static String getCurrendUserId() {
+        String id = (String) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        LOGGER.info("Id " +id);
+        if( null == id || id.isEmpty()) {
+            String message = "Conception architecture default : No user connected but there is an access to a database";
+            LOGGER.error(message);
+            throw new RuntimeException(message);
+        }
+        return id;
+    }
 }

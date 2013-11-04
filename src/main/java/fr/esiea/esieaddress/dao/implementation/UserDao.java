@@ -37,7 +37,7 @@ public class UserDao implements ICrudUserDao {
 
 	@Override
 	public Collection<User> getAll() throws DaoException {
-		return database.values();  //To change body of implemented methods use File | Settings | File Templates.
+		return database.values();
 	}
 
 	@Override

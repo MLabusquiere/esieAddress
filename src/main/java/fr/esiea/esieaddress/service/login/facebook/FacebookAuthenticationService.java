@@ -85,10 +85,11 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
         User user = facebookClient.fetchObject("me", User.class);
         user.setAccountFacebook(true);
         //Update or create the contact
-        User one = userDao.getOne(user.getId());
+        User one = userDao.getOneByMail(user.getMail());
         if(null == one) {
             userDao.insert(user); //insert a new user
         }else {
+            user.setId(one.getId());
             if(one.equals(user))
                 userDao.save(user); //Update the user
         }

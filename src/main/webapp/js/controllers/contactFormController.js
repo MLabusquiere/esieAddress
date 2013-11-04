@@ -44,6 +44,7 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
 					function (data) {
 						console.log("New contact created");
 						console.log(data);
+                        $scope.newContact={};
 						$rootScope.$broadcast('updateContactList');
 					},
 					function (error) {

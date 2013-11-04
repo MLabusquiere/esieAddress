@@ -64,4 +64,28 @@ public class User extends Model {
     public void setAccountFacebook(boolean accountFacebook) {
         this.accountFacebook = accountFacebook;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (accountFacebook != user.accountFacebook) return false;
+        if (mail != null ? !mail.equals(user.mail) : user.mail != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (profile != user.profile) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mail != null ? mail.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (profile != null ? profile.hashCode() : 0);
+        result = 31 * result + (accountFacebook ? 1 : 0);
+        return result;
+    }
 }

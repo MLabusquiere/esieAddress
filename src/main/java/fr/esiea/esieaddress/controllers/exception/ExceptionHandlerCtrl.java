@@ -1,6 +1,7 @@
 package fr.esiea.esieaddress.controllers.exception;
 
 import fr.esiea.esieaddress.model.exception.RestException;
+import fr.esiea.esieaddress.service.exception.security.NotConnectedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -43,4 +44,11 @@ public class ExceptionHandlerCtrl extends ResponseEntityExceptionHandler {
 		Object model = ex.getModel();
 		return new ResponseEntity<Object>(model, HttpStatus.valueOf(ex.getStatus()));
 	}
+
+    @ExceptionHandler(value = {NotConnectedException.class})
+    protected ResponseEntity<Object> handleException(NotConnectedException ex, WebRequest request) {
+        // avoid a useless log each time that the user ping (open the web-app)
+        Object model = ex.getModel();
+        return new ResponseEntity<Object>(model, HttpStatus.valueOf(ex.getStatus()));
+    }
 }

@@ -20,15 +20,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean name="databaseContact" class="fr.esiea.esieaddress.dao.implementation.ContactDao">
-        <property name="database">
-            <map>
-                <entry key="id1" value-ref="contact1"/>
-                <entry key="id2" value-ref="contact2"/>
-                <entry key="id3" value-ref="contact3"/>
-            </map>
-        </property>
-    </bean>
+    <bean name="databaseContact" class="fr.esiea.esieaddress.dao.implementation.ContactDao"/>
     <bean name="databaseUser" class="fr.esiea.esieaddress.dao.implementation.UserDao">
         <property name="database">
             <map>
@@ -37,7 +29,7 @@
         </property>
     </bean>
 
-    <bean name="contact1" class="fr.esiea.esieaddress.model.contact.Contact">
+    <!--<bean name="contact1" class="fr.esiea.esieaddress.model.contact.Contact">
         <property name="email" value="labusquiere@gmail.com"/>
         <property name="firstname" value="Maxence"/>
         <property name="lastname" value="Labusquière"/>
@@ -61,7 +53,7 @@
         <property name="actif" value="true"/>
         <property name="dateOfBirth" value="12/06/1991"/>
         <property name="id" value="id3"/>
-    </bean>
+    </bean>-->
 
     <bean name="user1" class="fr.esiea.esieaddress.model.user.User">
         <property name="mail" value="test@gmail.com"/>
