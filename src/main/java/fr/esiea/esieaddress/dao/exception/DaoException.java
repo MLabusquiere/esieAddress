@@ -2,6 +2,8 @@ package fr.esiea.esieaddress.dao.exception;
 
 import fr.esiea.esieaddress.model.exception.RestException;
 
+import java.util.Map;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -25,7 +27,11 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class DaoException extends RestException {
-	public DaoException(int status, Object model) {
+	public DaoException(int status, Map model) {
 		super(status, model);
 	}
+
+    public DaoException(int status, String model) {
+        super(status, model);
+    }
 }

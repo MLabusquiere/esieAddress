@@ -56,7 +56,7 @@ public class ServiceValidationDecorator<T extends IModel> implements ICrudServic
 	public void save(T model) throws ServiceException, DaoException {
 		LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
 
-		final Map<Object, String> errorMap = validationService.validate(model);
+		final Map<String, Object> errorMap = validationService.validate(model);
 
 		if (errorMap.isEmpty())
 			crudService.save(model);
@@ -68,7 +68,7 @@ public class ServiceValidationDecorator<T extends IModel> implements ICrudServic
 	public void insert(T model) throws ServiceException, DaoException {
 		LOGGER.info("[VALIDATION] Do the validation on model " + model.getId());
 
-		final Map<Object, String> errorMap = validationService.validate(model);
+		final Map<String, Object> errorMap = validationService.validate(model);
 
 		if (errorMap.isEmpty())
 			crudService.insert(model);

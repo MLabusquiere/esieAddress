@@ -42,9 +42,6 @@ public class ExceptionHandlerCtrl extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleException(RestException ex, WebRequest request) {
 		LOGGER.info("An exception was catch by spring mvc :" + ex.getClass() + " : " + ex.getMessage());
 		Object model = ex.getModel();
-        //lazy code to enforce json
-        if(model instanceof String)
-            return new ResponseEntity<Object>("{error:\"+model+\"}", HttpStatus.valueOf(ex.getStatus()));
 		return new ResponseEntity<Object>(model, HttpStatus.valueOf(ex.getStatus()));
 	}
 

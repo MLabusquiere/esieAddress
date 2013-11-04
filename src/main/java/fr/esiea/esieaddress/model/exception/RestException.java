@@ -1,5 +1,8 @@
 package fr.esiea.esieaddress.model.exception;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -25,16 +28,22 @@ package fr.esiea.esieaddress.model.exception;
 public class RestException extends Exception {
 
 	private int status = 500;
-	private Object model;
+	private Map model;
 
 	public RestException() {
 	}
 
-	public RestException(int status, Object model) {
+	public RestException(int status, Map model) {
 		this.status = status;
 		this.model = model;
 	}
 
+    public RestException(int status, String model) {
+        this.status = status;
+        HashMap map = new HashMap();
+        map.put("error",model);
+        this.model = map;
+    }
 	public int getStatus() {
 		return status;
 	}

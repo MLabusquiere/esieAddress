@@ -2,6 +2,8 @@ package fr.esiea.esieaddress.service.exception;
 
 import fr.esiea.esieaddress.model.exception.RestException;
 
+import java.util.Map;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -25,7 +27,11 @@ import fr.esiea.esieaddress.model.exception.RestException;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class ServiceException extends RestException {
-	public ServiceException(int status, Object model) {
+	public ServiceException(int status, Map model) {
 		super(status, model);
 	}
+
+    public ServiceException(int status, String model) {
+        super(status, model);
+    }
 }

@@ -40,14 +40,14 @@ public class ValidationService<T extends IModel> implements IValidationService<T
 	private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	@Override
-	public Map<Object, String> validate(T model) {
+	public Map<String, String> validate(T model) {
 
 		Set<ConstraintViolation<T>> violations = validator.validate(model);
 
 		if (violations.isEmpty())
 			return Collections.EMPTY_MAP;
 
-		HashMap<Object, String> errorMap = new HashMap<Object, String>();
+		HashMap<String, String> errorMap = new HashMap<String, String>();
 		for (ConstraintViolation<T> violation : violations) {
             String[] propertyPath = violation.getPropertyPath().toString().split("\\.");
             errorMap.put(propertyPath[propertyPath.length-1], violation.getMessage());

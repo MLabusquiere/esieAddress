@@ -79,7 +79,7 @@ public class ImportCtrl {
 				}
 
 				try (Reader contactsFile = new InputStreamReader(inputStream)) {
-					List<Object> modelErrors = new ArrayList<>();
+					Map<String,Object> modelErrors = new HashMap<>();
 					LOGGER.debug("[IMPORT] File is reading");
 					Collection<Contact> contacts = csvService.ReadContactCSV(contactsFile);
 					for (Contact contact : contacts) {
@@ -88,7 +88,7 @@ public class ImportCtrl {
 						} catch (ValidationException e) {
 							Object modelError = e.getModel();
 							LOGGER.warn("found an error in contact " + modelError);
-							modelErrors.add(modelError);
+							modelErrors.put(contact.getId(),(Map)modelError);
 						}
 					}
 

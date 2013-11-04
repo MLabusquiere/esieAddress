@@ -27,5 +27,5 @@ import java.util.Map;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public interface IValidationService<T> {
-	Map<Object, String> validate(T model) throws ValidationException;
+	Map<String, String> validate(T model) throws ValidationException;
 }

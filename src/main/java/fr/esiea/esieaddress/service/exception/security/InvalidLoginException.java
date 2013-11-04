@@ -3,6 +3,8 @@ package fr.esiea.esieaddress.service.exception.security;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 
+import java.util.Collections;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -28,7 +30,7 @@ import org.springframework.http.HttpStatus;
 public class InvalidLoginException extends ServiceException {
 
     public InvalidLoginException() {
-        super(HttpStatus.UNAUTHORIZED.value(), 0);
+        super(HttpStatus.UNAUTHORIZED.value(), Collections.EMPTY_MAP);
     }
 
 }

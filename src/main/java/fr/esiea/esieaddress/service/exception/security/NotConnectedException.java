@@ -4,6 +4,8 @@ import fr.esiea.esieaddress.model.exception.RestException;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 
+import java.util.Collections;
+
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
@@ -29,6 +31,6 @@ import org.springframework.http.HttpStatus;
 public class NotConnectedException extends ServiceException {
 
     public NotConnectedException() {
-        super(HttpStatus.NOT_FOUND.value(),null);
+        super(HttpStatus.NOT_FOUND.value(), Collections.EMPTY_MAP);
     }
 }
