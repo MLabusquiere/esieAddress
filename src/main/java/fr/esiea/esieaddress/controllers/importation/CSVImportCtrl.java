@@ -1,4 +1,4 @@
-package fr.esiea.esieaddress.controllers;
+package fr.esiea.esieaddress.controllers.importation;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.contact.Contact;
@@ -44,9 +44,9 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/import")
-public class ImportCtrl {
+public class CSVImportCtrl {
 
-	private static final Logger LOGGER = Logger.getLogger(ImportCtrl.class);
+	private static final Logger LOGGER = Logger.getLogger(CSVImportCtrl.class);
 	private static final double FILE_SIZE_MAX = 30000;
 	@Autowired
 	private ICrudService<Contact> contactCrudService;
@@ -88,7 +88,7 @@ public class ImportCtrl {
 						} catch (ValidationException e) {
 							Object modelError = e.getModel();
 							LOGGER.warn("found an error in contact " + modelError);
-							modelErrors.put(contact.getId(),(Map)modelError);
+							modelErrors.put(contact.getId(), (Map) modelError);
 						}
 					}
 

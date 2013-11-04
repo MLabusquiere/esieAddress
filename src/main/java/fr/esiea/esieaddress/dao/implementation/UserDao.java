@@ -1,6 +1,6 @@
 package fr.esiea.esieaddress.dao.implementation;
 
-import fr.esiea.esieaddress.dao.ICrudUserDao;
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.dao.exception.UpdateException;
 import fr.esiea.esieaddress.model.user.User;
@@ -31,7 +31,7 @@ import java.util.Map;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-public class UserDao implements ICrudUserDao {
+public class UserDao implements ICrudDao<User> {
 	@Autowired
 	private Map<String, User> database;
 
@@ -68,7 +68,7 @@ public class UserDao implements ICrudUserDao {
 	}
 
 	@Override
-	public User getOneByMail(String mail) throws DaoException {
+	public User getOneByEmail(String mail) throws DaoException {
 		final Collection<User> users = database.values();
 		for (User user : users) {
 			if (user.getMail().equals(mail))

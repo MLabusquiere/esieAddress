@@ -46,7 +46,7 @@ module.factory('Logout', function ($resource) {
 });
 
 module.factory('Facebook', function ($resource) {
-	return $resource('rest/facebook', {}, {
-		synchronize: {method: 'GET', isArray: true}
+	return $resource('rest/facebook/synchronize', {}, {
+		synchronize: {method: 'GET'}
 	});
 });

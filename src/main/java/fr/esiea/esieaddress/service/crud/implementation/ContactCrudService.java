@@ -3,6 +3,7 @@ package fr.esiea.esieaddress.service.crud.implementation;
 import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.contact.Contact;
+import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.InvalidIdException;
 import fr.esiea.esieaddress.service.exception.ServiceException;
@@ -38,7 +39,7 @@ import java.util.Collection;
 public class ContactCrudService implements ICrudService<Contact> {
 
 	@Autowired
-	@Qualifier("databaseContact")
+	@Qualifier("contactDao")
 	private ICrudDao<Contact> dao;
 
 	@Override
@@ -68,4 +69,9 @@ public class ContactCrudService implements ICrudService<Contact> {
 			throw new InvalidIdException();
 		return contact;
 	}
+
+    @Override
+    public Contact getOneByEmail(String mail) throws ServiceException, DaoException {
+        return dao.getOneByEmail(mail);
+    }
 }

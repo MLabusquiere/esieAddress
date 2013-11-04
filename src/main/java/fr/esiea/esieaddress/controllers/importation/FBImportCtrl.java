@@ -1,6 +1,4 @@
-package fr.esiea.esieaddress.controllers.login;
-
-/**
+/*
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
  * <p/>
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,55 +21,46 @@ package fr.esiea.esieaddress.controllers.login;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+package fr.esiea.esieaddress.controllers.importation;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.esiea.esieaddress.dao.exception.DaoException;
+import fr.esiea.esieaddress.model.contact.view.ContactView;
 import fr.esiea.esieaddress.service.exception.ServiceException;
-import fr.esiea.esieaddress.service.login.facebook.IFacebookAuthentication;
+import fr.esiea.esieaddress.service.facebook.FBImportationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/login")
-public class  FBLoggin {
+@RequestMapping("facebook/")
+public class FBImportCtrl {
 
-    private static final Logger LOGGER = Logger.getLogger(FBLoggin.class);
+    private static final Logger LOGGER = Logger.getLogger(FBImportCtrl.class);
 
     @Autowired
-    private IFacebookAuthentication fbAuth;
-    /*
-     * The facebook login should get a param with a redirect url for the user
-     *
-     */
-	@RequestMapping(value = "/facebookAuthentication", method = RequestMethod.GET)
-	public void getFacebookLogin(HttpServletRequest request, HttpServletResponse response) {
-		LOGGER.info("Send a request to facebook");
+    private FBImportationService fbService;
 
-		try {
-			response.sendRedirect(fbAuth.getRedirectUrl());
-		} catch (IOException e) {
-			LOGGER.error("Imposible to redirect the user to the facebook page login",e);
-            throw new RuntimeException(e);
-		}
-	}
+    @Secured("ROLE_USER")
+    @RequestMapping(value = "synchronize",method = RequestMethod.GET)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void Synchronise() throws ServiceException, DaoException, IOException {
 
-	/**
-	 * @param code
-	 */
-	@RequestMapping(value = "/facebookRedirect", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public String getFacebookLogin(@RequestParam("code") String code, HttpServletResponse httpServletResponse ) throws ServiceException, DaoException {
+        LOGGER.info("[Controller] Synchronise contact facebook");
+        String accessToken = (String) SecurityContextHolder.getContext().getAuthentication().getCredentials();
+        fbService.SynchroniseFBContacts(accessToken);
+    }
 
-		LOGGER.info("Receive a request from facebook");
-        fbAuth.handleFacebookRedirect(code);
-        return "redirect:" + fbAuth.getRedirectUserPage();
-	}
 }

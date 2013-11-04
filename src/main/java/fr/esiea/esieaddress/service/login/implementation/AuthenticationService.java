@@ -1,10 +1,10 @@
 package fr.esiea.esieaddress.service.login.implementation;
 
+import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.security.InvalidLoginException;
 import fr.esiea.esieaddress.service.exception.security.NotConnectedException;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.user.User;
-import fr.esiea.esieaddress.service.crud.ICrudUserService;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.login.IAuthenticationService;
 import org.apache.log4j.Logger;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,7 +45,7 @@ public class AuthenticationService implements IAuthenticationService {
     private static final Logger LOGGER = Logger.getLogger(AuthenticationService.class);
     @Autowired
     @Qualifier("userCrudService")
-    private ICrudUserService userService;
+    private ICrudService<User> userService;
 
     @Autowired
     @Qualifier(value = "authenticationManager")

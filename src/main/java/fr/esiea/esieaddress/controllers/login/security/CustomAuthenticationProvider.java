@@ -35,7 +35,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		User userToAuthenticate;
 
 		try {
-			userToAuthenticate = userService.getOneByMail(mail);
+			userToAuthenticate = userService.getOneByEmail(mail);
 
 			if (userToAuthenticate == null)
 				throw new BadCredentialsException("Bad Login");

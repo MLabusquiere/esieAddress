@@ -4,9 +4,11 @@ import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.dao.exception.UpdateException;
 import fr.esiea.esieaddress.model.contact.Contact;
+import fr.esiea.esieaddress.model.user.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -34,12 +36,13 @@ import java.util.Map;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+@Repository
 public class ContactDao implements ICrudDao<Contact> {
 
     private static final Logger LOGGER = Logger.getLogger(ContactDao.class);
 
     @Autowired
-	private DatabaseMock database;
+    private DatabaseMock database;
 
 
 
@@ -48,28 +51,34 @@ public class ContactDao implements ICrudDao<Contact> {
         return database.values(getCurrendUserId());
     }
 
-	@Override
-	public void remove(String idContact) throws DaoException {
+    @Override
+    public void remove(String idContact) throws DaoException {
         database.remove(getCurrendUserId(),idContact);
-	}
+    }
 
-	@Override
-	public void save(Contact contact) throws DaoException {
+    @Override
+    public void save(Contact contact) throws DaoException {
         if (null == database.remove(getCurrendUserId(),contact.getId()))
-			throw new UpdateException();
-		insert(contact);
-	}
+            throw new UpdateException();
+        insert(contact);
+    }
 
-	@Override
-	public void insert(Contact contact) throws DaoException {
-		contact.generateId();
-		database.put(getCurrendUserId(), contact.getId(), contact);
-	}
+    @Override
+    public void insert(Contact contact) throws DaoException {
+        contact.generateId();
+        database.put(getCurrendUserId(), contact.getId(), contact);
+    }
 
-	@Override
-	public Contact getOne(String contactId) throws DaoException {
-		return database.get(getCurrendUserId(),contactId);
-	}
+    @Override
+    public Contact getOne(String contactId) throws DaoException {
+        return database.get(getCurrendUserId(),contactId);
+    }
+
+    @Override
+    public Contact getOneByEmail(String mail) throws DaoException {
+        return database.getOneByEmail(getCurrendUserId(),mail);
+    }
+
 
     public static String getCurrendUserId() {
         String id = (String) SecurityContextHolder.getContext().getAuthentication().getDetails();
@@ -81,4 +90,5 @@ public class ContactDao implements ICrudDao<Contact> {
         }
         return id;
     }
+
 }

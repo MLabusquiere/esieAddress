@@ -20,8 +20,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean name="databaseContact" class="fr.esiea.esieaddress.dao.implementation.ContactDao"/>
-    <bean name="databaseUser" class="fr.esiea.esieaddress.dao.implementation.UserDao">
+    <bean name="userDao" class="fr.esiea.esieaddress.dao.implementation.UserDao">
         <property name="database">
             <map>
                 <entry key="id1" value-ref="user1"/>

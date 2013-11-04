@@ -2,6 +2,7 @@ package fr.esiea.esieaddress.service.crud;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.IModel;
+import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.exception.NotUniqueEmailException;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 
@@ -40,4 +41,6 @@ public interface ICrudService<T extends IModel> {
 	void insert(T model) throws ServiceException, DaoException, NotUniqueEmailException;
 
 	T getOne(String Id) throws ServiceException, DaoException;
+
+    T getOneByEmail(String mail) throws ServiceException, DaoException;
 }

@@ -1,16 +1,17 @@
-package fr.esiea.esieaddress.controllers.crud;
+package fr.esiea.esieaddress.service.facebook;
 
-import fr.esiea.esieaddress.service.exception.NotUniqueEmailException;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.user.User;
-import fr.esiea.esieaddress.service.crud.ICrudService;
+import fr.esiea.esieaddress.model.contact.Contact;
 import fr.esiea.esieaddress.service.exception.ServiceException;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2013 ESIEA M. Labusquiere D. Déïs
@@ -34,29 +35,34 @@ import org.springframework.web.bind.annotation.*;
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-@Controller
-@RequestMapping("/users")
-public class CrudUserCtrl {
+@Service
+public class FBImportationService {
+
+    private static final String QUERY = "SELECT uid,email,birthday_date,last_name, first_name,current_address,pic_with_logo FROM user WHERE uid = me()" +
+            "OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me())";
 
     @Autowired
-    @Qualifier("userValidationDecorator")
-    ICrudService<User> crudValidationService;
+    @Qualifier("contactDao")
+    private ICrudDao<Contact> contactDao;
 
-    @Autowired
-    @Qualifier("userCrudService")
-    ICrudService<User> crudService;
+    public void SynchroniseFBContacts(String accessToken) throws ServiceException, DaoException {
 
-    private final static Logger LOGGER = Logger.getLogger(CrudUserCtrl.class);
+        FacebookClient facebookClient = new DefaultFacebookClient(accessToken);
 
+        List<Contact> contacts =
+                facebookClient.executeFqlQuery(QUERY, Contact.class,
+                        Parameter.with("return_ssl_resources", "true"));
 
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void login(@RequestBody User user) throws ServiceException, DaoException, NotUniqueEmailException {
+        for (Contact contact : contacts)  {
+            Contact contactToCheck = contactDao.getOneByEmail(contact.getEmail());
+            if(null == contactToCheck)  {
+                contactDao.insert(contact);
+                continue;
+            }
 
-        LOGGER.info("[Controller] Querying to create new user : " + user.toString() + "\"");
+            if( ! contact.equals(contactToCheck))
+                contactDao.save(contact);
 
-        crudValidationService.insert(user);
-
+        }
     }
-
 }

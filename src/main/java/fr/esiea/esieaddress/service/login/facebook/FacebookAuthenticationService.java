@@ -2,9 +2,8 @@ package fr.esiea.esieaddress.service.login.facebook;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import fr.esiea.esieaddress.dao.ICrudUserDao;
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
-import fr.esiea.esieaddress.model.contact.Contact;
 import fr.esiea.esieaddress.model.user.User;
 import fr.esiea.esieaddress.service.exception.ServiceException;
 import fr.esiea.esieaddress.service.login.IAuthenticationService;
@@ -15,6 +14,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -66,7 +66,8 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
     @Value("${controller.facebook.redirect_user_page}")
     private String redirectUserPage;
     @Autowired
-    ICrudUserDao userDao;
+    @Qualifier("userDao")
+    ICrudDao<User> userDao;
 
     @Autowired
     private IAuthenticationService authService;
@@ -85,7 +86,7 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
         User user = facebookClient.fetchObject("me", User.class);
         user.setAccountFacebook(true);
         //Update or create the contact
-        User one = userDao.getOneByMail(user.getMail());
+        User one = userDao.getOneByEmail(user.getMail());
         if(null == one) {
             userDao.insert(user); //insert a new user
         }else {
@@ -101,7 +102,7 @@ public class FacebookAuthenticationService implements IFacebookAuthentication {
         }
 
         //Make the autentication
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword(),authorities);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getMail(), accessToken,authorities);
         token.setDetails(user.getId());
         SecurityContextHolder.getContext().setAuthentication(token);
 

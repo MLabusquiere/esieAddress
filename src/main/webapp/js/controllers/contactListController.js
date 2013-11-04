@@ -4,7 +4,7 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Contact) {
+module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Contact, Facebook) {
 
 	$scope.sorts = [
 		{predicate: ['lastname', 'firstname', 'id'], text: 'Last name'},
@@ -48,11 +48,10 @@ module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Co
 	});
 
 	$scope.synchronizeFacebook = function() {
-		Facebook.synchronizeFacebook(
+		Facebook.synchronize(
 			{},
 			{},
-			function(data) {
-				$scope.contacts = data;
+			function() {
 			},
 			function(error) {
 				console.log("Failed to synchronize contacts with Facebook: Error", error.status, error.data);

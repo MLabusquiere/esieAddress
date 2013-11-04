@@ -1,9 +1,9 @@
 package fr.esiea.esieaddress.service.crud.implementation;
 
-import fr.esiea.esieaddress.dao.ICrudUserDao;
+import fr.esiea.esieaddress.dao.ICrudDao;
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.user.User;
-import fr.esiea.esieaddress.service.crud.ICrudUserService;
+import fr.esiea.esieaddress.service.crud.ICrudService;
 import fr.esiea.esieaddress.service.exception.InvalidIdException;
 import fr.esiea.esieaddress.service.exception.NotUniqueEmailException;
 import fr.esiea.esieaddress.service.exception.ServiceException;
@@ -36,10 +36,10 @@ import java.util.Collection;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 @Service
-public class UserCrudService implements ICrudUserService {
+public class UserCrudService implements ICrudService<User> {
     @Autowired
-    @Qualifier("databaseUser")
-    private ICrudUserDao dao;
+    @Qualifier("userDao")
+    private ICrudDao<User> dao;
 
     @Override
     public Collection<User> getAll() throws DaoException {
@@ -77,13 +77,13 @@ public class UserCrudService implements ICrudUserService {
     }
 
     @Override
-    public User getOneByMail(String mail) throws InvalidIdException, DaoException {
-        User user = dao.getOneByMail(mail);
+    public User getOneByEmail(String mail) throws InvalidIdException, DaoException {
+        User user = dao.getOneByEmail(mail);
         return user;
     }
 
 
     private boolean checkUniqueEmail(String mail) throws ServiceException, DaoException {
-        return null == getOneByMail(mail);
+        return null == getOneByEmail(mail);
     }
 }

@@ -2,6 +2,8 @@ package fr.esiea.esieaddress.dao;
 
 import fr.esiea.esieaddress.dao.exception.DaoException;
 import fr.esiea.esieaddress.model.IModel;
+import fr.esiea.esieaddress.model.contact.Contact;
+import fr.esiea.esieaddress.model.user.User;
 
 import java.util.Collection;
 
@@ -37,4 +39,6 @@ public interface ICrudDao<T extends IModel> {
 	void insert(T model) throws DaoException;
 
 	T getOne(String model) throws DaoException;
+
+    T getOneByEmail(String mail) throws DaoException;
 }

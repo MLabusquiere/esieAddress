@@ -81,7 +81,12 @@ public class ServiceValidationDecorator<T extends IModel> implements ICrudServic
 		return crudService.getOne(id);
 	}
 
-	public void setCrudService(ICrudService<T> crudService) {
+    @Override
+    public T getOneByEmail(String mail) throws ServiceException, DaoException {
+        return getOneByEmail(mail);
+    }
+
+    public void setCrudService(ICrudService<T> crudService) {
 		this.crudService = crudService;
 	}
 }

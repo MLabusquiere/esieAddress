@@ -1,6 +1,7 @@
 package fr.esiea.esieaddress.dao.implementation;
 
 import fr.esiea.esieaddress.model.contact.Contact;
+import fr.esiea.esieaddress.model.user.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -70,5 +71,17 @@ public class DatabaseMock {
         if(!database.containsKey(collectionId))
             database.put(collectionId,new HashMap<String,Contact>());
         database.get(collectionId).put(idContact,contact);
+    }
+
+    public Contact getOneByEmail(String collectionId, String mail) {
+        if(!database.containsKey(collectionId))
+            return null;
+        Map<String, Contact> contactMap = database.get(collectionId);
+
+        for (Contact contact : contactMap.values()) {
+            if (contact.getEmail() != null && contact.getEmail().equals(mail))
+                return contact;
+        }
+        return null;
     }
 }
