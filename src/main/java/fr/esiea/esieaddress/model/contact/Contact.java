@@ -6,6 +6,7 @@ import fr.esiea.esieaddress.model.Model;
 import fr.esiea.esieaddress.model.contact.view.ContactView;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class Contact extends Model {
 	//@NotNull(message = "{fr.esiea.esieaddress.model.contact.firstname.notNull}")
 	//@Pattern(regexp="/^[[:alpha:]\\s'\"\\-_&@!?()\\[\\]-]*$/u",message="{fr.esiea.esieaddress.model.contact.firstname}")
 	@Facebook("first_name")
+    @NotNull(message = "{fr.esiea.esieaddress.model.contact.firstname.notNull}")
 	@JsonView(ContactView.LightView.class)
 	@Size(max = 20, message = "{fr.esiea.esieaddress.model.contact.firstname.size}")
 	private String firstname;
@@ -62,6 +64,8 @@ public class Contact extends Model {
 
 	@JsonView(ContactView.FullView.class)
 	@Facebook("birthday_date")
+    @Pattern(regexp ="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d",
+            message = "{fr.esiea.esieaddress.model.contact.birthdate.format}")
 	private String dateOfBirth;
 
 	//May a map to specify an type of an address
