@@ -3,7 +3,7 @@
 /* Controllers */
 
 var module = angular.module('esieAddress.controllers');
-module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $location, Login, Logout) {
+module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $timeout, $location, Login, Logout) {
 
 	$scope.login = {};
 	$scope.user = {};
@@ -132,4 +132,22 @@ module.controller('AppCtrl', function ($rootScope, $route, $http, $scope, $locat
 		console.info("accesForbidden in appController")
 	});
 
+	$scope.resize = function() {
+		var pageHeight = $(window).height() - 20;
+		var contentHeight = $("#content").outerHeight(true);
+		var sidebarHeaderHeight = $("#sidebar-header").outerHeight(true);
+		if(contentHeight > pageHeight) {
+			$("#contacts").height(contentHeight - sidebarHeaderHeight - 30);
+		}
+		else {
+			$("#contacts").height(pageHeight - sidebarHeaderHeight - 20);
+		}
+	};
+
+//	$scope.$on('$routeChangeStart', function(next, current) {
+//		console.log("route");
+//		$timeout(function() {
+//			$scope.resize();
+//		}, 1000);
+//	});
 });

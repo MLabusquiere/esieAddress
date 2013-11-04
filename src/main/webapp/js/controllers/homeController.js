@@ -4,7 +4,7 @@
 
 var module = angular.module('esieAddress.controllers');
 
-module.controller('HomeCtrl', function () {
-
+module.controller('HomeCtrl', function ($scope) {
+	$scope.resize();
 
 });

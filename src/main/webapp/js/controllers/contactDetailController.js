@@ -4,6 +4,7 @@
 var module = angular.module('esieAddress.controllers');
 module.controller('ContactDetailCtrl', function ($rootScope, $scope, $location, $routeParams, Contact) {
 
+	$scope.resize();
 	$scope.contact = {};
 
 	Contact.get(

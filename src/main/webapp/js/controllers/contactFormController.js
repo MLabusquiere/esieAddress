@@ -6,6 +6,8 @@ var module = angular.module('esieAddress.controllers');
 
 module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $routeParams, Contact, Address) {
 
+	$scope.resize();
+
     var init = function()    {
         $scope.newContact = {};
         $scope.newContact.actif = true;
@@ -81,19 +83,22 @@ module.controller('ContactFormCtrl', function ($rootScope, $scope, $location, $r
         console.log("Adding address ");
         $scope.addresses.push(address);
         console.log("form", $scope.contact_form);
-        sizeContent();
+
+		$scope.resize();
     };
 
     $scope.deleteLastAddress = function () {
         console.log("Deleting last address");
         $scope.addresses.pop();
-        sizeContent()
+
+		$scope.resize();
     };
 
     $scope.deleteAddress = function (index) {
         console.log("Deleting address # " + index);
         $scope.addresses.splice(index, 1);
-        sizeContent()
+
+		$scope.resize();
     };
 
 });

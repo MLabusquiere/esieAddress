@@ -34,6 +34,7 @@ module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Co
 		Contact.query(function (data) {
 			$scope.contacts = data;
 			console.log("Contact list loaded successfully:", data);
+
 		}, function (error) {
 			console.log("Error " + error.status);
 			$location.path('/error/' + error.status);

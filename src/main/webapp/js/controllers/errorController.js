@@ -5,5 +5,5 @@
 var module = angular.module('esieAddress.controllers');
 
 module.controller('ErrorCtrl', function ($scope, $routeParams, $location) {
-
+	$scope.resize();
 });

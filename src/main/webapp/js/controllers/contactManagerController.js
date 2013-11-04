@@ -15,7 +15,9 @@ module.controller('ContactManagerCtrl', function ($rootScope, $location, $scope,
 			function (data) {
 				$scope.contacts = data;
 				console.log("Contact list loaded successfully");
-				$timeout(sizeContent(), 1000);
+				$timeout(function() {
+					$scope.resize();
+				}, 100);
 			},
 			function (error) {
 				console.log("Error " + error.status);
