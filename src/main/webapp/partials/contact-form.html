@@ -10,7 +10,11 @@
 	<div id="pageContent" class="scrollable">
 		<form name="contact_form" class="form-horizontal col-lg-10" role="form" ng-submit="saveContact()" novalidate>
 			<div class="form-group">
-
+                <div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="errors.error">
+                    <small>
+                        {{errors.error}}
+                    </small>
+                </div>
 				<div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="errors.firstname">
 					<small>
 						{{errors.firstname}}

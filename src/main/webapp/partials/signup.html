@@ -13,6 +13,11 @@
 						{{errors.email}}
 					</small>
 				</div>
+                <div class="col-lg-offset-2 col-lg-10 text-danger" ng-show="errors.error">
+                    <small>
+                        {{errors.error}}
+                    </small>
+                </div>
 				<label class="col-lg-2 control-label" for="inputEmail">Email address</label>
 				<div class="col-lg-10">
 					<input type="email" name="email" class="form-control" id="inputEmail" placeholder="Enter email" ng-model="user.mail" ng-minlength=3 ng-maxlength=20 required>
