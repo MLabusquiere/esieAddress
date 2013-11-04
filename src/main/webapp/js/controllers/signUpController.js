@@ -17,9 +17,9 @@ module.controller('SignUpCtrl', function ($scope,$location, Signup) {
 			$scope.user,
 			function(data){
                 $scope.login ={};
-                //Not Working
-                $scope.login.email = $scope.user.email;
-                $scope.login.password = $scope.user.password;
+                var scope = angular.element($("body")).scope();
+                scope.login.email = $scope.user.email;
+                scope.login.password = $scope.user.password;
 
                 $scope.$emit('event:loginRequest');
 

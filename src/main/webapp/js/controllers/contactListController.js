@@ -21,7 +21,7 @@ module.controller('ContactListCtrl', function ($rootScope, $scope, $location, Co
 	$scope.contacts = [];
 
 	$('.label-toggle-switch').on('switch-change', function (e, data) {
-		var scope = angular.element($(".container")).scope();
+            var scope = angular.element($(".container")).scope();
 		scope.$apply(function(){
 			$scope.showAll = !$scope.showAll;
 		});
